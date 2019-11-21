@@ -1,19 +1,9 @@
-package entities;
+package dtos;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@NamedQueries({
-        @NamedQuery(
-                name = "getAllAtletas",
-                query = "SELECT a FROM Atleta a ORDER BY a.numeroSocio" // JPQL
-        )
-})
-
-public class Atleta implements Serializable {
-    @Id
-    private int numeroSocio;
+public class AtletaDTO implements Serializable {
+    private long numeroSocio;
 
     private String nome;
 
@@ -21,21 +11,21 @@ public class Atleta implements Serializable {
 
     private int idade;
 
-    public Atleta() {
+    public AtletaDTO() {
     }
 
-    public Atleta(int numeroSocio, String nome, String email, int idade) {
+    public AtletaDTO(long numeroSocio,String nome, String email, int idade) {
         this.numeroSocio = numeroSocio;
         this.nome = nome;
         this.email = email;
         this.idade = idade;
     }
 
-    public int getNumeroSocio() {
+    public long getNumeroSocio() {
         return numeroSocio;
     }
 
-    public void setNumeroSocio(int numeroSocio) {
+    public void setNumeroSocio(long numeroSocio) {
         this.numeroSocio = numeroSocio;
     }
 

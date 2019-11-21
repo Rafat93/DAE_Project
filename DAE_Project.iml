@@ -58,5 +58,7 @@
     <orderEntry type="library" scope="PROVIDED" name="JBoss 17.0.1.Final" level="application_server_libraries" />
     <orderEntry type="library" name="JPA 2.0-2.0 (2)" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="Jersey-2.2" level="project" />
+    <orderEntry type="library" name="javax.json.binding-1.0" level="project" />
   </component>
 </module>
