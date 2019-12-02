@@ -10,7 +10,6 @@ import java.io.Serializable;
                 query = "SELECT a FROM Atleta a ORDER BY a.numeroSocio" // JPQL
         )
 })
-
 public class Atleta implements Serializable {
     @Id
     private int numeroSocio;

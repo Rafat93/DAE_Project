@@ -30,7 +30,7 @@ public class AtletaController {
     }
 
     public static List<AtletaDTO> toDTOs(List<Atleta> atletas) {
-        return atletas.stream().map(this::toDTO).collect(Collectors.toList());
+        return atletas.stream().map(AtletaController::toDTO).collect(Collectors.toList());
     }
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
