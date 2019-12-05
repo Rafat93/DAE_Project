@@ -3,6 +3,9 @@ package ws;
 import dtos.AtletaDTO;
 import ejbs.AtletaBean;
 import entities.Atleta;
+import exceptions.MyConstraintViolationException;
+import exceptions.MyEntityAlreadyExistsException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -12,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -56,6 +58,13 @@ public class AtletaController {
         } catch (Exception e) {
             throw new EJBException("ERROR_GET_STUDENTS", e);
         }
+    }
+
+    @POST
+    @Path("/")
+    public Response createNewAtleta (AtletaDTO atletaDTO) {
+        Atleta atleta = atletaBean.create(atletaDTO.getNumeroSocio(), atletaDTO.getNome(), atletaDTO.getEmail(),atletaDTO.getPassword(),atletaDTO.getIdade());
+        return Response.status(Response.Status.CREATED).entity(toDTO(atleta,null)).build();
     }
 
 }

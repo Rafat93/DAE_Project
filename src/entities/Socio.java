@@ -19,7 +19,7 @@ public class Socio extends User implements Serializable {
 
     @NotNull
     @Column(unique=true)
-    private int numeroSocio;
+    private long numeroSocio;
 
     public Socio() {
     }
@@ -29,11 +29,11 @@ public class Socio extends User implements Serializable {
         this.numeroSocio = numeroSocio;
     }
 
-    public int getNumeroSocio() {
+    public long getNumeroSocio() {
         return numeroSocio;
     }
 
-    public void setNumeroSocio(int numeroSocio) {
+    public void setNumeroSocio(long numeroSocio) {
         this.numeroSocio = numeroSocio;
     }
 }

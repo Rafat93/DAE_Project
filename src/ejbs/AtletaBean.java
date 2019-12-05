@@ -16,7 +16,7 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(int numeroSocio,String nome, String email,String password, int idade){
+    public Atleta create(long numeroSocio,String nome, String email,String password, int idade){
         try{
             Atleta atleta = new Atleta(1,nome,email,password,idade);
             em.persist(atleta);
@@ -26,7 +26,7 @@ public class AtletaBean {
         }
     }
 
-    public Atleta update (int numeroSocio,String nome, String email,String password, int idade) throws MyEntityNotFoundException {
+    public Atleta update (long numeroSocio,String nome, String email,String password, int idade) throws MyEntityNotFoundException {
         try {
             Atleta atleta = em.find(Atleta.class, email);
 
