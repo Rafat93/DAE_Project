@@ -28,14 +28,14 @@ public class User {
     private String password;
 
     @NotNull
-    private String name;
+    private String nome;
 
     @NotNull
     @Email
     private String email;
 
-    public User(String name, String password, String email) {
-        this.name = name;
+    public User(String nome, String password, String email) {
+        this.nome = nome;
         this.password = hashPassword(password);
         this.email = email;
     }
@@ -59,12 +59,12 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String name) {
+        this.nome = name;
     }
 
     public String getEmail() {

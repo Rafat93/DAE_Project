@@ -12,11 +12,7 @@ import java.io.Serializable;
                 query = "SELECT a FROM Atleta a ORDER BY a.numeroSocio" // JPQL
         )
 })
-public class Atleta extends User implements Serializable {
-
-    @NotNull
-    @Column(unique=true)
-    private int numeroSocio;
+public class Atleta extends Socio implements Serializable {
 
     @NotNull
     private int idade;
@@ -26,17 +22,8 @@ public class Atleta extends User implements Serializable {
     }
 
     public Atleta(int numeroSocio, String nome, String email,String password, int idade) {
-        super(nome,password,email);
-        this.numeroSocio = numeroSocio;
+        super(numeroSocio,nome,password,email);
         this.idade = idade;
-    }
-
-    public int getNumeroSocio() {
-        return numeroSocio;
-    }
-
-    public void setNumeroSocio(int numeroSocio) {
-        this.numeroSocio = numeroSocio;
     }
 
     public int getIdade() {

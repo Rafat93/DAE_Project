@@ -14,9 +14,9 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(int id,String nome, String email, int idade){
+    public Atleta create(int numeroSocio,String nome, String email,String password, int idade){
         try{
-            Atleta atleta = new Atleta(id,nome,email,idade);
+            Atleta atleta = new Atleta(1,nome,email,password,idade);
             em.persist(atleta);
             return atleta;
         }catch(Exception e){
