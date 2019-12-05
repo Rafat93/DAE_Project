@@ -3,9 +3,7 @@ package ws;
 import dtos.AtletaDTO;
 import ejbs.AtletaBean;
 import entities.Atleta;
-import exceptions.MyConstraintViolationException;
-import exceptions.MyEntityAlreadyExistsException;
-import exceptions.MyIllegalArgumentException;
+import exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -65,6 +63,29 @@ public class AtletaController {
     public Response createNewAtleta (AtletaDTO atletaDTO) {
         Atleta atleta = atletaBean.create(atletaDTO.getNumeroSocio(), atletaDTO.getNome(), atletaDTO.getEmail(),atletaDTO.getPassword(),atletaDTO.getIdade());
         return Response.status(Response.Status.CREATED).entity(toDTO(atleta,null)).build();
+    }
+
+    @PUT
+    @Path("{email}")
+    public Response updateStudent(@PathParam("email") String email, AtletaDTO atletaDTO)
+            throws MyEntityNotFoundException {
+        atletaBean.update(atletaDTO.getNumeroSocio(),
+                atletaDTO.getNome(),
+                email,
+                atletaDTO.getPassword(),
+                atletaDTO.getIdade());
+        Atleta atleta = atletaBean.findAtleta(email);
+        return Response.status(Response.Status.OK)
+                .entity(toDTO(atleta,null))
+                .build();
+    }
+
+    @DELETE
+    @Path("{email}")
+    public Response removeStudent(@PathParam("email") String email)
+            throws MyEntityNotFoundException {
+        atletaBean.delete(email);
+        return Response.status(Response.Status.OK).build();
     }
 
 }
