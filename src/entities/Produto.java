@@ -17,12 +17,12 @@ public class Produto {
     @NotNull
     private String descricao;
     @NotNull
-    private int preco;
+    private double preco;
 
     public Produto() {
     }
 
-    public Produto(String tipo, String descricao, int preco) {
+    public Produto(String tipo, String descricao, double preco) {
         this.tipo = tipo;
         this.descricao = descricao;
         this.preco = preco;
@@ -44,11 +44,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public int getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(int preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 }

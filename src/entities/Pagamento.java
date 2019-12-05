@@ -25,7 +25,7 @@ public class Pagamento {
     private int quantidade;
 
     @NotNull
-    private int precoFinal;
+    private double precoFinal;
 
     @NotNull
     private EnumEstado estado;
@@ -35,7 +35,7 @@ public class Pagamento {
     public Pagamento() {
     }
 
-    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, int precoFinal, EnumEstado estado) {
+    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EnumEstado estado) {
         this.utilizador = user;
         this.produto = produto;
         this.dataLancamento = dataLancamento;
