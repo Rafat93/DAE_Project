@@ -4,7 +4,9 @@ import com.sun.istack.internal.NotNull;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name="PRODUTOS")
 @Entity
 public class Produto {
 
@@ -19,6 +21,7 @@ public class Produto {
 
     public Produto() {
     }
+
     public Produto(String tipo, String descricao, int preco) {
         this.tipo = tipo;
         this.descricao = descricao;
