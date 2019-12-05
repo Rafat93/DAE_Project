@@ -1,5 +1,7 @@
 package entities;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,23 +12,22 @@ import java.io.Serializable;
                 query = "SELECT a FROM Atleta a ORDER BY a.numeroSocio" // JPQL
         )
 })
-public class Atleta implements Serializable {
-    @Id
+public class Atleta extends User implements Serializable {
+
+    @NotNull
+    @Column(unique=true)
     private int numeroSocio;
 
-    private String nome;
-
-    private String email;
-
+    @NotNull
     private int idade;
 
     public Atleta() {
+        super();
     }
 
-    public Atleta(int numeroSocio, String nome, String email, int idade) {
+    public Atleta(int numeroSocio, String nome, String email,String password, int idade) {
+        super(nome,password,email);
         this.numeroSocio = numeroSocio;
-        this.nome = nome;
-        this.email = email;
         this.idade = idade;
     }
 
@@ -36,22 +37,6 @@ public class Atleta implements Serializable {
 
     public void setNumeroSocio(int numeroSocio) {
         this.numeroSocio = numeroSocio;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public int getIdade() {
