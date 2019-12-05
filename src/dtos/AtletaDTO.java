@@ -9,15 +9,18 @@ public class AtletaDTO implements Serializable {
 
     private String email;
 
+    private String password;
+
     private int idade;
 
     public AtletaDTO() {
     }
 
-    public AtletaDTO(long numeroSocio,String nome, String email, int idade) {
+    public AtletaDTO(long numeroSocio,String nome, String email,String password, int idade) {
         this.numeroSocio = numeroSocio;
         this.nome = nome;
         this.email = email;
+        this.password = password;
         this.idade = idade;
     }
 
@@ -51,5 +54,13 @@ public class AtletaDTO implements Serializable {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

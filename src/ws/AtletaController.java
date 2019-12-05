@@ -7,8 +7,14 @@ import entities.Atleta;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Path("/atletas") // relative url web path of this controller
@@ -20,24 +26,33 @@ public class AtletaController {
     @EJB
     private AtletaBean atletaBean;
 
-    public static AtletaDTO toDTO(Atleta atleta) {
-        return new AtletaDTO(
+    @Context
+    private SecurityContext securityContext;
+
+    public static AtletaDTO toDTO(Atleta atleta, Function<AtletaDTO,AtletaDTO> fn) {
+        AtletaDTO dto = new AtletaDTO(
                 atleta.getNumeroSocio(),
                 atleta.getNome(),
                 atleta.getEmail(),
+                atleta.getPassword(),
                 atleta.getIdade()
         );
+        if(fn != null){
+            return fn.apply(dto);
+        }
+        return dto;
     }
 
-    public static List<AtletaDTO> toDTOs(List<Atleta> atletas) {
-        return atletas.stream().map(AtletaController::toDTO).collect(Collectors.toList());
+    public static Set<AtletaDTO> toDTOs(Collection<Atleta> atletas,Function<AtletaDTO,AtletaDTO> fn) {
+        return atletas.stream().map(s -> AtletaController.toDTO(s, fn)).collect(Collectors.toSet());
     }
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/students/”
-    public List<AtletaDTO> all() {
+    public Response all() {
         try {
-            return toDTOs(atletaBean.all());
+            return Response.status(Response.Status.OK).entity(toDTOs(atletaBean.all(), null)).build();
+
         } catch (Exception e) {
             throw new EJBException("ERROR_GET_STUDENTS", e);
         }
