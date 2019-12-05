@@ -2,12 +2,16 @@ package entities;
 
 import com.sun.istack.internal.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Table(name="PRODUTOS")
 @Entity
+@Table(name="PRODUTOS", uniqueConstraints = @UniqueConstraint(columnNames = {"TIPO"}))
+@NamedQueries({
+        @NamedQuery(
+                name="getAllProdutos",
+                query = "SELECT p FROM Produto p ORDER BY p.tipo"
+        )
+})
 public class Produto {
 
     @Id

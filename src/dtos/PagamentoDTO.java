@@ -1,13 +1,9 @@
 package dtos;
 
-import entities.EnumEstado;
-import entities.Pagamento;
+import enums.EstadoPagamento;
 import entities.Produto;
 import entities.User;
 
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,12 +15,12 @@ public class PagamentoDTO  implements Serializable {
     private Date dataLancamento;
     private int quantidade;
     private double precoFinal;
-    private EnumEstado estado;
+    private EstadoPagamento estado;
 
     public PagamentoDTO() {
     }
 
-    public PagamentoDTO(User utilizador, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EnumEstado estado) {
+    public PagamentoDTO(User utilizador, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado) {
         this.utilizador = utilizador;
         this.produto = produto;
         this.dataLancamento = dataLancamento;
@@ -73,11 +69,11 @@ public class PagamentoDTO  implements Serializable {
         this.precoFinal = precoFinal;
     }
 
-    public EnumEstado getEstado() {
+    public EstadoPagamento getEstado() {
         return estado;
     }
 
-    public void setEstado(EnumEstado estado) {
+    public void setEstado(EstadoPagamento estado) {
         this.estado = estado;
     }
 }
