@@ -1,21 +1,30 @@
 package entities;
 
+import enums.EstadoPagamento;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@Table(name = "PAGAMENTOS")
+
 @Entity
+@Table(name = "PAGAMENTOS")
+@NamedQueries(
+        @NamedQuery(
+                name = "getAllPagamentos",
+                query = "SELECT p FROM Pagamento p ORDER BY p.dataLancamento"
+        )
+)
 public class Pagamento {
     @Id
     private int id;
 
     @NotNull
-    @OneToMany
+    @OneToOne
     private User utilizador;
 
     @NotNull
-    @OneToMany
+    @OneToOne
     private Produto produto;
 
     @NotNull
@@ -25,17 +34,17 @@ public class Pagamento {
     private int quantidade;
 
     @NotNull
-    private int precoFinal;
+    private double precoFinal;
 
     @NotNull
-    private EnumEstado estado;
+    private EstadoPagamento estado;
 
 
 
     public Pagamento() {
     }
 
-    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, int precoFinal, EnumEstado estado) {
+    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado) {
         this.utilizador = user;
         this.produto = produto;
         this.dataLancamento = dataLancamento;

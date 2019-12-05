@@ -1,36 +1,26 @@
-package entities;
+package dtos;
 
 import com.sun.istack.internal.NotNull;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import java.io.Serializable;
 
-@Entity
-@Table(name="PRODUTOS", uniqueConstraints = @UniqueConstraint(columnNames = {"TIPO"}))
-@NamedQueries({
-        @NamedQuery(
-                name="getAllProdutos",
-                query = "SELECT p FROM Produto p ORDER BY p.tipo"
-        )
-})
-public class Produto {
+public class ProdutoDTO implements Serializable {
 
-    @Id
     private int id;
-    @NotNull
     private String tipo;
-    @NotNull
     private String descricao;
-    @NotNull
     private double preco;
 
-    public Produto() {
+    public ProdutoDTO() {
     }
 
-    public Produto(String tipo, String descricao, double preco) {
+    public ProdutoDTO(String tipo, String descricao, double preco) {
         this.tipo = tipo;
         this.descricao = descricao;
         this.preco = preco;
     }
+
 
     public String getTipo() {
         return tipo;
