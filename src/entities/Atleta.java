@@ -17,6 +17,7 @@ public class Atleta extends Socio implements Serializable {
     @NotNull
     private int idade;
 
+
     public Atleta() {
         super();
     }
