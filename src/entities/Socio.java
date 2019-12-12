@@ -1,11 +1,10 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @NamedQueries({
@@ -20,12 +19,24 @@ public class Socio extends User implements Serializable {
     @Column(unique=true)
     private long numeroSocio;
 
+    @ManyToMany
+    private Set<Modalidade> modalidades;
+
     public Socio() {
     }
 
     public Socio(int numeroSocio, String nome, String password, String email) {
         super(nome, password, email);
         this.numeroSocio = numeroSocio;
+        this.modalidades = new LinkedHashSet<>();
+    }
+
+    public Set<Modalidade> getModalidades() {
+        return modalidades;
+    }
+
+    public void setModalidades(Set<Modalidade> modalidades) {
+        this.modalidades = modalidades;
     }
 
     public long getNumeroSocio() {

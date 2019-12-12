@@ -15,10 +15,13 @@ public class Produto {
 
     @Id
     private int id;
+
     @NotNull
     private String tipo;
+
     @NotNull
     private String descricao;
+
     @NotNull
     private double preco;
 

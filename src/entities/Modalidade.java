@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,8 @@ import java.util.Set;
 })
 public class Modalidade {
 
+    //Falta colocar a epoca desportiva
+
     @Id
     private String sigla;
 
@@ -23,8 +26,8 @@ public class Modalidade {
     private String nome;
 
     @NotNull
-    @OneToOne
-    private Horario horario;
+    @OneToMany
+    private List<Treino> treinos;
 
     @NotNull
     @ManyToMany
@@ -33,7 +36,16 @@ public class Modalidade {
     @OneToMany
     private List<Atleta> atletas;
 
-     @OneToMany
+    @ManyToMany
     private List<Socio> socios;
 
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Modalidade && ((Modalidade) o).nome.equals(this.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sigla, nome, treinos, escaloes, atletas, socios);
+    }
 }

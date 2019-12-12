@@ -48,7 +48,7 @@ public class AtletaController {
     }
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/students/”
+    @Path("/") // means: the relative url path is “/api/atletas/”
     public Response all() {
         try {
             return Response.status(Response.Status.OK).entity(toDTOs(atletaBean.all(), null)).build();

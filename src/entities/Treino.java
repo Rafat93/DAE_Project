@@ -3,12 +3,38 @@ package entities;
 import enums.DiasSemana;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
+
 @Entity
 public class Treino {
 
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotNull
+    @ManyToOne
+    private Treinador treinador;
+
+    @ManyToOne
+    private Modalidade modalidade;
+
+    @NotNull
+    @ManyToOne
+    private Graduacao graduacao;
+
+    @ManyToOne
+    private Escalao escalao;
+
+    @NotNull
     private Time horaInicio;
+    @NotNull
     private Time horaFim;
+    @NotNull
     private DiasSemana dia;
 
     public Treino() {

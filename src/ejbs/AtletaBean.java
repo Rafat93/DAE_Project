@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Stateless(name = "AtletaEJB")
@@ -16,9 +17,9 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(long numeroSocio,String nome, String email,String password, int idade){
+    public Atleta create(long numeroSocio, String nome, String email, String password, Date dataNascimento){
         try{
-            Atleta atleta = new Atleta(1,nome,email,password,idade);
+            Atleta atleta = new Atleta(1,nome,email,password, dataNascimento);
             em.persist(atleta);
             return atleta;
         }catch(Exception e){

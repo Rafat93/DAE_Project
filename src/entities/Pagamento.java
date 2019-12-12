@@ -5,6 +5,7 @@ import enums.EstadoPagamento;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -24,7 +25,7 @@ public class Pagamento {
     private User utilizador;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     private Produto produto;
 
     @NotNull
