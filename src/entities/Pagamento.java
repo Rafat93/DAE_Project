@@ -40,6 +40,9 @@ public class Pagamento {
     @NotNull
     private EstadoPagamento estado;
 
+    @NotNull
+    private Recibo recibo;
+
 
 
     public Pagamento() {

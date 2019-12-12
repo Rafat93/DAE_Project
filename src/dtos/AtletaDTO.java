@@ -1,5 +1,7 @@
 package dtos;
 
+import auxiliar.Data;
+
 import java.io.Serializable;
 
 public class AtletaDTO implements Serializable {
@@ -11,17 +13,17 @@ public class AtletaDTO implements Serializable {
 
     private String password;
 
-    private int idade;
+    private Data dataNascimento;
 
     public AtletaDTO() {
     }
 
-    public AtletaDTO(long numeroSocio,String nome, String email,String password, int idade) {
+    public AtletaDTO(long numeroSocio,String nome, String email,String password, Data dataNascimento) {
         this.numeroSocio = numeroSocio;
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.idade = idade;
+        this.dataNascimento = dataNascimento;
     }
 
     public long getNumeroSocio() {
@@ -48,12 +50,12 @@ public class AtletaDTO implements Serializable {
         this.email = email;
     }
 
-    public int getIdade() {
-        return idade;
+    public Data getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
+    public void setDataNascimento(Data dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getPassword() {
