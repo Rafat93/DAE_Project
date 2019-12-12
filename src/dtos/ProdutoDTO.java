@@ -1,7 +1,5 @@
 package dtos;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.Id;
 import java.io.Serializable;
 

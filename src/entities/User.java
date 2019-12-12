@@ -1,10 +1,10 @@
 package entities;
 
-import com.sun.istack.internal.NotNull;
 import org.hibernate.validator.constraints.Email;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;

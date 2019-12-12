@@ -34,6 +34,6 @@ public class Escalao {
         this.nome = nome;
         this.idadeMin = idadeMin;
         this.idadeMax = idadeMax;
-        this.modalidades = modalidade ;
+        this.modalidade = modalidade ;
     }
 }
