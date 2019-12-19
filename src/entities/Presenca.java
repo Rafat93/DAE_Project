@@ -1,8 +1,9 @@
 package entities;
 
+import auxiliar.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public class Presenca {
     private Treino treino;
 
     @NotNull
-    private Date dataTreino;
+    private Data dataTreino;
 
     @NotNull
     @ManyToMany

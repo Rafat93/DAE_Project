@@ -48,4 +48,16 @@ public class Atleta extends Socio implements Serializable {
     public void setInscricoes(Set<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
     }
+
+    public void addInscricao (Inscricao inscricao){
+        if (!inscricoes.contains(inscricao)){
+            inscricoes.add(inscricao);
+        }
+    }
+
+    public void removeInscricao(Inscricao inscricao){
+        if (inscricoes.contains(inscricao)){
+            inscricoes.remove(inscricao);
+        }
+    }
 }
