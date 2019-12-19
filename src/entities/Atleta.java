@@ -1,5 +1,7 @@
 package entities;
 
+import auxiliar.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -17,7 +19,7 @@ import java.util.Set;
 public class Atleta extends Socio implements Serializable {
 
     @NotNull
-    private Date dataNascimento;
+    private Data dataNascimento;
 
     @OneToMany
     private Set<Inscricao> inscricoes;
@@ -27,17 +29,17 @@ public class Atleta extends Socio implements Serializable {
         super();
     }
 
-    public Atleta(int numeroSocio, String nome, String email,String password, Date dataNascimento) {
+    public Atleta(int numeroSocio, String nome, String email,String password, Data dataNascimento) {
         super(numeroSocio,nome,password,email);
         this.dataNascimento = dataNascimento;
         this.inscricoes = new LinkedHashSet<>();
     }
 
-    public Date getDataNascimento() {
+    public Data getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(Data dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

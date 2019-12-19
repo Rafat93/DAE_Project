@@ -35,7 +35,7 @@ public class AtletaController {
                 atleta.getNome(),
                 atleta.getEmail(),
                 atleta.getPassword(),
-                atleta.getIdade()
+                atleta.getDataNascimento()
         );
         if(fn != null){
             return fn.apply(dto);
@@ -61,7 +61,7 @@ public class AtletaController {
     @POST
     @Path("/")
     public Response createNewAtleta (AtletaDTO atletaDTO) {
-        Atleta atleta = atletaBean.create(atletaDTO.getNumeroSocio(), atletaDTO.getNome(), atletaDTO.getEmail(),atletaDTO.getPassword(),atletaDTO.getIdade());
+        Atleta atleta = atletaBean.create(atletaDTO.getNumeroSocio(), atletaDTO.getNome(), atletaDTO.getEmail(),atletaDTO.getPassword(),atletaDTO.getDataNascimento());
         return Response.status(Response.Status.CREATED).entity(toDTO(atleta,null)).build();
     }
 
@@ -73,7 +73,7 @@ public class AtletaController {
                 atletaDTO.getNome(),
                 email,
                 atletaDTO.getPassword(),
-                atletaDTO.getIdade());
+                atletaDTO.getDataNascimento());
         Atleta atleta = atletaBean.findAtleta(email);
         return Response.status(Response.Status.OK)
                 .entity(toDTO(atleta,null))
