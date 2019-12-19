@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
         @NamedQuery(
                 name="getAllProdutos",
-                query = "SELECT p FROM Produto p ORDER BY p.tipo"
+                query = "SELECT p FROM Produto p ORDER BY p.id"
         )
 })
 public class Produto {
