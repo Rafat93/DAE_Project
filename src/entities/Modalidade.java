@@ -48,4 +48,99 @@ public class Modalidade {
     public int hashCode() {
         return Objects.hash(sigla, nome, treinos, escaloes, atletas, socios);
     }
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Treino> getTreinos() {
+        return treinos;
+    }
+
+    public void setTreinos(List<Treino> treinos) {
+        this.treinos = treinos;
+    }
+
+    public Set<Escalao> getEscaloes() {
+        return escaloes;
+    }
+
+    public void setEscaloes(Set<Escalao> escaloes) {
+        this.escaloes = escaloes;
+    }
+
+    public List<Atleta> getAtletas() {
+        return atletas;
+    }
+
+    public void setAtletas(List<Atleta> atletas) {
+        this.atletas = atletas;
+    }
+
+    public List<Socio> getSocios() {
+        return socios;
+    }
+
+    public void setSocios(List<Socio> socios) {
+        this.socios = socios;
+    }
+
+    public void addSocio (Socio socio){
+        if (!socios.contains(socio)){
+            socios.add(socio);
+        }
+    }
+
+    public void removeSocio (Socio socio){
+        if (socios.contains(socio)){
+            socios.remove(socio);
+        }
+    }
+
+    public void addAtleta (Atleta atleta){
+        if (!atletas.contains(atleta)){
+            atletas.add(atleta);
+        }
+    }
+
+    public void removeAtleta (Atleta atleta){
+        if (atletas.contains(atleta)){
+            atletas.remove(atleta);
+        }
+    }
+
+    public void addEscalao (Escalao escalao){
+        if (!escaloes.contains(escalao)){
+            escaloes.add(escalao);
+        }
+    }
+    public void removeEscalao (Escalao escalao){
+        if (escaloes.contains(escalao)){
+            escaloes.remove(escalao);
+        }
+    }
+
+    public void addTreino (Treino treino){
+        if (!treinos.contains(treino)){
+            treinos.add(treino);
+        }
+    }
+
+    public void removeTreino (Treino treino){
+        if (treinos.contains(treino)){
+            treinos.remove(treino);
+        }
+    }
 }
