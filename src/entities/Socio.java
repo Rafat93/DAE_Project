@@ -46,4 +46,16 @@ public class Socio extends User implements Serializable {
     public void setNumeroSocio(long numeroSocio) {
         this.numeroSocio = numeroSocio;
     }
+
+    public void addModalidade (Modalidade modalidade){
+        if (!modalidades.contains(modalidade)){
+            modalidades.add(modalidade);
+        }
+    }
+
+    public void removeModalidade (Modalidade modalidade){
+        if (modalidades.contains(modalidade)){
+            modalidades.remove(modalidade);
+        }
+    }
 }

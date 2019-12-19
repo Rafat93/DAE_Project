@@ -48,7 +48,7 @@ public class Pagamento {
     public Pagamento() {
     }
 
-    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado) {
+    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado, Recibo recibo) {
         this.utilizador = user;
         this.produto = produto;
         this.dataLancamento = dataLancamento;
