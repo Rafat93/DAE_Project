@@ -1,10 +1,8 @@
 package entities;
 
-import auxiliar.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 @Entity
@@ -18,7 +16,7 @@ public class Presenca {
     private Treino treino;
 
     @NotNull
-    private Data dataTreino;
+    private GregorianCalendar dataTreino;
 
     @NotNull
     @ManyToMany

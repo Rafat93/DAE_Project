@@ -1,6 +1,5 @@
 package dtos;
 
-import auxiliar.Data;
 import entities.Atleta;
 import entities.Treinador;
 import entities.Treino;

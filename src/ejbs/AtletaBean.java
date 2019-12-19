@@ -1,6 +1,5 @@
 package ejbs;
 
-import auxiliar.Data;
 import entities.Atleta;
 import exceptions.MyEntityNotFoundException;
 
@@ -9,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
 import java.util.List;
 
 @Stateless(name = "AtletaEJB")

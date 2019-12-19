@@ -1,7 +1,5 @@
 package dtos;
 
-import auxiliar.Data;
-
 import java.io.Serializable;
 
 public class AtletaDTO implements Serializable {

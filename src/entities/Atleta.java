@@ -1,11 +1,8 @@
 package entities;
 
-import auxiliar.Data;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
