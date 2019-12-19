@@ -18,7 +18,8 @@ public class Produto {
     private int id;
 
     @NotNull
-    private String tipo;
+
+    private TipoProduto tipo;
 
     @NotNull
     private String descricao;
