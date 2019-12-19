@@ -5,7 +5,6 @@ import enums.EstadoPagamento;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -35,7 +34,7 @@ public class Pagamento {
     private int quantidade;
 
     @NotNull
-    private double precoFinal;
+    private double precoFinalEmEuros;
 
     @NotNull
     private EstadoPagamento estado;
@@ -53,7 +52,7 @@ public class Pagamento {
         this.produto = produto;
         this.dataLancamento = dataLancamento;
         this.quantidade = quantidade;
-        this.precoFinal = precoFinal;
+        this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
     }
     public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado, Recibo recibo) {
@@ -61,7 +60,7 @@ public class Pagamento {
         this.produto = produto;
         this.dataLancamento = dataLancamento;
         this.quantidade = quantidade;
-        this.precoFinal = precoFinal;
+        this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
         this.recibo = recibo;
     }
@@ -98,12 +97,12 @@ public class Pagamento {
         this.quantidade = quantidade;
     }
 
-    public double getPrecoFinal() {
-        return precoFinal;
+    public double getPrecoFinalEmEuros() {
+        return precoFinalEmEuros;
     }
 
-    public void setPrecoFinal(double precoFinal) {
-        this.precoFinal = precoFinal;
+    public void setPrecoFinalEmEuros(double precoFinal) {
+        this.precoFinalEmEuros = precoFinal;
     }
 
     public EstadoPagamento getEstado() {

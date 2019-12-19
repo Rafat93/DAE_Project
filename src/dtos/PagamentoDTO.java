@@ -14,7 +14,7 @@ public class PagamentoDTO  implements Serializable {
     private Produto produto;
     private Date dataLancamento;
     private int quantidade;
-    private double precoFinal;
+    private double precoFinalEmEuros;
     private EstadoPagamento estado;
 
     public PagamentoDTO() {
@@ -25,7 +25,7 @@ public class PagamentoDTO  implements Serializable {
         this.produto = produto;
         this.dataLancamento = dataLancamento;
         this.quantidade = quantidade;
-        this.precoFinal = precoFinal;
+        this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
     }
 
@@ -61,12 +61,12 @@ public class PagamentoDTO  implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public double getPrecoFinal() {
-        return precoFinal;
+    public double getPrecoFinalEmEuros() {
+        return precoFinalEmEuros;
     }
 
-    public void setPrecoFinal(double precoFinal) {
-        this.precoFinal = precoFinal;
+    public void setPrecoFinalEmEuros(double precoFinalEmEuros) {
+        this.precoFinalEmEuros = precoFinalEmEuros;
     }
 
     public EstadoPagamento getEstado() {

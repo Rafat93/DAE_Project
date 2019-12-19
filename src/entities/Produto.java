@@ -24,7 +24,7 @@ public class Produto {
     private String descricao;
 
     @NotNull
-    private double preco;
+    private double precoEmEuros;
 
     public Produto() {
     }
@@ -32,7 +32,7 @@ public class Produto {
     public Produto(String tipo, String descricao, double preco) {
         this.tipo = tipo;
         this.descricao = descricao;
-        this.preco = preco;
+        this.precoEmEuros = preco;
     }
 
     public String getTipo() {
@@ -51,11 +51,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getPrecoEmEuros() {
+        return precoEmEuros;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setPrecoEmEuros(double precoEmEuros) {
+        this.precoEmEuros = precoEmEuros;
     }
 }

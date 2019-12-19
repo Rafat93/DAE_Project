@@ -24,15 +24,16 @@ public class Recibo {
     private long nifEntidade;
 
     @NotNull
-    private Pagamento Pagamento;
+    @OneToOne
+    private Pagamento pagamento;
 
     public Recibo() {
 
     }
 
-    public Recibo(Pagamento Pagamento){
+    public Recibo(Pagamento pagamento){
         this.entidade = "Clube";
         this.nifEntidade= 912456325;
-
+        this.pagamento = pagamento;
     }
 }
