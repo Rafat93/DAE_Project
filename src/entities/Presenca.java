@@ -30,4 +30,8 @@ public class Presenca {
 
     public Presenca() {
     }
+
+    public Presenca(Treino treino, Data dataTreino, Treinador treinador){
+
+    }
 }

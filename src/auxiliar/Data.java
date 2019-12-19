@@ -1,5 +1,6 @@
 package auxiliar;
 
+@
 public class Data {
 
     private int dia;

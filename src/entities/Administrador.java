@@ -12,4 +12,6 @@ public class Administrador extends User implements Serializable {
 
     public Administrador() {
     }
+
+
 }
