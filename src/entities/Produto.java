@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Produto {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @NotNull
