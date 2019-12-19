@@ -58,4 +58,6 @@ public class Socio extends User implements Serializable {
             modalidades.remove(modalidade);
         }
     }
+
+
 }
