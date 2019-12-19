@@ -18,7 +18,7 @@ public class Produto {
     private int id;
 
     @NotNull
-
+    @ManyToOne
     private TipoProduto tipo;
 
     @NotNull
@@ -33,18 +33,18 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String tipo, String descricao, double preco, int stock) {
+    public Produto(TipoProduto tipo, String descricao, double preco, int stock) {
         this.tipo = tipo;
         this.descricao = descricao;
         this.precoEmEuros = preco;
         this.stock = stock;
     }
 
-    public String getTipo() {
+    public TipoProduto getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoProduto tipo) {
         this.tipo = tipo;
     }
 
