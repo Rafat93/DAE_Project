@@ -2,10 +2,7 @@ package entities;
 
 import enums.DiasSemana;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
 
@@ -13,7 +10,7 @@ import java.sql.Time;
 public class Treino {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull

@@ -25,7 +25,7 @@ public class SocioBean {
 
     public Socio create(long numeroSocio, String nome, String email, String password) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
         try{
-            Socio socio = new Socio(1,nome,email,password);
+            Socio socio = new Socio(numeroSocio,nome,email,password);
             em.persist(socio);
             return socio;
         }catch(Exception e){

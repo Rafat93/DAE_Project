@@ -12,9 +12,6 @@ public class UserBean {
     @PersistenceContext
     EntityManager em;
 
-    public UserBean() {
-    }
-
     public User authenticate(final String email, final String password) throws
             Exception {
         User user = em.find(User.class, email);

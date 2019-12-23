@@ -22,10 +22,12 @@ public class Socio extends User implements Serializable {
     @ManyToMany
     private Set<Modalidade> modalidades;
 
+    //
+
     public Socio() {
     }
 
-    public Socio(int numeroSocio, String nome, String password, String email) {
+    public Socio(long numeroSocio, String nome, String password, String email) {
         super(nome, password, email);
         this.numeroSocio = numeroSocio;
         this.modalidades = new LinkedHashSet<>();

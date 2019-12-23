@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -15,10 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Entity
-@Table(name="USERS")
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class User {
+@Table(name = "USERS")
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

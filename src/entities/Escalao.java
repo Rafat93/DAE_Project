@@ -10,7 +10,7 @@ import java.util.Set;
 public class Escalao {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull

@@ -1,7 +1,7 @@
 package ejbs;
 
-import entities.Atleta;
 import entities.Produto;
+import entities.TipoProduto;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,9 +16,9 @@ public class ProdutoBean {
     public ProdutoBean() {
     }
 
-    public Produto create(String tipo, String descricao, double preco){
+    public Produto create(TipoProduto tipo, String descricao, double preco, int stock){
         try{
-            Produto produto = new Produto(tipo,descricao,preco);
+            Produto produto = new Produto(tipo,descricao,preco,stock);
             em.persist(produto);
             return produto;
         }catch(Exception e){
