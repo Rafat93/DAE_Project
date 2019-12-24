@@ -1,10 +1,7 @@
 package dtos;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
+import java.util.*;
 
 public class SocioDTO implements Serializable {
 
@@ -18,7 +15,7 @@ public class SocioDTO implements Serializable {
 
     private GregorianCalendar dataNascimento;
 
-    private Collection<ModalidadeDTO> modalidades;
+    private List<ModalidadeDTO> modalidades;
 
     public SocioDTO() {
         modalidades = new LinkedList<>();
@@ -73,11 +70,11 @@ public class SocioDTO implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Collection<ModalidadeDTO> getModalidades() {
+    public List<ModalidadeDTO> getModalidades() {
         return modalidades;
     }
 
-    public void setModalidades(Collection<ModalidadeDTO> modalidades) {
+    public void setModalidades(List<ModalidadeDTO> modalidades) {
         this.modalidades = modalidades;
     }
 }

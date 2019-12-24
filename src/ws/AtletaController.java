@@ -63,7 +63,7 @@ public class AtletaController {
         System.out.println(email + " --- " + principal.getName());
 
         if(securityContext.isUserInRole("Administrador") ||
-                securityContext.isUserInRole("Atleta") && principal.getName().equals(email)) {
+                securityContext.isUserInRole("Atleta") && principal.getName().equals(atletaDTO.getNome())) {
 
             atletaBean.update(atletaDTO.getNumeroSocio(),
                     atletaDTO.getNome(),
@@ -82,6 +82,7 @@ public class AtletaController {
 
     @DELETE
     @Path("{email}")
+    @RolesAllowed({"Administrator"})
     public Response removeAtleta(@PathParam("email") String email)
             throws MyEntityNotFoundException {
         atletaBean.delete(email);
@@ -94,9 +95,10 @@ public class AtletaController {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println(email + " --- " + principal.getName());
 
+        Atleta atleta = atletaBean.findAtleta(email);
         if(securityContext.isUserInRole("Administrador") ||
-                securityContext.isUserInRole("Atleta") && principal.getName().equals(email)) {
-            Atleta atleta = atletaBean.findAtleta(email);
+                securityContext.isUserInRole("Atleta") && principal.getName().equals(atleta.getNome())) {
+
             return Response.status(Response.Status.OK)
                     .entity(atletaToDTO(atleta))
                     .build();
@@ -124,6 +126,7 @@ public class AtletaController {
 
     @PUT
     @Path("{email}/modalidade/enroll/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response enrollAtletaInModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         atletaBean.enrollAtletaInModalidade(email, sigla);
         return getAtletaModalidades(email);
@@ -131,6 +134,7 @@ public class AtletaController {
 
     @PUT
     @Path("{email}/modalidade/unroll/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response unrollAtletaFromModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         atletaBean.unrollAtletaFromModalidade(email, sigla);
         return getAtletaModalidades(email);

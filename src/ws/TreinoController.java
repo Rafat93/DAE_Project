@@ -85,6 +85,8 @@ public class TreinoController {
 
     @DELETE
     @Path("{code}")
+
+    @RolesAllowed({"Administrator"})
     public Response removeTreino (@PathParam("code") int code){
         treinoBean.delete(code);
         return Response.status(Response.Status.OK).build();
@@ -108,6 +110,7 @@ public class TreinoController {
 
     @PUT
     @Path("{code}/modalidade/enroll/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response enrollAtletaInModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.enrollTreinoInModalidade(code, sigla);
         return getModalidade(code);
@@ -115,6 +118,7 @@ public class TreinoController {
 
     @PUT
     @Path("{code}/modalidade/unroll/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response unrollTreinoFromModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.unrollTreinoFromModalidade(code, sigla);
         return getModalidade(code);

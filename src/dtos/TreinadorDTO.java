@@ -1,12 +1,14 @@
 package dtos;
 
+import entities.Treino;
+
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AtletaDTO implements Serializable {
-    private long numeroSocio;
+public class TreinadorDTO implements Serializable {
+    private long numeroCedula;
 
     private String nome;
 
@@ -14,29 +16,30 @@ public class AtletaDTO implements Serializable {
 
     private String password;
 
-    private GregorianCalendar dataNascimento;
+    private List<Treino> treinosLecionados;
 
     private List<ModalidadeDTO> modalidades;
 
-    public AtletaDTO() {
-        modalidades = new LinkedList<>();
-    }
-
-    public AtletaDTO(long numeroSocio,String nome, String email,String password, GregorianCalendar dataNascimento) {
-        this();
-        this.numeroSocio = numeroSocio;
+    public TreinadorDTO(long numeroCedula, String nome, String email, String password) {
+        this.numeroCedula = numeroCedula;
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.dataNascimento = dataNascimento;
+        this.treinosLecionados = new LinkedList<>();
+        this.modalidades = new LinkedList<>();
     }
 
-    public long getNumeroSocio() {
-        return numeroSocio;
+    public TreinadorDTO() {
+        this.treinosLecionados = new LinkedList<>();
+        this.modalidades = new LinkedList<>();
     }
 
-    public void setNumeroSocio(long numeroSocio) {
-        this.numeroSocio = numeroSocio;
+    public long getNumeroCedula() {
+        return numeroCedula;
+    }
+
+    public void setNumeroCedula(long numeroCedula) {
+        this.numeroCedula = numeroCedula;
     }
 
     public String getNome() {
@@ -55,20 +58,20 @@ public class AtletaDTO implements Serializable {
         this.email = email;
     }
 
-    public GregorianCalendar getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Treino> getTreinosLecionados() {
+        return treinosLecionados;
+    }
+
+    public void setTreinosLecionados(List<Treino> treinosLecionados) {
+        this.treinosLecionados = treinosLecionados;
     }
 
     public List<ModalidadeDTO> getModalidades() {

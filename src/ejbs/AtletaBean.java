@@ -2,6 +2,7 @@ package ejbs;
 
 import entities.Atleta;
 import entities.Modalidade;
+import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
@@ -21,7 +22,11 @@ public class AtletaBean {
 
     public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano){
         try{
-            Atleta atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(dia,mes,ano));
+            Atleta atleta = em.find(Atleta.class,email);
+            if(atleta != null){
+                throw new MyEntityAlreadyExistsException("Atleta com o email: " + email + " já existe");
+            }
+            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(dia,mes,ano));
             em.persist(atleta);
             return atleta;
         }catch(Exception e){
@@ -57,7 +62,6 @@ public class AtletaBean {
 
     public List<Atleta> all() {
         try {
-
             return (List<Atleta>) em.createNamedQuery("getAllAtletas").getResultList();
         } catch (Exception e) {
             throw new EJBException("ERROR_RETRIEVING_ATLETAS", e);
@@ -72,9 +76,15 @@ public class AtletaBean {
         }
     }
 
-    public void delete(String email){
+    public void delete(String email) throws MyEntityNotFoundException{
         try {
+            Atleta atleta = em.find(Atleta.class,email);
+            if (atleta == null) {
+                throw new MyEntityNotFoundException("Atleta com o email: " + email + " já existe");
+            }
             em.remove(findAtleta(email));
+        }catch (MyEntityNotFoundException e) {
+            throw e;
         }catch (Exception e){
             throw new EJBException("ERROR_DELETING_ATLETA",e);
         }
