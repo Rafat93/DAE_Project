@@ -1,5 +1,6 @@
 package dtos;
 
+import entities.Recibo;
 import enums.EstadoPagamento;
 import entities.Produto;
 import entities.User;
@@ -16,17 +17,19 @@ public class PagamentoDTO  implements Serializable {
     private int quantidade;
     private double precoFinalEmEuros;
     private EstadoPagamento estado;
+    private Recibo recibo;
 
     public PagamentoDTO() {
     }
 
-    public PagamentoDTO(User utilizador, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado) {
+    public PagamentoDTO(User utilizador, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado, Recibo recibo) {
         this.utilizador = utilizador;
         this.produto = produto;
         this.dataLancamento = dataLancamento;
         this.quantidade = quantidade;
         this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
+        this.recibo = recibo;
     }
 
     public User getUtilizador() {
@@ -75,5 +78,13 @@ public class PagamentoDTO  implements Serializable {
 
     public void setEstado(EstadoPagamento estado) {
         this.estado = estado;
+    }
+
+    public Recibo getRecibo() {
+        return recibo;
+    }
+
+    public void setRecibo(Recibo recibo) {
+        this.recibo = recibo;
     }
 }

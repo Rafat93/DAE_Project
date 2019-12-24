@@ -16,8 +16,7 @@ import java.util.Set;
 })
 public class Atleta extends Socio implements Serializable {
 
-    @NotNull
-    private GregorianCalendar dataNascimento;
+
 
     @OneToMany
     private Set<Inscricao> inscricoes;
@@ -28,17 +27,8 @@ public class Atleta extends Socio implements Serializable {
     }
 
     public Atleta(long numeroSocio, String nome, String email,String password, GregorianCalendar dataNascimento) {
-        super(numeroSocio,nome,password,email);
-        this.dataNascimento = dataNascimento;
+        super(numeroSocio,nome,password,email,dataNascimento);
         this.inscricoes = new LinkedHashSet<>();
-    }
-
-    public GregorianCalendar getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public Set<Inscricao> getInscricoes() {

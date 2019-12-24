@@ -1,5 +1,6 @@
 package ejbs;
 
+import entities.Modalidade;
 import entities.Socio;
 import entities.Socio;
 import exceptions.MyConstraintViolationException;
@@ -12,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Stateless(name = "SocioEJB")
@@ -23,9 +25,9 @@ public class SocioBean {
     public SocioBean() {
     }
 
-    public Socio create(long numeroSocio, String nome, String email, String password) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
+    public Socio create(long numeroSocio, String nome, String email, String password,int dia, int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
         try{
-            Socio socio = new Socio(numeroSocio,nome,email,password);
+            Socio socio = new Socio(numeroSocio,nome,email,password,new GregorianCalendar(dia,mes,ano));
             em.persist(socio);
             return socio;
         }catch(Exception e){
@@ -41,7 +43,7 @@ public class SocioBean {
         }
     }
 
-    public Socio findStudent(String email) {
+    public Socio findSocio(String email) {
         try{
             return em.find(Socio.class, email);
         } catch (Exception e) {
@@ -49,7 +51,7 @@ public class SocioBean {
         }
     }
 
-    public Socio update(long numeroSocio, String nome, String email, String password) throws MyConstraintViolationException, MyEntityAlreadyExistsException, MyIllegalArgumentException, MyEntityNotFoundException {
+    public Socio update(long numeroSocio, String nome, String email, String password, int dia,int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException, MyIllegalArgumentException, MyEntityNotFoundException {
         try {
             Socio socio = em.find(Socio.class, email);
 
@@ -64,6 +66,7 @@ public class SocioBean {
             socio.setPassword(password);
             socio.setNome(nome);
             socio.setEmail(email);
+            socio.setDataNascimento(new GregorianCalendar(dia,mes,ano));
 
             em.merge(socio);
 
@@ -77,9 +80,29 @@ public class SocioBean {
 
     public void delete(String email){
         try {
-            em.remove(findStudent(email));
+            em.remove(findSocio(email));
         }catch (Exception e){
             throw new EJBException("ERROR_DELETING_SOCIO",e);
+        }
+    }
+
+    public void subscribeModalidade(String email, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Socio socio = (Socio) em.find(Socio.class, email);
+            if(socio == null){
+                throw new MyEntityNotFoundException("Socio with email " + email + " not found.");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
+            }
+            if(modalidade.getSocios().contains(socio)){
+                throw new MyIllegalArgumentException("Socio have already subscribe this modalidade with code " + sigla);
+            }
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_SOCIO_SUBSCRIBING_MODALIDADE ---->" + e.getMessage());
         }
     }
 }

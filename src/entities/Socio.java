@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -19,6 +20,9 @@ public class Socio extends User implements Serializable {
     @Column(unique=true)
     private long numeroSocio;
 
+    @NotNull
+    private GregorianCalendar dataNascimento;
+
     @ManyToMany
     private Set<Modalidade> modalidades;
 
@@ -27,9 +31,10 @@ public class Socio extends User implements Serializable {
     public Socio() {
     }
 
-    public Socio(long numeroSocio, String nome, String password, String email) {
+    public Socio(long numeroSocio, String nome, String password, String email, GregorianCalendar dataNascimento) {
         super(nome, password, email);
         this.numeroSocio = numeroSocio;
+        this.dataNascimento = dataNascimento;
         this.modalidades = new LinkedHashSet<>();
     }
 
@@ -47,6 +52,14 @@ public class Socio extends User implements Serializable {
 
     public void setNumeroSocio(long numeroSocio) {
         this.numeroSocio = numeroSocio;
+    }
+
+    public GregorianCalendar getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(GregorianCalendar dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void addModalidade (Modalidade modalidade){

@@ -55,6 +55,7 @@ public class Pagamento {
         this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
     }
+
     public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado, Recibo recibo) {
         this.utilizador = user;
         this.produto = produto;
