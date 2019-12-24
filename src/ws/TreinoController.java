@@ -1,8 +1,12 @@
 package ws;
 
+import dtos.ModalidadeDTO;
 import dtos.TreinoDTO;
 import ejbs.TreinoBean;
+import entities.Modalidade;
 import entities.Treino;
+import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -57,7 +61,7 @@ public class TreinoController {
     @PUT
     @Path("{code}")
     @RolesAllowed({"Administrator"})
-    public Response updateTreino(@PathParam("code") int code, TreinoDTO treinoDTO){
+    public Response updateTreino(@PathParam("code") int code, TreinoDTO treinoDTO) throws MyEntityNotFoundException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println("Treino: " + treinoDTO.getCode() + " --- " + principal.getName());
         if(securityContext.isUserInRole("Administrador")) {
@@ -79,6 +83,57 @@ public class TreinoController {
         return Response.status(Response.Status.FORBIDDEN).build();
     }
 
+    @DELETE
+    @Path("{code}")
+    public Response removeTreino (@PathParam("code") int code){
+        treinoBean.delete(code);
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @GET
+    @Path("{code}")
+    public Response getTreinoDetails (@PathParam("code") int code){
+        Principal principal = securityContext.getUserPrincipal();
+        System.out.println("Treino: "+ code + " --- " + principal.getName());
+
+        if(securityContext.isUserInRole("Administrador") ||
+                securityContext.isUserInRole("Treinador") ){
+            Treino treino = treinoBean.findTreino(code);
+            return Response.status(Response.Status.OK)
+                    .entity(toDTO(treino))
+                    .build();
+        }
+        return Response.status(Response.Status.FORBIDDEN).build();
+    }
+
+    @PUT
+    @Path("{code}/modalidade/enroll/{sigla}")
+    public Response enrollAtletaInModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        treinoBean.enrollTreinoInModalidade(code, sigla);
+        return getModalidade(code);
+    }
+
+    @PUT
+    @Path("{code}/modalidade/unroll/{sigla}")
+    public Response unrollTreinoFromModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        treinoBean.unrollTreinoFromModalidade(code, sigla);
+        return getModalidade(code);
+    }
+
+    @GET
+    @Path("{code}/modalidade")
+    public Response getModalidade(@PathParam("code") int code){
+        Treino treino = treinoBean.findTreino(code);
+        if(treino != null){
+            return Response.status(Response.Status.OK)
+                    .entity(treinoToDTO(treino.getModalidade()))
+                    .build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Treino com o codigo "+code+" não encontrado")
+                .build();
+    }
+
     TreinoDTO toDTO (Treino treino){
         return new TreinoDTO(
                 treino.getCode(),
@@ -94,5 +149,11 @@ public class TreinoController {
 
     List <TreinoDTO> toDTOs (List <Treino> treinos){
         return treinos.stream().map(this::toDTO).collect(Collectors.toList());
+    }
+
+    ModalidadeDTO treinoToDTO(Modalidade modalidade){
+        return new ModalidadeDTO(modalidade.getSigla(),
+                modalidade.getNome(),
+                modalidade.getEpocaDesportiva());
     }
 }

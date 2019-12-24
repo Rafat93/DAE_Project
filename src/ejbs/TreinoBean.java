@@ -6,6 +6,7 @@ import entities.*;
 import enums.DiasSemana;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -75,8 +76,6 @@ public class TreinoBean {
             if(escalao == null){
                 throw new MyEntityNotFoundException("Escalão com o id: " + idEscalao + " não existe.");
             }
-
-
             treino.setCode(code);
             treino.setTreinador(treinador);
             treino.setModalidade(modalidade);
@@ -121,6 +120,51 @@ public class TreinoBean {
         }
     }
 
+    public void enrollTreinoInModalidade(int code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try {
+            Treino treino = (Treino) em.find(Treino.class, code);
+            if (treino == null) {
+                throw new MyEntityNotFoundException("Treino com o código " + code + " não existe.");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class, sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade com a sigla " + sigla + " não existe.");
+            }
+            if (!modalidade.equals(treino.getModalidade())) {
+                throw new MyIllegalArgumentException("Treino não pode ser adicionado à Modalidade com a sigla " + sigla + "!");
+            }
+            if (modalidade.getTreinos().contains(treino)) {
+                throw new MyIllegalArgumentException("Treino já está adicionado à Modalidade com a sigla " + sigla + "!");
+            }
+            modalidade.addTreino(treino);
+        } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_ENROLLING_TREINO_IN_MODALIDADE ---->" + e.getMessage());
+        }
+    }
 
-
+    public void unrollTreinoFromModalidade(int code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try {
+            Treino treino = (Treino) em.find(Treino.class, code);
+            if (treino == null) {
+                throw new MyEntityNotFoundException("Treino com o código " + code + " não existe.");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class, sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade com a sigla " + sigla + " não existe.");
+            }
+            if (!modalidade.equals(treino.getModalidade())) {
+                throw new MyIllegalArgumentException("Treino não pode ser adicionado à Modalidade com a sigla " + sigla + "!");
+            }
+            if (modalidade.getTreinos().contains(treino)) {
+                throw new MyIllegalArgumentException("Treino já está adicionado à Modalidade com a sigla " + sigla + "!");
+            }
+            modalidade.removeTreino(treino);
+        } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_TREINO_FROM_MODALIDADE ---->" + e.getMessage());
+        }
+    }
 }

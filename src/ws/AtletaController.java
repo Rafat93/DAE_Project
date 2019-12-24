@@ -124,8 +124,15 @@ public class AtletaController {
 
     @PUT
     @Path("{email}/modalidade/enroll/{sigla}")
-    public Response enrollAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Response enrollAtletaInModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         atletaBean.enrollAtletaInModalidade(email, sigla);
+        return getAtletaModalidades(email);
+    }
+
+    @PUT
+    @Path("{email}/modalidade/unroll/{sigla}")
+    public Response unrollAtletaFromModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        atletaBean.unrollAtletaFromModalidade(email, sigla);
         return getAtletaModalidades(email);
     }
 

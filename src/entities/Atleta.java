@@ -1,7 +1,6 @@
 package entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.LinkedHashSet;

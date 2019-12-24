@@ -100,4 +100,25 @@ public class AtletaBean {
             throw new EJBException("ERROR_ENROLLING_ATLETA_IN_MODALIDADE ---->" + e.getMessage());
         }
     }
+
+    public void unrollAtletaFromModalidade(String email, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Atleta atleta = (Atleta) em.find(Atleta.class,email);
+            if(atleta ==null){
+                throw new MyEntityNotFoundException("Atleta com email " + email + " não existe.");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade com a sigla " + sigla + " não existe.");
+            }
+            if(!modalidade.getAtletas().contains(atleta)){
+                throw new MyIllegalArgumentException("Atleta não existe na Modalidade com a sigla " + sigla);
+            }
+            modalidade.removeAtleta(atleta);
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_ATLETA_FROM_MODALIDADE ---->" + e.getMessage());
+        }
+    }
 }
