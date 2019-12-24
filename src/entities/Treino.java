@@ -16,7 +16,6 @@ import java.sql.Time;
 public class Treino {
 
     @Id
-    @NotNull
     private int code;
 
     @NotNull
@@ -35,8 +34,10 @@ public class Treino {
 
     @NotNull
     private Time horaInicio;
+
     @NotNull
     private Time horaFim;
+
     @NotNull
     private DiasSemana diaSemana;
 

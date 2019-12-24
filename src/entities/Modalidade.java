@@ -15,8 +15,6 @@ import java.util.*;
 })
 public class Modalidade {
 
-    //Falta colocar a epoca desportiva
-
     @Id
     private String sigla;
 
@@ -40,11 +38,15 @@ public class Modalidade {
     @ManyToMany
     private List<Socio> socios;
 
+    @ManyToMany
+    private List<Treinador> treinadores;
+
 
     public Modalidade() {
         this.treinos = new LinkedList<>();
         this.socios = new LinkedList<>();
         this.atletas = new LinkedList<>();
+        this.treinadores = new LinkedList<>();
         this.escaloes = new HashSet<>();
     }
 
@@ -85,32 +87,23 @@ public class Modalidade {
         return treinos;
     }
 
-    public void setTreinos(List<Treino> treinos) {
-        this.treinos = treinos;
-    }
 
     public Set<Escalao> getEscaloes() {
         return escaloes;
     }
 
-    public void setEscaloes(Set<Escalao> escaloes) {
-        this.escaloes = escaloes;
-    }
 
     public List<Atleta> getAtletas() {
         return atletas;
     }
 
-    public void setAtletas(List<Atleta> atletas) {
-        this.atletas = atletas;
-    }
 
     public List<Socio> getSocios() {
         return socios;
     }
 
-    public void setSocios(List<Socio> socios) {
-        this.socios = socios;
+    public List<Treinador> getTreinadores() {
+        return treinadores;
     }
 
     public void addSocio (Socio socio){
@@ -120,9 +113,7 @@ public class Modalidade {
     }
 
     public void removeSocio (Socio socio){
-        if (socios.contains(socio)){
-            socios.remove(socio);
-        }
+        socios.remove(socio);
     }
 
     public void addAtleta (Atleta atleta){
@@ -132,20 +123,14 @@ public class Modalidade {
     }
 
     public void removeAtleta (Atleta atleta){
-        if (atletas.contains(atleta)){
-            atletas.remove(atleta);
-        }
+        atletas.remove(atleta);
     }
 
     public void addEscalao (Escalao escalao){
-        if (!escaloes.contains(escalao)){
-            escaloes.add(escalao);
-        }
+        escaloes.add(escalao);
     }
     public void removeEscalao (Escalao escalao){
-        if (escaloes.contains(escalao)){
-            escaloes.remove(escalao);
-        }
+        escaloes.remove(escalao);
     }
 
     public void addTreino (Treino treino){
@@ -155,9 +140,17 @@ public class Modalidade {
     }
 
     public void removeTreino (Treino treino){
-        if (treinos.contains(treino)){
-            treinos.remove(treino);
+        treinos.remove(treino);
+    }
+
+    public void addTreinador (Treinador treinador){
+        if (!treinadores.contains(treinador)){
+            treinadores.add(treinador);
         }
+    }
+
+    public void removeTreinador (Treinador treinador){
+        treinadores.remove(treinador);
     }
 
     public String getEpocaDesportiva() {

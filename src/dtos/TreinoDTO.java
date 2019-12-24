@@ -1,6 +1,5 @@
 package dtos;
 
-import entities.Treinador;
 import enums.DiasSemana;
 
 import java.io.Serializable;
@@ -8,6 +7,7 @@ import java.sql.Time;
 
 public class TreinoDTO implements Serializable {
 
+    private int code;
     private String emailTreinador;
     private String siglaModalidade;
     private int idGraduacao;
@@ -16,8 +16,9 @@ public class TreinoDTO implements Serializable {
     private Time horaFim;
     private DiasSemana diaSemana;
 
-    public TreinoDTO(String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
-        this.emailTreinador = emailTreinador;
+    public TreinoDTO(int code, String nomeTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+        this.code = code;
+        this.emailTreinador = nomeTreinador;
         this.siglaModalidade = siglaModalidade;
         this.idGraduacao = idGraduacao;
         this.idEscalao = idEscalao;
@@ -27,6 +28,14 @@ public class TreinoDTO implements Serializable {
     }
 
     public TreinoDTO() {
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getEmailTreinador() {

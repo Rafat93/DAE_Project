@@ -1,9 +1,6 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -24,10 +21,14 @@ public class Treinador extends User implements Serializable {
     @OneToMany
     private List<Treino> treinosLecionados;
 
+    @ManyToMany
+    private List<Modalidade> modalidades;
+
     public Treinador(String nome, String password, String email,long numeroCedula) {
         super(nome, password, email);
         this.numeroCedula=numeroCedula;
         this.treinosLecionados = new LinkedList<>();
+        this.modalidades = new LinkedList<>();
     }
 
     public Treinador() {
@@ -45,8 +46,8 @@ public class Treinador extends User implements Serializable {
         return treinosLecionados;
     }
 
-    public void setTreinosLecionados(List<Treino> treinosLecionados) {
-        this.treinosLecionados = treinosLecionados;
+    public List<Modalidade> getModalidades() {
+        return modalidades;
     }
 
     public void addTreinoLecionado (Treino treino){
@@ -56,8 +57,18 @@ public class Treinador extends User implements Serializable {
     }
 
     public void removeTreinoLecionado (Treino treino){
-        if (treinosLecionados.contains(treino)){
-            treinosLecionados.remove(treino);
+        treinosLecionados.remove(treino);
+    }
+
+    public void addModalidade(Modalidade modalidade){
+        if (!modalidades.contains(modalidade)){
+            modalidades.add(modalidade);
         }
     }
+
+    public void removeModalidade(Modalidade modalidade){
+        modalidades.remove(modalidade);
+    }
+
+
 }

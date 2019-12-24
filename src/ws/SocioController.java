@@ -154,10 +154,7 @@ public class SocioController {
     ModalidadeDTO socioToDTO(Modalidade modalidade){
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getTreinos(),
-                modalidade.getEscaloes(),
-                modalidade.getAtletas(),
-                modalidade.getSocios());
+                modalidade.getEpocaDesportiva());
     }
 
     List<ModalidadeDTO> modalidadeToDTOs(Collection<Modalidade> modalidades){

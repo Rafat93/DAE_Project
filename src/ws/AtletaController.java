@@ -156,14 +156,11 @@ public class AtletaController {
         );
     }
 
-    // Converts an entity Atleta to a DTO Atleta class without the list of Modalidades
+
     ModalidadeDTO atletaToDTO(Modalidade modalidade){
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getTreinos(),
-                modalidade.getEscaloes(),
-                modalidade.getAtletas(),
-                modalidade.getSocios());
+                modalidade.getEpocaDesportiva());
     }
 
     // converts an entire list of Atletas entities without the list of Modalidades into a list of DTOs
