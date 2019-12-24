@@ -7,11 +7,17 @@ import javax.validation.constraints.NotNull;
 import java.sql.Time;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllTreinos",
+                query = "SELECT t FROM Treino t ORDER BY t.code" // JPQL
+        )
+})
 public class Treino {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @NotNull
+    private int code;
 
     @NotNull
     @ManyToOne
@@ -32,15 +38,20 @@ public class Treino {
     @NotNull
     private Time horaFim;
     @NotNull
-    private DiasSemana dia;
+    private DiasSemana diaSemana;
 
     public Treino() {
     }
 
-    public Treino(Time horaInicio, Time horaFim, DiasSemana dia) {
+    public Treino(int code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+        this.code = code;
+        this.treinador = treinador;
+        this.modalidade = modalidade;
+        this.graduacao = graduacao;
+        this.escalao = escalao;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
-        this.dia = dia;
+        this.diaSemana = diaSemana;
     }
 
     public Time getHoraInicio() {
@@ -59,11 +70,51 @@ public class Treino {
         this.horaFim = horaFim;
     }
 
-    public DiasSemana getDia() {
-        return dia;
+    public DiasSemana getDiaSemana() {
+        return diaSemana;
     }
 
-    public void setDia(DiasSemana dia) {
-        this.dia = dia;
+    public void setDiaSemana(DiasSemana dia) {
+        this.diaSemana = dia;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public Treinador getTreinador() {
+        return treinador;
+    }
+
+    public void setTreinador(Treinador treinador) {
+        this.treinador = treinador;
+    }
+
+    public Modalidade getModalidade() {
+        return modalidade;
+    }
+
+    public void setModalidade(Modalidade modalidade) {
+        this.modalidade = modalidade;
+    }
+
+    public Graduacao getGraduacao() {
+        return graduacao;
+    }
+
+    public void setGraduacao(Graduacao graduacao) {
+        this.graduacao = graduacao;
+    }
+
+    public Escalao getEscalao() {
+        return escalao;
+    }
+
+    public void setEscalao(Escalao escalao) {
+        this.escalao = escalao;
     }
 }

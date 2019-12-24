@@ -57,7 +57,7 @@ public class AtletaBean {
 
     public List<Atleta> all() {
         try {
-            // remember, maps to: “SELECT s FROM Student s ORDER BY s.name”
+
             return (List<Atleta>) em.createNamedQuery("getAllAtletas").getResultList();
         } catch (Exception e) {
             throw new EJBException("ERROR_RETRIEVING_ATLETAS", e);

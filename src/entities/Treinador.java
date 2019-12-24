@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -8,6 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllTreinadores",
+                query = "SELECT t FROM Treinador t ORDER BY t.nome" // JPQL
+        )
+})
 public class Treinador extends User implements Serializable {
 
     @NotNull

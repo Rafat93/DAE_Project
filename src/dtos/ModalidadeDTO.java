@@ -6,30 +6,31 @@ import entities.Socio;
 import entities.Treino;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ModalidadeDTO implements Serializable {
 
     private String sigla;
     private String nome;
-    private List<Treino> treinos;
-    private Set<Escalao> escaloes;
-    private List<Atleta> atletas;
-    private List<Socio> socios;
+    private String epocaDesportiva;
+    private Collection<TreinoDTO> treinos;
+    private Collection<EscalaoDTO> escaloes;
+    private Collection<AtletaDTO> atletas;
+    private Collection<SocioDTO> socios;
 
-    public ModalidadeDTO(String sigla, String nome, List<Treino> treinos, Set<Escalao> escaloes, List<Atleta> atletas, List<Socio> socios) {
+    public ModalidadeDTO(String sigla, String nome, String epocaDesportiva) {
+        this();
         this.sigla = sigla;
         this.nome = nome;
-        this.treinos = new LinkedList<>();
-        this.escaloes = new HashSet<>();
-        this.atletas = new LinkedList<>();
-        this.socios = new LinkedList<>();
+        this.epocaDesportiva = epocaDesportiva;
     }
 
     public ModalidadeDTO() {
+        treinos = new LinkedList<>();
+        escaloes = new LinkedList<>();
+        atletas = new LinkedList<>();
+        socios = new LinkedList<>();
+
     }
 
     public String getSigla() {
@@ -48,35 +49,43 @@ public class ModalidadeDTO implements Serializable {
         this.nome = nome;
     }
 
-    public List<Treino> getTreinos() {
+    public String getEpocaDesportiva() {
+        return epocaDesportiva;
+    }
+
+    public void setEpocaDesportiva(String epocaDesportiva) {
+        this.epocaDesportiva = epocaDesportiva;
+    }
+
+    public Collection<TreinoDTO> getTreinos() {
         return treinos;
     }
 
-    public void setTreinos(List<Treino> treinos) {
+    public void setTreinos(Collection<TreinoDTO> treinos) {
         this.treinos = treinos;
     }
 
-    public Set<Escalao> getEscaloes() {
+    public Collection<EscalaoDTO> getEscaloes() {
         return escaloes;
     }
 
-    public void setEscaloes(Set<Escalao> escaloes) {
+    public void setEscaloes(Collection<EscalaoDTO> escaloes) {
         this.escaloes = escaloes;
     }
 
-    public List<Atleta> getAtletas() {
+    public Collection<AtletaDTO> getAtletas() {
         return atletas;
     }
 
-    public void setAtletas(List<Atleta> atletas) {
+    public void setAtletas(Collection<AtletaDTO> atletas) {
         this.atletas = atletas;
     }
 
-    public List<Socio> getSocios() {
+    public Collection<SocioDTO> getSocios() {
         return socios;
     }
 
-    public void setSocios(List<Socio> socios) {
+    public void setSocios(Collection<SocioDTO> socios) {
         this.socios = socios;
     }
 }
