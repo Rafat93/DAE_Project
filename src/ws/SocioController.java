@@ -118,6 +118,13 @@ public class SocioController {
         return getSocioModalidadesSubscritas(email);
     }
 
+    @PUT
+    @Path("{email}/modalidade/unsubscribe/{sigla}")
+    public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        socioBean.unsubscribeModalidade(email, sigla);
+        return getSocioModalidadesSubscritas(email);
+    }
+
 
 
     // Converts an entity Atleta to a DTO Atleta class

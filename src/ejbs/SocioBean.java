@@ -99,10 +99,34 @@ public class SocioBean {
             if(modalidade.getSocios().contains(socio)){
                 throw new MyIllegalArgumentException("Socio have already subscribe this modalidade with code " + sigla);
             }
+            socio.addModalidade(modalidade);
+            modalidade.addSocio(socio);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_SOCIO_SUBSCRIBING_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
+    public void unsubscribeModalidade(String email, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Socio socio = (Socio) em.find(Socio.class, email);
+            if(socio == null){
+                throw new MyEntityNotFoundException("Socio with email " + email + " not found.");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
+            }
+            if(modalidade.getSocios().contains(socio)){
+                throw new MyIllegalArgumentException("Socio have already subscribe this modalidade with code " + sigla);
+            }
+            socio.removeModalidade(modalidade);
+            modalidade.removeSocio(socio);
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_SOCIO_UNSUBSCRIBING_MODALIDADE ---->" + e.getMessage());
         }
     }
 }
