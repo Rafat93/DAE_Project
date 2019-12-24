@@ -11,6 +11,7 @@ import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -33,6 +34,7 @@ public class SocioController {
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/atletas/”
+    @RolesAllowed({"Administrator"})
     public List<SocioDTO> all() {
         return toDTOsNoModalidades(socioBean.all());
     }

@@ -37,7 +37,6 @@ public class AtletaBean {
                 throw new MyEntityNotFoundException("Atleta não encontrado!");
             }
 
-            //O que faz?
             em.lock(atleta, LockModeType.OPTIMISTIC);
 
             atleta.setNumeroSocio(numeroSocio);

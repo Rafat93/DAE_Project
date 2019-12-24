@@ -2,9 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "MODALIDADES",
@@ -26,6 +24,9 @@ public class Modalidade {
     private String nome;
 
     @NotNull
+    private String epocaDesportiva;
+
+    @NotNull
     @OneToMany
     private List<Treino> treinos;
 
@@ -38,6 +39,21 @@ public class Modalidade {
 
     @ManyToMany
     private List<Socio> socios;
+
+
+    public Modalidade() {
+        this.treinos = new LinkedList<>();
+        this.socios = new LinkedList<>();
+        this.atletas = new LinkedList<>();
+        this.escaloes = new HashSet<>();
+    }
+
+    public Modalidade (String sigla, String nome, String epocaDesportiva){
+        this();
+        this.sigla = sigla;
+        this.nome = nome;
+        this.epocaDesportiva=epocaDesportiva;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -142,5 +158,13 @@ public class Modalidade {
         if (treinos.contains(treino)){
             treinos.remove(treino);
         }
+    }
+
+    public String getEpocaDesportiva() {
+        return epocaDesportiva;
+    }
+
+    public void setEpocaDesportiva(String epocaDesportiva) {
+        this.epocaDesportiva = epocaDesportiva;
     }
 }

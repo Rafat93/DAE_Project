@@ -10,6 +10,7 @@ import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -34,12 +35,14 @@ public class AtletaController {
 
     @GET // means: to call this endpoint, we need to use the HTTP GET method
     @Path("/") // means: the relative url path is “/api/atletas/”
+    @RolesAllowed({"Administrator"})
     public List<AtletaDTO> all() {
         return toDTOsNoModalidades(atletaBean.all());
     }
 
     @POST
     @Path("/")
+    @RolesAllowed({"Administrator"})
     public Response createNewAtleta (AtletaDTO atletaDTO) {
         Atleta atleta = atletaBean.create(
                 atletaDTO.getNumeroSocio(),
@@ -56,17 +59,25 @@ public class AtletaController {
     @Path("{email}")
     public Response updateAtleta(@PathParam("email") String email, AtletaDTO atletaDTO)
             throws MyEntityNotFoundException {
-        atletaBean.update(atletaDTO.getNumeroSocio(),
-                atletaDTO.getNome(),
-                email,
-                atletaDTO.getPassword(),
-                atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                atletaDTO.getDataNascimento().get(Calendar.MONTH),
-                atletaDTO.getDataNascimento().get(Calendar.YEAR));
-        Atleta atleta = atletaBean.findAtleta(email);
-        return Response.status(Response.Status.OK)
-                .entity(atletaToDTO(atleta))
-                .build();
+        Principal principal = securityContext.getUserPrincipal();
+        System.out.println(email + " --- " + principal.getName());
+
+        if(securityContext.isUserInRole("Administrador") ||
+                securityContext.isUserInRole("Atleta") && principal.getName().equals(email)) {
+
+            atletaBean.update(atletaDTO.getNumeroSocio(),
+                    atletaDTO.getNome(),
+                    email,
+                    atletaDTO.getPassword(),
+                    atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
+                    atletaDTO.getDataNascimento().get(Calendar.MONTH),
+                    atletaDTO.getDataNascimento().get(Calendar.YEAR));
+            Atleta atleta = atletaBean.findAtleta(email);
+            return Response.status(Response.Status.OK)
+                    .entity(atletaToDTO(atleta))
+                    .build();
+        }
+        return Response.status(Response.Status.FORBIDDEN).build();
     }
 
     @DELETE
