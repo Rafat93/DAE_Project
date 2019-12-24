@@ -19,7 +19,7 @@ public class AdministradorBean {
             }
             em.persist(new Administrador(nome,email,password));
         } catch (MyEntityAlreadyExistsException e) {
-            throw new EJBException(e.getMessage());
+            throw e;
         }catch (Exception e) {
             throw new EJBException(e.getMessage());
         }

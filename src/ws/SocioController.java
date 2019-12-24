@@ -71,6 +71,7 @@ public class SocioController {
 
     @DELETE
     @Path("{email}")
+    @RolesAllowed({"Administrator"})
     public Response removeSocio(@PathParam("email") String email)
             throws MyEntityNotFoundException {
         socioBean.delete(email);
@@ -82,10 +83,10 @@ public class SocioController {
     public Response getSociosDetails(@PathParam("email")String email) throws MyEntityAlreadyExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println(email + " --- " + principal.getName());
-
+        Socio socio = socioBean.findSocio(email);
         if(securityContext.isUserInRole("Administrador") ||
-        securityContext.isUserInRole("Atleta") && principal.getName().equals(email)) {
-            Socio socio = socioBean.findSocio(email);
+        securityContext.isUserInRole("Socio") && principal.getName().equals(socio.getNome())) {
+
             return Response.status(Response.Status.OK)
                     .entity(socioToDTO(socio))
                     .build();
@@ -113,6 +114,7 @@ public class SocioController {
 
     @PUT
     @Path("{email}/modalidade/subscribe/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response subscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         socioBean.subscribeModalidade(email, sigla);
         return getSocioModalidadesSubscritas(email);
@@ -120,6 +122,7 @@ public class SocioController {
 
     @PUT
     @Path("{email}/modalidade/unsubscribe/{sigla}")
+    @RolesAllowed({"Administrator"})
     public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         socioBean.unsubscribeModalidade(email, sigla);
         return getSocioModalidadesSubscritas(email);

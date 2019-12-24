@@ -1,8 +1,10 @@
 package ws;
 
 import dtos.AtletaDTO;
+import dtos.EmailDTO;
 import dtos.ModalidadeDTO;
 import ejbs.AtletaBean;
+import ejbs.EmailBean;
 import entities.Atleta;
 import entities.Modalidade;
 import exceptions.MyConstraintViolationException;
@@ -12,6 +14,7 @@ import exceptions.MyIllegalArgumentException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
+import javax.mail.MessagingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.security.Principal;
@@ -28,6 +31,9 @@ public class AtletaController {
 
     @EJB
     private AtletaBean atletaBean;
+
+    @EJB
+    private EmailBean emailBean;
 
     @Context
     private SecurityContext securityContext;
@@ -138,6 +144,19 @@ public class AtletaController {
     public Response unrollAtletaFromModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         atletaBean.unrollAtletaFromModalidade(email, sigla);
         return getAtletaModalidades(email);
+    }
+
+    @POST
+    @Path("{email}/email/send")
+    public Response sendEmailToAtleta(@PathParam("email") String email, EmailDTO emailDTO) throws MessagingException {
+        Atleta atleta = atletaBean.findAtleta(email);
+        if (atleta != null) {
+            emailBean.send(atleta.getEmail(), emailDTO.getSubject(), emailDTO.getMessage());
+            return Response.status(Response.Status.OK).build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).
+                entity("Atleta with email " + email + " not found.").
+                build();
     }
 
 
