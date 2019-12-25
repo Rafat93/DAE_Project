@@ -9,16 +9,16 @@ public class EscalaoDTO implements Serializable {
     private String nome;
     private int idadeMin;
     private int idadeMax;
-    private Modalidade modalidade;
+    private String siglaModalidade;
 
     public EscalaoDTO() {
     }
 
-    public EscalaoDTO(String nome, int idadeMin, int idadeMax, Modalidade modalidade) {
+    public EscalaoDTO(String nome, int idadeMin, int idadeMax, String siglaModalidade) {
         this.nome = nome;
         this.idadeMin = idadeMin;
         this.idadeMax = idadeMax;
-        this.modalidade = modalidade;
+        this.siglaModalidade = siglaModalidade;
     }
 
     public String getNome() {
@@ -45,11 +45,11 @@ public class EscalaoDTO implements Serializable {
         this.idadeMax = idadeMax;
     }
 
-    public Modalidade getModalidade() {
-        return modalidade;
+    public String getSiglaModalidade() {
+        return siglaModalidade;
     }
 
-    public void setModalidade(Modalidade modalidade) {
-        this.modalidade = modalidade;
+    public void setSiglaModalidade(String siglaModalidade) {
+        this.siglaModalidade = siglaModalidade;
     }
 }

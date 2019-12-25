@@ -11,7 +11,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllSocios",
-                query = "SELECT s FROM Socio s ORDER BY s.numeroSocio" // JPQL
+                query = "SELECT s FROM Socio s ORDER BY s.nome" // JPQL
         )
 })
 public class Socio extends User implements Serializable {
@@ -23,7 +23,7 @@ public class Socio extends User implements Serializable {
     @NotNull
     private GregorianCalendar dataNascimento;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "socios")
     private Set<Modalidade> modalidades;
 
     //

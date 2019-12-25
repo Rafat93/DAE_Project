@@ -30,7 +30,7 @@ public class ModalidadeBean {
         try {
             Modalidade modalidade = em.find(Modalidade.class, sigla);
             if(modalidade ==null){
-                throw new MyEntityNotFoundException("Modalidade não encontrado!");
+                throw new MyEntityNotFoundException("Modalidade não encontrada!");
             }
 
             em.lock(modalidade, LockModeType.OPTIMISTIC);
@@ -65,9 +65,15 @@ public class ModalidadeBean {
         }
     }
 
-    public void delete(String sigla){
+    public void delete(String sigla) throws MyEntityNotFoundException {
         try {
+            Modalidade modalidade = em.find(Modalidade.class,sigla);
+            if(modalidade == null){
+                throw new MyEntityNotFoundException("Modalidade com a sigla: " + sigla + " não existe");
+            }
             em.remove(findModalidade(sigla));
+        }catch (MyEntityNotFoundException e) {
+            throw e;
         }catch (Exception e){
             throw new EJBException("ERROR_DELETING_MODALIDADE",e);
         }

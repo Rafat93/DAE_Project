@@ -7,6 +7,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 @Entity
+@Table(name = "ESCALOES",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"NOME"}))
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllEscaloes",
+                query = "SELECT e FROM Escalao e ORDER BY e.id" // JPQL
+        )
+})
 public class Escalao {
 
     @Id
@@ -23,7 +31,7 @@ public class Escalao {
     private int idadeMax;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Modalidade modalidade;
 
     public Escalao() {

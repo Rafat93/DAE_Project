@@ -17,6 +17,7 @@ public class ModalidadeDTO implements Serializable {
     private Collection<EscalaoDTO> escaloes;
     private Collection<AtletaDTO> atletas;
     private Collection<SocioDTO> socios;
+    private Collection<TreinadorDTO> treinadores;
 
     public ModalidadeDTO(String sigla, String nome, String epocaDesportiva) {
         this();
@@ -30,6 +31,7 @@ public class ModalidadeDTO implements Serializable {
         escaloes = new LinkedList<>();
         atletas = new LinkedList<>();
         socios = new LinkedList<>();
+        treinadores = new LinkedList<>();
 
     }
 
@@ -87,5 +89,13 @@ public class ModalidadeDTO implements Serializable {
 
     public void setSocios(Collection<SocioDTO> socios) {
         this.socios = socios;
+    }
+
+    public Collection<TreinadorDTO> getTreinadores() {
+        return treinadores;
+    }
+
+    public void setTreinadores(Collection<TreinadorDTO> treinadores) {
+        this.treinadores = treinadores;
     }
 }

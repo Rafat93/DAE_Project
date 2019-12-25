@@ -20,6 +20,7 @@ public class Treino {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "TREINADOR_EMAIL")
     private Treinador treinador;
 
     @ManyToOne

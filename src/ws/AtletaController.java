@@ -39,8 +39,8 @@ public class AtletaController {
     private SecurityContext securityContext;
 
 
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/atletas/”
+    @GET
+    @Path("/")
     @RolesAllowed({"Administrator"})
     public List<AtletaDTO> all() {
         return toDTOsNoModalidades(atletaBean.all());

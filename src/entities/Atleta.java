@@ -15,8 +15,6 @@ import java.util.Set;
 })
 public class Atleta extends Socio implements Serializable {
 
-
-
     @OneToMany
     private Set<Inscricao> inscricoes;
 

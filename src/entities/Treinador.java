@@ -18,10 +18,10 @@ public class Treinador extends User implements Serializable {
     @NotNull
     private long numeroCedula;
 
-    @OneToMany
+    @OneToMany(mappedBy = "treinador", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Treino> treinosLecionados;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "treinadores")
     private List<Modalidade> modalidades;
 
     public Treinador(String nome, String password, String email,long numeroCedula) {

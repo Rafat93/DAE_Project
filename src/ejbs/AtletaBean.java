@@ -80,7 +80,7 @@ public class AtletaBean {
         try {
             Atleta atleta = em.find(Atleta.class,email);
             if (atleta == null) {
-                throw new MyEntityNotFoundException("Atleta com o email: " + email + " já existe");
+                throw new MyEntityNotFoundException("Atleta com o email: " + email + " não existe");
             }
             em.remove(findAtleta(email));
         }catch (MyEntityNotFoundException e) {

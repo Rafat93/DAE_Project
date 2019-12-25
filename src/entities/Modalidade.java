@@ -25,20 +25,26 @@ public class Modalidade {
     private String epocaDesportiva;
 
     @NotNull
-    @OneToMany
+    @OneToMany (mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Treino> treinos;
 
     @NotNull
-    @ManyToMany
-    private Set<Escalao> escaloes;
+    @OneToMany(mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Escalao> escaloes;
 
     @OneToMany
     private List<Atleta> atletas;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "MODALIDADES_SOCIOS",
+            joinColumns =  @JoinColumn(name = "MODALIDADE_SIGLA", referencedColumnName = "SIGLA"),
+            inverseJoinColumns = @JoinColumn(name = "SOCIO_EMAIL", referencedColumnName = "EMAIL"))
     private List<Socio> socios;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "MODALIDADES_TREINADORES",
+            joinColumns =  @JoinColumn(name = "MODALIDADE_SIGLA", referencedColumnName = "SIGLA"),
+            inverseJoinColumns = @JoinColumn(name = "TREINADOR_EMAIL", referencedColumnName = "EMAIL"))
     private List<Treinador> treinadores;
 
 
@@ -47,7 +53,7 @@ public class Modalidade {
         this.socios = new LinkedList<>();
         this.atletas = new LinkedList<>();
         this.treinadores = new LinkedList<>();
-        this.escaloes = new HashSet<>();
+        this.escaloes = new LinkedList<>();
     }
 
     public Modalidade (String sigla, String nome, String epocaDesportiva){
@@ -88,7 +94,7 @@ public class Modalidade {
     }
 
 
-    public Set<Escalao> getEscaloes() {
+    public List<Escalao> getEscaloes() {
         return escaloes;
     }
 
