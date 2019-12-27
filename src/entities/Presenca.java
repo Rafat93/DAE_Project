@@ -2,10 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 
 
 @Entity
@@ -13,13 +10,13 @@ import java.util.Set;
 @NamedQueries(
         @NamedQuery(
                 name = "getAllPresencas",
-                query = "SELECT p FROM Presenca p ORDER BY p.id"
+                query = "SELECT p FROM Presenca p ORDER BY p.code"
         )
 )
 public class Presenca {
 
     @Id
-    private int id;
+    private String code;
 
     @NotNull
     @ManyToOne
@@ -30,7 +27,7 @@ public class Presenca {
 
     @NotNull
     @ManyToMany
-    private Set<Atleta> atletasPresentes;
+    private List<Atleta> atletasPresentes;
 
     @NotNull
     @ManyToOne
@@ -39,11 +36,12 @@ public class Presenca {
     public Presenca() {
     }
 
-    public Presenca(Treino treino, GregorianCalendar dataTreino, Treinador treinador){
+    public Presenca(String code, Treino treino, GregorianCalendar dataTreino, Treinador treinador){
+        this.code = code;
         this.treino = treino;
         this.dataTreino = dataTreino;
         this.treinador = treinador;
-        this.atletasPresentes = new HashSet<>();
+        this.atletasPresentes = new LinkedList<>();
     }
 
     public Treino getTreino() {
@@ -62,11 +60,11 @@ public class Presenca {
         this.dataTreino = dataTreino;
     }
 
-    public Set<Atleta> getAtletasPresentes() {
+    public List<Atleta> getAtletasPresentes() {
         return atletasPresentes;
     }
 
-    public void setAtletasPresentes(Set<Atleta> atletasPresentes) {
+    public void setAtletasPresentes(List<Atleta> atletasPresentes) {
         this.atletasPresentes = atletasPresentes;
     }
 
@@ -88,5 +86,13 @@ public class Presenca {
         if (atletasPresentes.contains(atleta)){
             atletasPresentes.remove(atleta);
         }
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

@@ -7,7 +7,7 @@ import java.sql.Time;
 
 public class TreinoDTO implements Serializable {
 
-    private int code;
+    private String code;
     private String emailTreinador;
     private String siglaModalidade;
     private int idGraduacao;
@@ -16,7 +16,7 @@ public class TreinoDTO implements Serializable {
     private Time horaFim;
     private DiasSemana diaSemana;
 
-    public TreinoDTO(int code, String nomeTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+    public TreinoDTO(String code, String nomeTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
         this.code = code;
         this.emailTreinador = nomeTreinador;
         this.siglaModalidade = siglaModalidade;
@@ -30,13 +30,7 @@ public class TreinoDTO implements Serializable {
     public TreinoDTO() {
     }
 
-    public int getCode() {
-        return code;
-    }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
 
     public String getEmailTreinador() {
         return emailTreinador;
@@ -92,5 +86,13 @@ public class TreinoDTO implements Serializable {
 
     public void setDiaSemana(DiasSemana diaSemana) {
         this.diaSemana = diaSemana;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

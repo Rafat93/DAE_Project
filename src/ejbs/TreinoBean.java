@@ -22,7 +22,7 @@ public class TreinoBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Treino create (int code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana){
+    public Treino create (String code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana){
         try {
             if(em.find(Treino.class, code) != null){
                 throw new MyEntityAlreadyExistsException("Treino com o codigo: " + code + " já existe");
@@ -51,7 +51,7 @@ public class TreinoBean {
         }
     }
 
-    public Treino update (int code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) throws MyEntityNotFoundException {
+    public Treino update (String code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) throws MyEntityNotFoundException {
         try {
             Treino treino = em.find(Treino.class,code);
             if(treino == null){
@@ -104,7 +104,7 @@ public class TreinoBean {
         }
     }
 
-    public Treino findTreino(int code){
+    public Treino findTreino(String code){
         try{
             return em.find(Treino.class,code);
         } catch (Exception e) {
@@ -112,7 +112,7 @@ public class TreinoBean {
         }
     }
 
-    public void delete(int code){
+    public void delete(String code){
         try {
             em.remove(findTreino(code));
         }catch (Exception e){
@@ -120,7 +120,7 @@ public class TreinoBean {
         }
     }
 
-    public void enrollTreinoInModalidade(int code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public void enrollTreinoInModalidade(String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
         try {
             Treino treino = (Treino) em.find(Treino.class, code);
             if (treino == null) {
@@ -144,7 +144,7 @@ public class TreinoBean {
         }
     }
 
-    public void unrollTreinoFromModalidade(int code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public void unrollTreinoFromModalidade(String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
         try {
             Treino treino = (Treino) em.find(Treino.class, code);
             if (treino == null) {

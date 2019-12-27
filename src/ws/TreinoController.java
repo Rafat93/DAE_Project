@@ -61,7 +61,7 @@ public class TreinoController {
     @PUT
     @Path("{code}")
     @RolesAllowed({"Administrator"})
-    public Response updateTreino(@PathParam("code") int code, TreinoDTO treinoDTO) throws MyEntityNotFoundException {
+    public Response updateTreino(@PathParam("code") String code, TreinoDTO treinoDTO) throws MyEntityNotFoundException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println("Treino: " + treinoDTO.getCode() + " --- " + principal.getName());
         if(securityContext.isUserInRole("Administrador")) {
@@ -85,16 +85,15 @@ public class TreinoController {
 
     @DELETE
     @Path("{code}")
-
     @RolesAllowed({"Administrator"})
-    public Response removeTreino (@PathParam("code") int code){
+    public Response removeTreino (@PathParam("code") String code){
         treinoBean.delete(code);
         return Response.status(Response.Status.OK).build();
     }
 
     @GET
     @Path("{code}")
-    public Response getTreinoDetails (@PathParam("code") int code){
+    public Response getTreinoDetails (@PathParam("code") String code){
         Principal principal = securityContext.getUserPrincipal();
         System.out.println("Treino: "+ code + " --- " + principal.getName());
 
@@ -111,7 +110,7 @@ public class TreinoController {
     @PUT
     @Path("{code}/modalidade/enroll/{sigla}")
     @RolesAllowed({"Administrator"})
-    public Response enrollAtletaInModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Response enrollAtletaInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.enrollTreinoInModalidade(code, sigla);
         return getModalidade(code);
     }
@@ -119,14 +118,14 @@ public class TreinoController {
     @PUT
     @Path("{code}/modalidade/unroll/{sigla}")
     @RolesAllowed({"Administrator"})
-    public Response unrollTreinoFromModalidade(@PathParam("code") int code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Response unrollTreinoFromModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.unrollTreinoFromModalidade(code, sigla);
         return getModalidade(code);
     }
 
     @GET
     @Path("{code}/modalidade")
-    public Response getModalidade(@PathParam("code") int code){
+    public Response getModalidade(@PathParam("code") String code){
         Treino treino = treinoBean.findTreino(code);
         if(treino != null){
             return Response.status(Response.Status.OK)

@@ -1,43 +1,52 @@
 package dtos;
 
 import entities.Atleta;
-import entities.Treinador;
-import entities.Treino;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 public class PresencaDTO implements Serializable {
 
-    private Treino treino;
-    private Data dataTreino;
+    private String code;
+    private String codeTreino;
+    private GregorianCalendar dataTreino;
     private Set<Atleta> atletasPresentes;
-    private Treinador treinador;
+    private String emailTreinador;
 
 
-    public PresencaDTO(Treino treino, Data dataTreino, Set<Atleta> atletasPresentes, Treinador treinador) {
-        this.treino = treino;
+    public PresencaDTO(String code, String codeTreino, GregorianCalendar dataTreino, Set<Atleta> atletasPresentes, String emailProfessor) {
+        this.code = code;
+        this.codeTreino = codeTreino;
         this.dataTreino = dataTreino;
         this.atletasPresentes = atletasPresentes;
-        this.treinador = treinador;
+        this.emailTreinador = emailProfessor;
     }
 
     public PresencaDTO() {
     }
 
-    public Treino getTreino() {
-        return treino;
+    public String getCodeTreino() {
+        return codeTreino;
     }
 
-    public void setTreino(Treino treino) {
-        this.treino = treino;
+    public void setCodeTreino(String codeTreino) {
+        this.codeTreino = codeTreino;
     }
 
-    public Data getDataTreino() {
+    public String getEmailTreinador() {
+        return emailTreinador;
+    }
+
+    public void setEmailTreinador(String emailTreinador) {
+        this.emailTreinador = emailTreinador;
+    }
+
+    public GregorianCalendar getDataTreino() {
         return dataTreino;
     }
 
-    public void setDataTreino(Data dataTreino) {
+    public void setDataTreino(GregorianCalendar dataTreino) {
         this.dataTreino = dataTreino;
     }
 
@@ -49,11 +58,11 @@ public class PresencaDTO implements Serializable {
         this.atletasPresentes = atletasPresentes;
     }
 
-    public Treinador getTreinador() {
-        return treinador;
+    public String getCode() {
+        return code;
     }
 
-    public void setTreinador(Treinador treinador) {
-        this.treinador = treinador;
+    public void setCode(String code) {
+        this.code = code;
     }
 }

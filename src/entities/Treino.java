@@ -16,7 +16,7 @@ import java.sql.Time;
 public class Treino {
 
     @Id
-    private int code;
+    private String code;
 
     @NotNull
     @ManyToOne
@@ -45,7 +45,7 @@ public class Treino {
     public Treino() {
     }
 
-    public Treino(int code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+    public Treino(String code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,Time horaInicio, Time horaFim, DiasSemana diaSemana) {
         this.code = code;
         this.treinador = treinador;
         this.modalidade = modalidade;
@@ -80,11 +80,11 @@ public class Treino {
         this.diaSemana = dia;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
