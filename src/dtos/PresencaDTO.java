@@ -4,6 +4,8 @@ import entities.Atleta;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class PresencaDTO implements Serializable {
@@ -11,15 +13,15 @@ public class PresencaDTO implements Serializable {
     private String code;
     private String codeTreino;
     private GregorianCalendar dataTreino;
-    private Set<Atleta> atletasPresentes;
+    private List <String> atletasPresentes;
     private String emailTreinador;
 
 
-    public PresencaDTO(String code, String codeTreino, GregorianCalendar dataTreino, Set<Atleta> atletasPresentes, String emailProfessor) {
+    public PresencaDTO(String code, String codeTreino, GregorianCalendar dataTreino, String emailProfessor) {
         this.code = code;
         this.codeTreino = codeTreino;
         this.dataTreino = dataTreino;
-        this.atletasPresentes = atletasPresentes;
+        this.atletasPresentes = new LinkedList<>();
         this.emailTreinador = emailProfessor;
     }
 
@@ -50,11 +52,11 @@ public class PresencaDTO implements Serializable {
         this.dataTreino = dataTreino;
     }
 
-    public Set<Atleta> getAtletasPresentes() {
+    public List<String> getAtletasPresentes() {
         return atletasPresentes;
     }
 
-    public void setAtletasPresentes(Set<Atleta> atletasPresentes) {
+    public void setAtletasPresentes(List <String> atletasPresentes) {
         this.atletasPresentes = atletasPresentes;
     }
 

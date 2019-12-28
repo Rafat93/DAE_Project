@@ -32,8 +32,8 @@ public class SocioController {
     @Context
     private SecurityContext securityContext;
 
-    @GET // means: to call this endpoint, we need to use the HTTP GET method
-    @Path("/") // means: the relative url path is “/api/atletas/”
+    @GET
+    @Path("/")
     @RolesAllowed({"Administrator"})
     public List<SocioDTO> all() {
         return toDTOsNoModalidades(socioBean.all());
@@ -86,7 +86,6 @@ public class SocioController {
         Socio socio = socioBean.findSocio(email);
         if(securityContext.isUserInRole("Administrador") ||
         securityContext.isUserInRole("Socio") && principal.getName().equals(socio.getNome())) {
-
             return Response.status(Response.Status.OK)
                     .entity(socioToDTO(socio))
                     .build();
