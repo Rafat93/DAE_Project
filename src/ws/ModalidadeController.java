@@ -32,7 +32,7 @@ public class ModalidadeController {
 
     @POST
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response createNewModalidade (ModalidadeDTO modalidadeDTO){
         Modalidade modalidade = modalidadeBean.create(
           modalidadeDTO.getSigla(),
@@ -46,7 +46,7 @@ public class ModalidadeController {
 
     @PUT
     @Path("{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response updateModalidade(@PathParam("sigla")String sigla,ModalidadeDTO modalidadeDTO) throws MyEntityNotFoundException {
         modalidadeBean.update(
                 modalidadeDTO.getSigla(),
@@ -60,7 +60,7 @@ public class ModalidadeController {
 
     @DELETE
     @Path("{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response removeModalidade (@PathParam("sigla")String sigla) throws MyEntityNotFoundException {
         modalidadeBean.delete(sigla);
         return Response.status(Response.Status.OK).build();
@@ -68,7 +68,7 @@ public class ModalidadeController {
 
     @GET
     @Path("{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response getModalidadeDetails (@PathParam("sigla")String sigla){
         Modalidade modalidade = modalidadeBean.findModalidade(sigla);
         return Response.status(Response.Status.OK)
@@ -207,11 +207,11 @@ public class ModalidadeController {
         );
     }
 
-    List <ModalidadeDTO> toDTOsNoLists (Collection<Modalidade> modalidades){
+    List <ModalidadeDTO> toDTOsNoLists (Collection <Modalidade> modalidades){
         return modalidades.stream().map(this::toDTONoLists).collect(Collectors.toList());
     }
 
-    AtletaDTO atleteToDTO(Atleta atleta){
+    AtletaDTO atletaToDTO(Atleta atleta){
         return new AtletaDTO(
                 atleta.getNumeroSocio(),
                 atleta.getNome(),
@@ -221,7 +221,7 @@ public class ModalidadeController {
         );
     }
     List <AtletaDTO> atletaToDTOs (List<Atleta> atletas){
-        return atletas.stream().map(this::atleteToDTO).collect(Collectors.toList());
+        return atletas.stream().map(this::atletaToDTO).collect(Collectors.toList());
     }
 
     TreinoDTO treinoToDTO (Treino treino){

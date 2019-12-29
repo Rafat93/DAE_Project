@@ -19,6 +19,7 @@ public class ModalidadeBean {
     public Modalidade create (String sigla, String nome, String epocaDesportiva){
         try {
             Modalidade modalidade = new Modalidade(sigla,nome,epocaDesportiva);
+            System.out.println("PASSOU 0");
             em.persist(modalidade);
             return modalidade;
         }catch (Exception e){
@@ -51,7 +52,7 @@ public class ModalidadeBean {
 
     public List<Modalidade> all(){
         try {
-            return (List<Modalidade>) em.createNamedQuery("getAllSocios").getResultList();
+            return (List<Modalidade>) em.createNamedQuery("getAllModalidades").getResultList();
         }catch (Exception e) {
             throw new EJBException("ERROR_RETRIEVING_MODALIDADES", e);
         }

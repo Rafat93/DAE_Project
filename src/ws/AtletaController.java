@@ -41,14 +41,14 @@ public class AtletaController {
 
     @GET
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public List<AtletaDTO> all() {
         return toDTOsNoModalidades(atletaBean.all());
     }
 
     @POST
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response createNewAtleta (AtletaDTO atletaDTO) {
         Atleta atleta = atletaBean.create(
                 atletaDTO.getNumeroSocio(),

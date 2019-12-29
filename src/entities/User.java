@@ -27,7 +27,6 @@ public class User implements Serializable {
     protected String nome;
 
     @Id
-    @NotNull
     @Email
     protected String email;
 
