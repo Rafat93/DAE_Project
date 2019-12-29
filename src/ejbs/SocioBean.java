@@ -33,6 +33,7 @@ public class SocioBean {
             }
             socio = new Socio(numeroSocio,nome,password,email,new GregorianCalendar(ano,mes,dia));
             em.persist(socio);
+            em.flush();
             return socio;
         } catch (MyEntityAlreadyExistsException e) {
             throw e;

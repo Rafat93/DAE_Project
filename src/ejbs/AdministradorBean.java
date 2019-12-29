@@ -21,6 +21,7 @@ public class AdministradorBean {
                 throw new MyEntityAlreadyExistsException("Admin with email: " + email + " already exists");
             }
             em.persist(new Administrador(nome,password,email));
+            em.flush();
         } catch (MyEntityAlreadyExistsException e) {
             throw e;
         }catch (Exception e) {

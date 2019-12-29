@@ -31,6 +31,7 @@ public class TreinadorBean {
             }
             treinador = new Treinador(nome,password,email,numeroCedula);
             em.persist(treinador);
+            em.flush();
             return treinador;
         }catch(Exception e){
             throw new NullPointerException(e.getMessage());

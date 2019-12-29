@@ -28,6 +28,7 @@ public class AtletaBean {
             }
             atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia));
             em.persist(atleta);
+            em.flush();
             return atleta;
         }catch(Exception e){
             throw new NullPointerException(e.getMessage());
