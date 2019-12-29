@@ -24,11 +24,11 @@ public class Modalidade {
     @NotNull
     private String epocaDesportiva;
 
-    @NotNull
+
     @OneToMany (mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Treino> treinos;
 
-    @NotNull
+
     @OneToMany(mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Escalao> escaloes;
 
@@ -47,6 +47,9 @@ public class Modalidade {
             inverseJoinColumns = @JoinColumn(name = "TREINADOR_EMAIL", referencedColumnName = "EMAIL"))
     private List<Treinador> treinadores;
 
+    @OneToMany(mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Graduacao> graduacoes;
+
 
     public Modalidade() {
         this.treinos = new LinkedList<>();
@@ -54,6 +57,7 @@ public class Modalidade {
         this.atletas = new LinkedList<>();
         this.treinadores = new LinkedList<>();
         this.escaloes = new LinkedList<>();
+        this.graduacoes = new LinkedList<>();
     }
 
     public Modalidade (String sigla, String nome, String epocaDesportiva){
@@ -70,7 +74,7 @@ public class Modalidade {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sigla, nome, treinos, escaloes, atletas, socios);
+        return Objects.hash(sigla, nome, treinos, escaloes, atletas, socios,graduacoes);
     }
 
     public String getSigla() {
@@ -132,8 +136,19 @@ public class Modalidade {
         atletas.remove(atleta);
     }
 
+    public void addGraducao (Graduacao graduacao){
+        if(!graduacoes.contains(graduacao)) {
+            graduacoes.add(graduacao);
+        }
+    }
+    public void removeGraduacao (Graduacao graduacao){
+        graduacoes.remove(graduacao);
+    }
+
     public void addEscalao (Escalao escalao){
-        escaloes.add(escalao);
+        if(!escaloes.contains(escalao)) {
+            escaloes.add(escalao);
+        }
     }
     public void removeEscalao (Escalao escalao){
         escaloes.remove(escalao);
@@ -166,4 +181,10 @@ public class Modalidade {
     public void setEpocaDesportiva(String epocaDesportiva) {
         this.epocaDesportiva = epocaDesportiva;
     }
+
+    public List<Graduacao> getGraduacoes() {
+        return graduacoes;
+    }
+
+
 }
