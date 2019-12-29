@@ -8,11 +8,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class TipoProduto  {
-    @Id
-    @GeneratedValue
-    private int id;
 
-    @NotNull
+    @Id
     private String nome;
 
     public TipoProduto() {

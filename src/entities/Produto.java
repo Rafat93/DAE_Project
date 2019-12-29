@@ -8,14 +8,13 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
         @NamedQuery(
                 name="getAllProdutos",
-                query = "SELECT p FROM Produto p ORDER BY p.id"
+                query = "SELECT p FROM Produto p ORDER BY p.code"
         )
 })
 public class Produto {
 
     @Id
-    @GeneratedValue
-    private int id;
+    private String code;
 
     @NotNull
     @ManyToOne
@@ -33,7 +32,8 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(TipoProduto tipo, String descricao, double preco, int stock) {
+    public Produto(String code, TipoProduto tipo, String descricao, double preco, int stock) {
+        this.code = code;
         this.tipo = tipo;
         this.descricao = descricao;
         this.precoEmEuros = preco;
@@ -71,5 +71,13 @@ public class Produto {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

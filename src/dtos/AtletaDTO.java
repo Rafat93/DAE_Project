@@ -1,9 +1,9 @@
 package dtos;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
-import java.util.List;
 
 public class AtletaDTO implements Serializable {
     private long numeroSocio;
@@ -16,7 +16,7 @@ public class AtletaDTO implements Serializable {
 
     private GregorianCalendar dataNascimento;
 
-    private List<ModalidadeDTO> modalidades;
+    private Collection<ModalidadeDTO> modalidades;
 
     public AtletaDTO() {
         modalidades = new LinkedList<>();
@@ -71,11 +71,11 @@ public class AtletaDTO implements Serializable {
         this.password = password;
     }
 
-    public List<ModalidadeDTO> getModalidades() {
+    public Collection<ModalidadeDTO> getModalidades() {
         return modalidades;
     }
 
-    public void setModalidades(List<ModalidadeDTO> modalidades) {
+    public void setModalidades(Collection<ModalidadeDTO> modalidades) {
         this.modalidades = modalidades;
     }
 }

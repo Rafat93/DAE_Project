@@ -4,7 +4,8 @@ import enums.EstadoPagamento;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.GregorianCalendar;
 
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.Date;
 )
 public class Pagamento {
     @Id
-    private int id;
+    private String code;
 
     @NotNull
     @OneToOne
@@ -25,13 +26,14 @@ public class Pagamento {
 
     @NotNull
     @ManyToOne
-    private Produto produto;
+    private Compra compra;
 
     @NotNull
-    private Date dataLancamento;
+    private GregorianCalendar dataLancamento;
 
-    @NotNull
-    private int quantidade;
+    private GregorianCalendar dataPagamento;
+
+    private GregorianCalendar dataLimitePagamento;
 
     @NotNull
     private double precoFinalEmEuros;
@@ -47,23 +49,22 @@ public class Pagamento {
     public Pagamento() {
     }
 
-    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado) {
+    public Pagamento(String code,User user, Compra compra,GregorianCalendar dataLancamento, GregorianCalendar dataLimitePagamento, double precoFinal, EstadoPagamento estado) {
+        this.code = code;
         this.utilizador = user;
-        this.produto = produto;
+        this.compra = compra;
         this.dataLancamento = dataLancamento;
-        this.quantidade = quantidade;
+        this.dataLimitePagamento = dataLimitePagamento;
         this.precoFinalEmEuros = precoFinal;
         this.estado = estado;
     }
 
-    public Pagamento(User user, Produto produto, Date dataLancamento, int quantidade, double precoFinal, EstadoPagamento estado, Recibo recibo) {
-        this.utilizador = user;
-        this.produto = produto;
-        this.dataLancamento = dataLancamento;
-        this.quantidade = quantidade;
-        this.precoFinalEmEuros = precoFinal;
-        this.estado = estado;
-        this.recibo = recibo;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public User getUtilizador() {
@@ -74,28 +75,20 @@ public class Pagamento {
         this.utilizador = utilizador;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Compra getCompra() {
+        return compra;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 
-    public Date getDataLancamento() {
+    public GregorianCalendar getDataLancamento() {
         return dataLancamento;
     }
 
-    public void setDataLancamento(Date dataLancamento) {
+    public void setDataLancamento(GregorianCalendar dataLancamento) {
         this.dataLancamento = dataLancamento;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
     }
 
     public double getPrecoFinalEmEuros() {

@@ -105,10 +105,6 @@ public class Compra {
         return pagamentos;
     }
 
-    public void setPagamentos(Set<Pagamento> pagamentos) {
-        this.pagamentos = pagamentos;
-    }
-
     public double getValorTotal() {
         return valorTotal;
     }
@@ -123,6 +119,26 @@ public class Compra {
 
     public void setValorPago(double valorPago) {
         this.valorPago = valorPago;
+    }
+
+    public void addProduto (Produto produto){
+        if (!produtos.contains(produto)){
+            produtos.add(produto);
+        }
+    }
+
+    public void addPagamento (Pagamento pagamento){
+        if (!pagamentos.contains(pagamento)){
+            pagamentos.add(pagamento);
+        }
+    }
+
+    public void removeProduto (Produto produto){
+        produtos.remove(produto);
+    }
+
+    public void removePagamento (Pagamento pagamento){
+        pagamentos.remove(pagamento);
     }
 
     @Override
