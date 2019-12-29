@@ -47,8 +47,8 @@ public class ConfigBean {
 
             treinadorBean.create("Rui Norte","123","rui@mail.com",25365);
 
-            socioBean.create(3,"Carlos Silva","carlos.silva@mail.com","123",12,3,2000);
-            administradorBean.create("Rafael Correia","rafa@admin.com","rafa123");
+            socioBean.create(3,"Carlos Silva","123","carlos.silva@mail.com",12,3,2000);
+            administradorBean.create("Rafael Correia","rafa123","rafa@admin.com");
 
         }catch(Exception e){
             logger.log(Level.SEVERE, e.getMessage());
