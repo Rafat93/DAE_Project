@@ -25,13 +25,19 @@ public class SocioBean {
     public SocioBean() {
     }
 
-    public Socio create(long numeroSocio, String nome, String email, String password,int dia, int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
+    public Socio create(long numeroSocio, String nome,String password,String email,int dia, int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
         try{
-            Socio socio = new Socio(numeroSocio,nome,email,password,new GregorianCalendar(dia,mes,ano));
+            Socio socio = em.find(Socio.class,email);
+            if(socio != null){
+                throw new MyEntityAlreadyExistsException("Socio with email: " + email + " already exists");
+            }
+            socio = new Socio(numeroSocio,nome,password,email,new GregorianCalendar(ano,mes,dia));
             em.persist(socio);
             return socio;
+        } catch (MyEntityAlreadyExistsException e) {
+            throw e;
         }catch(Exception e){
-            throw new NullPointerException(e.getMessage());
+            throw new EJBException(e.getMessage());
         }
     }
 

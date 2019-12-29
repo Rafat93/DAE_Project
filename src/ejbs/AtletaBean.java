@@ -26,7 +26,7 @@ public class AtletaBean {
             if(atleta != null){
                 throw new MyEntityAlreadyExistsException("Atleta com o email: " + email + " já existe");
             }
-            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(dia,mes,ano));
+            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia));
             em.persist(atleta);
             return atleta;
         }catch(Exception e){

@@ -14,16 +14,17 @@ public class AdministradorBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create (String nome, String email, String password) throws MyEntityAlreadyExistsException{
+    public void create (String nome,String password, String email) throws MyEntityAlreadyExistsException{
         try {
-            if(em.find(Administrador.class, email) != null){
+            Administrador administrador = em.find(Administrador.class, email);
+            if( administrador != null){
                 throw new MyEntityAlreadyExistsException("Admin with email: " + email + " already exists");
             }
-            em.persist(new Administrador(nome,email,password));
+            em.persist(new Administrador(nome,password,email));
         } catch (MyEntityAlreadyExistsException e) {
             throw e;
         }catch (Exception e) {
-            throw new EJBException(e.getMessage());
+            throw new EJBException("ERRO no AdministratorBean" + e.getMessage());
         }
     }
 
