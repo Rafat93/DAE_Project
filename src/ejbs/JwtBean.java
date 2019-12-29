@@ -1,18 +1,22 @@
 package ejbs;
 
-import com.nimbusds.jose.*;
-import com.nimbusds.jose.crypto.RSASSASigner;
-
-import javax.ejb.Stateless;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import com.nimbusds.jose.JOSEObjectType;
+import com.nimbusds.jose.JWSAlgorithm;
+import com.nimbusds.jose.JWSHeader;
+import com.nimbusds.jose.JWSObject;
+import com.nimbusds.jose.JWSSigner;
+import com.nimbusds.jose.Payload;
+import com.nimbusds.jose.crypto.RSASSASigner;
+import javax.ejb.Stateless;
 
 @Stateless(name = "JwtEJB")
 public class JwtBean {
@@ -68,6 +72,7 @@ public class JwtBean {
                 new JWSHeader.Builder(JWSAlgorithm.RS256)
                         .type(new JOSEObjectType("jwt")).build(),
                 new Payload(claimsBuilder.build().toString()));
-        jwsObject.sign(signer); return jwsObject.serialize();
+        jwsObject.sign(signer);
+        return jwsObject.serialize();
     }
 }
