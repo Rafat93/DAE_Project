@@ -6,20 +6,20 @@ import exceptions.MyEntityAlreadyExistsException;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Stateless(name = "AdministradorEJB")
 public class AdministradorBean {
 
+    @PersistenceContext
     private EntityManager em;
 
-    public Administrador create (String nome, String email, String password)throws MyEntityAlreadyExistsException{
+    public void create (String nome, String email, String password) throws MyEntityAlreadyExistsException{
         try {
             if(em.find(Administrador.class, email) != null){
                 throw new MyEntityAlreadyExistsException("Admin with email: " + email + " already exists");
             }
-            Administrador administrador = new Administrador(nome,email,password);
-            em.persist(administrador);
-            return administrador;
+            em.persist(new Administrador(nome,email,password));
         } catch (MyEntityAlreadyExistsException e) {
             throw e;
         }catch (Exception e) {

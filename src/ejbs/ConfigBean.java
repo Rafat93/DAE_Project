@@ -28,12 +28,14 @@ public class ConfigBean {
 
     @PostConstruct
     public void populateDB(){
-        System.out.println("Seed Db");
-
         try {
-            Administrador admin = administradorBean.create("admin","admin@teste.com","123456789");
-            Atleta atleta1 = atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001);
-            Atleta atleta2 = atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002);
+            System.out.println("Seed Db");
+
+            atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001);
+            atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002);
+
+            //administradorBean.create("admin","admin1@teste.com","123456789");
+
         }catch(Exception e){
             logger.log(Level.SEVERE, e.getMessage());
         }

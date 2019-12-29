@@ -20,35 +20,24 @@ import java.util.logging.Logger;
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
+    @NotNull
+    protected String password;
+
+    @NotNull
+    protected String nome;
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-
-    @NotNull
-    private String password;
-
-    @NotNull
-    private String nome;
-
     @NotNull
     @Email
-    private String email;
+    protected String email;
 
-    public User(String nome, String password, String email) {
+    protected User(String nome, String password, String email) {
         this.nome = nome;
         this.password = hashPassword(password);
         this.email = email;
     }
 
-    public User() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    protected User() {
     }
 
     public String getPassword() {
@@ -91,6 +80,6 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof User && ((User) o).id == this.id;
+        return o instanceof User && ((User) o).email == this.email;
     }
 }
