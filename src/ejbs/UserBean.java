@@ -14,6 +14,7 @@ public class UserBean {
 
     public User authenticate(final String email, final String password) throws
             Exception {
+        System.out.println("USERBEAN --------------"+email);
         User user = em.find(User.class, email);
         if (user != null &&
                 user.getPassword().equals(User.hashPassword(password))) {

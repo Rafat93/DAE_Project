@@ -29,7 +29,8 @@ public class LoginController {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response authenticateUser(AuthDTO authDTO){
         try {
-            User user = userBean.authenticate(authDTO.getUsername(), authDTO.getPassword());
+            System.out.println("LOGINCONTROLLER ----------"+authDTO.getEmail());
+            User user = userBean.authenticate(authDTO.getEmail(), authDTO.getPassword());
             if (user != null) {
                 if (user.getNome() != null) {
                     log.info("Generating JWT for user " + user.getNome());
