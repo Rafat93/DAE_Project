@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="PRODUTOS", uniqueConstraints = @UniqueConstraint(columnNames = {"TIPO"}))
+@Table(name="PRODUTOS")
 @NamedQueries({
         @NamedQuery(
                 name="getAllProdutos",
