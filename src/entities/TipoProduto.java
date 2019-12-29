@@ -14,6 +14,7 @@ public class TipoProduto  {
 
     public TipoProduto() {
     }
+
     public TipoProduto(String nome) {
         this.nome = nome;
     }

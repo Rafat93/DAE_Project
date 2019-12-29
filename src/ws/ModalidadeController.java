@@ -161,6 +161,23 @@ public class ModalidadeController {
                 .build();
     }
 
+    @GET
+    @Path("{sigla}/graduacoes")
+    public Response getModalidadeGraduacoes (@PathParam("sigla")String sigla){
+        Modalidade modalidade = modalidadeBean.findModalidade(sigla);
+        if(modalidade != null){
+            GenericEntity<List<GraduacaoDTO>> entity
+                    = new GenericEntity<List<GraduacaoDTO>>(graduacaoToDTOs(modalidade.getGraduacoes())){
+            };
+            return  Response.status(Response.Status.OK)
+                    .entity(entity)
+                    .build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Modalidade com a "+ sigla + " não existe")
+                .build();
+    }
+
 
     ModalidadeDTO toDTO (Modalidade modalidade){
         ModalidadeDTO modalidadeDTO = new ModalidadeDTO(
@@ -263,5 +280,13 @@ public class ModalidadeController {
 
     List <EscalaoDTO> escalaoToDTOs (List <Escalao> escaloes){
         return escaloes.stream().map(this::escalaoToDTO).collect(Collectors.toList());
+    }
+
+    GraduacaoDTO graduacaoToDTO (Graduacao graduacao){
+        return new GraduacaoDTO(graduacao.getNome(),graduacao.getModalidade().getSigla());
+    }
+
+    List <GraduacaoDTO> graduacaoToDTOs (List <Graduacao> graduacoes){
+        return graduacoes.stream().map(this::graduacaoToDTO).collect(Collectors.toList());
     }
 }

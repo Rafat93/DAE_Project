@@ -7,11 +7,11 @@ import java.io.Serializable;
 public class GraduacaoDTO implements Serializable {
 
     private String name;
-    private Modalidade modalidade;
+    private String siglaModalidade;
 
-    public GraduacaoDTO(String name, Modalidade modalidade) {
+    public GraduacaoDTO(String name, String siglaModalidade) {
         this.name = name;
-        this.modalidade = modalidade;
+        this.siglaModalidade = siglaModalidade;
     }
 
     public GraduacaoDTO() {
@@ -25,11 +25,11 @@ public class GraduacaoDTO implements Serializable {
         this.name = name;
     }
 
-    public Modalidade getModalidade() {
-        return modalidade;
+    public String getSiglaModalidade() {
+        return siglaModalidade;
     }
 
-    public void setModalidade(Modalidade modalidade) {
-        this.modalidade = modalidade;
+    public void setSiglaModalidade(String siglaModalidade) {
+        this.siglaModalidade = siglaModalidade;
     }
 }

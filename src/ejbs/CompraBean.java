@@ -1,9 +1,6 @@
 package ejbs;
 
-import entities.Compra;
-import entities.Pagamento;
-import entities.Produto;
-import entities.User;
+import entities.*;
 import enums.EstadoPagamento;
 import enums.TipoPagamentoCompra;
 import exceptions.MyEntityAlreadyExistsException;
@@ -58,6 +55,30 @@ public class CompraBean {
             throw e;
         }catch (Exception e) {
             throw new EJBException(e.getMessage());
+        }
+    }
+
+    public List<Compra> all(){
+        try{
+            return (List<Compra>) em.createNamedQuery("getAllCompras").getResultList();
+        }catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_TREINOS", e);
+        }
+    }
+
+    public Compra findCompra(String code){
+        try{
+            return em.find(Compra.class,code);
+        }catch (Exception e) {
+            throw new EJBException("ERROR_FINDING_COMPRA", e);
+        }
+    }
+
+    public void delete (String code){
+        try {
+            em.remove(findCompra(code));
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_COMPRA",e);
         }
     }
 
