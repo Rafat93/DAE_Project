@@ -61,10 +61,15 @@ public class Modalidade {
     }
 
     public Modalidade (String sigla, String nome, String epocaDesportiva){
-        this();
         this.sigla = sigla;
         this.nome = nome;
-        this.epocaDesportiva=epocaDesportiva;
+        this.epocaDesportiva = epocaDesportiva;
+        this.treinos = new LinkedList<>();
+        this.socios = new LinkedList<>();
+        this.atletas = new LinkedList<>();
+        this.treinadores = new LinkedList<>();
+        this.escaloes = new LinkedList<>();
+        this.graduacoes = new LinkedList<>();
     }
 
     @Override

@@ -23,8 +23,8 @@ public class ModalidadeBean {
             if (modalidade != null){
                 throw new MyEntityAlreadyExistsException("Modalidade com a sigla "+sigla+"já existe");
             }
+            System.out.println("ModalidadeBean: Epoca Desportiva"+epocaDesportiva);
             modalidade = new Modalidade(sigla,nome,epocaDesportiva);
-            System.out.println("PASSOU 0");
             em.persist(modalidade);
             return modalidade;
         } catch (MyEntityAlreadyExistsException e) {
