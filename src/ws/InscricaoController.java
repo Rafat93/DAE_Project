@@ -34,6 +34,12 @@ public class InscricaoController {
         return toDTOs(inscricaoBean.all());
     }
 
+    @GET
+    @Path("/pendentes")
+    public List <InscricaoDTO> allNotConfirmed(){
+        return toDTOs(inscricaoBean.allNotConfirmed());
+    }
+
     @POST
     @Path("/")
     @RolesAllowed({"Administrador"})
@@ -65,7 +71,7 @@ public class InscricaoController {
     @GET
     @Path("{code}")
     @RolesAllowed({"Administrador"})
-    public Response getModalidadeDetails (@PathParam("code")String code){
+    public Response getInscricaoDetails (@PathParam("code")String code){
         Inscricao inscricao = inscricaoBean.findInscricao(code);
         return Response.status(Response.Status.OK)
                 .entity(toDTO(inscricao))

@@ -3,6 +3,7 @@ package ejbs;
 import entities.Modalidade;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -86,5 +87,4 @@ public class ModalidadeBean {
             throw new EJBException("ERROR_DELETING_MODALIDADE",e);
         }
     }
-
 }

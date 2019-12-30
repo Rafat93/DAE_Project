@@ -38,6 +38,9 @@ public class ConfigBean {
     @EJB
     private TipoProdutoBean tipoProdutoBean;
 
+    @EJB
+    private InscricaoBean inscricaoBean;
+
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     public ConfigBean() {
@@ -68,6 +71,9 @@ public class ConfigBean {
 
             System.out.println("CREATING PRODUTOS");
             produtoBean.create("AD20",tipoProdutoBean.findTipoProduto("Sapatilha"),"Adidas Finesse",50,5);
+
+            System.out.println("CREATING INSCRICOES");
+            inscricaoBean.create("INSTEST","João Silva","joão.silva@mail.com",12,12,1993,123456789,123456789,"Rua Teste");
 
             System.out.println("*********FINISH POPULATING");
         }catch(Exception e){

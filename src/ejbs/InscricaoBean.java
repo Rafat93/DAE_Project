@@ -66,6 +66,14 @@ public class InscricaoBean {
         }
     }
 
+    public List <Inscricao> allNotConfirmed(){
+        try{
+            return (List<Inscricao>) em.createNamedQuery("getInscricoesNotConfirmed").getResultList();
+        }catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_INSCRICOES_NOT_CONFIRMED", e);
+        }
+    }
+
     public Inscricao findInscricao(String code) {
         try{
             return em.find(Inscricao.class,code);
