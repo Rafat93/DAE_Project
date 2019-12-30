@@ -52,17 +52,20 @@ public class ConfigBean {
             System.out.println("#### Populating DB...");
             System.out.println("CREATING MODALIDADES");
             modalidadeBean.create("Atl","Atletismo","2019/2020");
+            modalidadeBean.create("Nat", "Natação", "2019/2020");
 
             System.out.println("CREATING ATLETAS");
             atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001,15891457,456456789,"Testing");
             atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002,11566327,987456789,"Testing");
+            atletaBean.create(3,"Margarida Maria", "maggs@ipleiria.com","123", 15, 3, 1987,11563427,983456789,"Rua da Paz");
 
-            //atletaBean.enrollAtletaInModalidade("jose.silva@ipleiria,com", "Atl");
+            atletaBean.enrollAtletaInModalidade("jose.silva@ipleiria.com", "Atl");
+            atletaBean.enrollAtletaInModalidade("maggs@ipleiria.com", "Nat");
             System.out.println("CREATING TREINADORES");
             treinadorBean.create("Rui Norte","123","rui@mail.com",25365);
 
             System.out.println("CREATING SOCIOS");
-            socioBean.create(3,"Carlos Silva","123","carlos.silva@mail.com",12,3,2000,15896327,123456789,"Testing");
+            socioBean.create(4,"Carlos Silva","123","carlos.silva@mail.com",12,3,2000,15896327,123456789,"Testing");
 
             System.out.println("CREATING ADMINS");
             administradorBean.create("a1","a1","a1@admin.com");
