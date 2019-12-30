@@ -23,18 +23,31 @@ public class Socio extends User implements Serializable {
     @NotNull
     private GregorianCalendar dataNascimento;
 
+    @NotNull
+    private long numIdentificacaoCivil;
+
+    @NotNull
+    private long numContibuinte;
+
+    @NotNull
+    private String morada;
+
     @ManyToMany(mappedBy = "socios")
     private Set<Modalidade> modalidades;
 
     //
 
     public Socio() {
+        this.modalidades = new LinkedHashSet<>();
     }
 
-    public Socio(long numeroSocio, String nome, String password, String email, GregorianCalendar dataNascimento) {
+    public Socio(long numeroSocio, String nome, String password, String email, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
         super(nome, password, email);
         this.numeroSocio = numeroSocio;
         this.dataNascimento = dataNascimento;
+        this.morada = morada;
+        this.numContibuinte = numContibuinte;
+        this.numIdentificacaoCivil = numIdentificacaoCivil;
         this.modalidades = new LinkedHashSet<>();
     }
 
@@ -74,5 +87,27 @@ public class Socio extends User implements Serializable {
         }
     }
 
+    public long getNumIdentificacaoCivil() {
+        return numIdentificacaoCivil;
+    }
 
+    public void setNumIdentificacaoCivil(long numIdentificacaoCivil) {
+        this.numIdentificacaoCivil = numIdentificacaoCivil;
+    }
+
+    public long getNumContibuinte() {
+        return numContibuinte;
+    }
+
+    public void setNumContibuinte(long numContibuinte) {
+        this.numContibuinte = numContibuinte;
+    }
+
+    public String getMorada() {
+        return morada;
+    }
+
+    public void setMorada(String morada) {
+        this.morada = morada;
+    }
 }

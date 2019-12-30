@@ -25,13 +25,13 @@ public class SocioBean {
     public SocioBean() {
     }
 
-    public Socio create(long numeroSocio, String nome,String password,String email,int dia, int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
+    public Socio create(long numeroSocio, String nome,String password,String email,int dia, int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada) throws MyConstraintViolationException, MyEntityAlreadyExistsException,MyIllegalArgumentException {
         try{
             Socio socio = em.find(Socio.class,email);
             if(socio != null){
                 throw new MyEntityAlreadyExistsException("Socio with email: " + email + " already exists");
             }
-            socio = new Socio(numeroSocio,nome,password,email,new GregorianCalendar(ano,mes,dia));
+            socio = new Socio(numeroSocio,nome,password,email,new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContibuinte,morada);
             em.persist(socio);
             em.flush();
             return socio;
@@ -58,7 +58,7 @@ public class SocioBean {
         }
     }
 
-    public Socio update(long numeroSocio, String nome, String email, String password, int dia,int mes, int ano) throws MyConstraintViolationException, MyEntityAlreadyExistsException, MyIllegalArgumentException, MyEntityNotFoundException {
+    public Socio update(long numeroSocio, String nome, String email, String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada) throws MyConstraintViolationException, MyEntityAlreadyExistsException, MyIllegalArgumentException, MyEntityNotFoundException {
         try {
             Socio socio = em.find(Socio.class, email);
 
@@ -74,6 +74,9 @@ public class SocioBean {
             socio.setNome(nome);
             socio.setEmail(email);
             socio.setDataNascimento(new GregorianCalendar(dia,mes,ano));
+            socio.setMorada(morada);
+            socio.setNumContibuinte(numContibuinte);
+            socio.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
             em.merge(socio);
 

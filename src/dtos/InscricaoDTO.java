@@ -1,57 +1,29 @@
-package entities;
+package dtos;
 
-import org.hibernate.validator.constraints.Email;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.GregorianCalendar;
 
-@Entity
-@Table(name = "INSCRICOES")
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@NamedQueries({
-        @NamedQuery(
-                name = "getAllInscricoes",
-                query = "SELECT i FROM Inscricao i ORDER BY i.nome" // JPQL
-        )
-})
-public class Inscricao {
+public class InscricaoDTO {
 
-    @Id
     private String code;
-
-    @NotNull
     private String nome;
-
-    @NotNull
     private GregorianCalendar dataNascimento;
-
-    @NotNull
     private long numIdentificacaoCivil;
-
-    @NotNull
-    private long numContibuinte;
-
-    @NotNull
+    private long numContribuinte;
     private String morada;
-
-    @NotNull
-    @Email
     private String email;
-
     private boolean confirmed;
 
-    public Inscricao() {
+    public InscricaoDTO() {
     }
 
-    public Inscricao(String code, String nome,String email, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
+    public InscricaoDTO(String code, String nome, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContribuinte, String morada, String email) {
         this.code = code;
         this.nome = nome;
-        this.email = email;
         this.dataNascimento = dataNascimento;
         this.numIdentificacaoCivil = numIdentificacaoCivil;
-        this.numContibuinte = numContibuinte;
+        this.numContribuinte = numContribuinte;
         this.morada = morada;
+        this.email = email;
         this.confirmed = false;
     }
 
@@ -87,12 +59,12 @@ public class Inscricao {
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
-    public long getNumContibuinte() {
-        return numContibuinte;
+    public long getNumContribuinte() {
+        return numContribuinte;
     }
 
-    public void setNumContibuinte(long numContibuinte) {
-        this.numContibuinte = numContibuinte;
+    public void setNumContribuinte(long numContribuinte) {
+        this.numContribuinte = numContribuinte;
     }
 
     public String getMorada() {
