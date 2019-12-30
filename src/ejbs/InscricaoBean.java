@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @Stateless(name = "InscricaoEJB")
 public class InscricaoBean {
@@ -54,6 +55,22 @@ public class InscricaoBean {
             throw e;
         }catch(Exception e){
             throw new EJBException("ERROR CONFIRMING INSCRICAO", e);
+        }
+    }
+
+    public List <Inscricao> all(){
+        try{
+            return (List<Inscricao>) em.createNamedQuery("getAllInscricoes").getResultList();
+        }catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_INSCRICOES", e);
+        }
+    }
+
+    public Inscricao findInscricao(String code) {
+        try{
+            return em.find(Inscricao.class,code);
+        }catch (Exception e){
+            throw new EJBException("ERROR_FINDING_INSCRICAO", e);
         }
     }
 }

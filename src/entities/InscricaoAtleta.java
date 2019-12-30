@@ -3,10 +3,7 @@ package entities;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class InscricaoAtleta extends Inscricao{
@@ -21,8 +18,8 @@ public class InscricaoAtleta extends Inscricao{
     public InscricaoAtleta() {
     }
 
-    public InscricaoAtleta(String nome, String email, int dia, int mes, int ano, long numIdentificacaoCivil, long numContibuinte, String morada,Set<Modalidade> modalidades, List<Treino> treinos) {
-        super(nome, email, dia, mes, ano, numIdentificacaoCivil, numContibuinte, morada);
+    public InscricaoAtleta(String code, String nome, String email, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContibuinte, String morada, Set<Modalidade> modalidades, List<Treino> treinos) {
+        super(code, nome, email, dataNascimento, numIdentificacaoCivil, numContibuinte, morada);
         this.modalidades = modalidades;
         this.treinos = treinos;
     }

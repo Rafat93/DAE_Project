@@ -261,7 +261,10 @@ public class ModalidadeController {
                 socio.getNome(),
                 socio.getEmail(),
                 socio.getPassword(),
-                socio.getDataNascimento()
+                socio.getDataNascimento(),
+                socio.getNumIdentificacaoCivil(),
+                socio.getNumContibuinte(),
+                socio.getMorada()
         );
     }
 
