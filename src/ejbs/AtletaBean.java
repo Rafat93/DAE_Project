@@ -50,7 +50,7 @@ public class AtletaBean {
             atleta.setEmail(email);
             atleta.setDataNascimento(new GregorianCalendar(dia,mes,ano));
             atleta.setMorada(morada);
-            atleta.setNumContibuinte(numContibuinte);
+            atleta.setNumContribuinte(numContibuinte);
             atleta.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
             em.merge(atleta);

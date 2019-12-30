@@ -175,7 +175,7 @@ public class AtletaController {
                 atleta.getPassword(),
                 atleta.getDataNascimento(),
                 atleta.getNumIdentificacaoCivil(),
-                atleta.getNumContibuinte(),
+                atleta.getNumContribuinte(),
                 atleta.getMorada()
         );
 
@@ -193,7 +193,7 @@ public class AtletaController {
                 atleta.getPassword(),
                 atleta.getDataNascimento(),
                 atleta.getNumIdentificacaoCivil(),
-                atleta.getNumContibuinte(),
+                atleta.getNumContribuinte(),
                 atleta.getMorada()
         );
     }

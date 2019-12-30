@@ -220,7 +220,7 @@ public class ModalidadeController {
                 atleta.getPassword(),
                 atleta.getDataNascimento(),
                 atleta.getNumIdentificacaoCivil(),
-                atleta.getNumContibuinte(),
+                atleta.getNumContribuinte(),
                 atleta.getMorada()
         );
     }
@@ -266,7 +266,7 @@ public class ModalidadeController {
                 socio.getPassword(),
                 socio.getDataNascimento(),
                 socio.getNumIdentificacaoCivil(),
-                socio.getNumContibuinte(),
+                socio.getNumContribuinte(),
                 socio.getMorada()
         );
     }

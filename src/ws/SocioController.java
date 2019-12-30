@@ -144,7 +144,7 @@ public class SocioController {
                 socio.getPassword(),
                 socio.getDataNascimento(),
                 socio.getNumIdentificacaoCivil(),
-                socio.getNumContibuinte(),
+                socio.getNumContribuinte(),
                 socio.getMorada()
         );
 
@@ -162,7 +162,7 @@ public class SocioController {
                 socio.getPassword(),
                 socio.getDataNascimento(),
                 socio.getNumIdentificacaoCivil(),
-                socio.getNumContibuinte(),
+                socio.getNumContribuinte(),
                 socio.getMorada()
         );
     }

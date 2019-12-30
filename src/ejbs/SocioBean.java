@@ -2,7 +2,6 @@ package ejbs;
 
 import entities.Modalidade;
 import entities.Socio;
-import entities.Socio;
 import exceptions.MyConstraintViolationException;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
@@ -72,7 +71,7 @@ public class SocioBean {
             socio.setEmail(email);
             socio.setDataNascimento(new GregorianCalendar(dia,mes,ano));
             socio.setMorada(morada);
-            socio.setNumContibuinte(numContibuinte);
+            socio.setNumContribuinte(numContibuinte);
             socio.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
             em.merge(socio);
