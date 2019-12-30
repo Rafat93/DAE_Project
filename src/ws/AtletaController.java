@@ -94,7 +94,7 @@ public class AtletaController {
 
     @DELETE
     @Path("{email}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response removeAtleta(@PathParam("email") String email)
             throws MyEntityNotFoundException {
         atletaBean.delete(email);

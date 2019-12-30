@@ -1,6 +1,7 @@
 package ejbs;
 
 import entities.Inscricao;
+import entities.Socio;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 
@@ -18,6 +19,9 @@ public class InscricaoBean {
 
     @EJB
     private SocioBean socioBean;
+
+    @EJB
+    private EmailBean emailBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -48,6 +52,9 @@ public class InscricaoBean {
             socioBean.create(socioBean.all().size()+1,inscricao.getNome(),Long.toString(inscricao.getNumContibuinte()),
                     inscricao.getEmail(),inscricao.getDataNascimento().get(Calendar.DAY_OF_MONTH),inscricao.getDataNascimento().get(Calendar.MONTH),inscricao.getDataNascimento().get(Calendar.YEAR),
                     inscricao.getNumIdentificacaoCivil(),inscricao.getNumContibuinte(),inscricao.getMorada());
+            //envia email a informar mail e password
+            emailBean.send(inscricao.getEmail(),"","");
+
             //confirma inscrição
             inscricao.setConfirmed(true);
             em.merge(inscricao);
@@ -79,6 +86,24 @@ public class InscricaoBean {
             return em.find(Inscricao.class,code);
         }catch (Exception e){
             throw new EJBException("ERROR_FINDING_INSCRICAO", e);
+        }
+    }
+
+    public void delete (String code) throws MyEntityNotFoundException {
+        try{
+            Inscricao inscricao = em.find(Inscricao.class,code);
+            if(inscricao == null){
+                throw new MyEntityNotFoundException("Inscrição com o codigo " + code + " não existe");
+            }
+            em.remove(findInscricao(code));
+            Socio socio = em.find(Socio.class,inscricao.getEmail());
+            if(socio != null){
+                em.remove(socio);
+            }
+        }catch (MyEntityNotFoundException e) {
+            throw e;
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_ATLETA",e);
         }
     }
 }

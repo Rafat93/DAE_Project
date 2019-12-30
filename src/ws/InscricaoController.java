@@ -78,6 +78,14 @@ public class InscricaoController {
                 .build();
     }
 
+    @DELETE
+    @Path("{code}")
+    @RolesAllowed({"Administrador"})
+    public Response removeInscricao(@PathParam("code") String code)
+            throws MyEntityNotFoundException {
+        inscricaoBean.delete(code);
+        return Response.status(Response.Status.OK).build();
+    }
 
     InscricaoDTO toDTO(Inscricao inscricao){
         InscricaoDTO inscricaoDTO = new InscricaoDTO(
