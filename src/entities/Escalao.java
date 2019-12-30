@@ -18,8 +18,7 @@ import java.util.Set;
 public class Escalao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private String code;
 
     @NotNull
     private String nome;
@@ -37,19 +36,20 @@ public class Escalao {
     public Escalao() {
     }
 
-    public Escalao(String nome, int idadeMin, int idadeMax, Modalidade modalidade) {
+    public Escalao(String code, String nome, int idadeMin, int idadeMax, Modalidade modalidade) {
+        this.code=code;
         this.nome = nome;
         this.idadeMin = idadeMin;
         this.idadeMax = idadeMax;
         this.modalidade = modalidade ;
     }
 
-    public int getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getNome() {

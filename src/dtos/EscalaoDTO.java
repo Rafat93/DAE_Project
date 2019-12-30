@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class EscalaoDTO implements Serializable {
 
+    private String code;
     private String nome;
     private int idadeMin;
     private int idadeMax;
@@ -14,11 +15,20 @@ public class EscalaoDTO implements Serializable {
     public EscalaoDTO() {
     }
 
-    public EscalaoDTO(String nome, int idadeMin, int idadeMax, String siglaModalidade) {
+    public EscalaoDTO(String code, String nome, int idadeMin, int idadeMax, String siglaModalidade) {
+        this.code = code;
         this.nome = nome;
         this.idadeMin = idadeMin;
         this.idadeMax = idadeMax;
         this.siglaModalidade = siglaModalidade;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getNome() {

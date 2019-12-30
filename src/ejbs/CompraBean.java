@@ -65,7 +65,7 @@ public class CompraBean {
         try{
             return (List<Compra>) em.createNamedQuery("getAllCompras").getResultList();
         }catch (Exception e) {
-            throw new EJBException("ERROR_RETRIEVING_TREINOS", e);
+            throw new EJBException("ERROR_RETRIEVING_COMPRAS", e);
         }
     }
 

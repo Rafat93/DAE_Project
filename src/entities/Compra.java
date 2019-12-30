@@ -128,9 +128,7 @@ public class Compra {
     }
 
     public void addPagamento (Pagamento pagamento){
-        if (!pagamentos.contains(pagamento)){
-            pagamentos.add(pagamento);
-        }
+        pagamentos.add(pagamento);
     }
 
     public void removeProduto (Produto produto){
