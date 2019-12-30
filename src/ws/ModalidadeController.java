@@ -218,7 +218,10 @@ public class ModalidadeController {
                 atleta.getNome(),
                 atleta.getEmail(),
                 atleta.getPassword(),
-                atleta.getDataNascimento()
+                atleta.getDataNascimento(),
+                atleta.getNumIdentificacaoCivil(),
+                atleta.getNumContibuinte(),
+                atleta.getMorada()
         );
     }
     List <AtletaDTO> atletaToDTOs (List<Atleta> atletas){

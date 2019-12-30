@@ -1,12 +1,15 @@
 package ejbs;
 
+import entities.Compra;
 import entities.Produto;
 import entities.TipoProduto;
 import exceptions.MyEntityAlreadyExistsException;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless(name = "ProdutoEJB")
 public class ProdutoBean {
@@ -27,6 +30,14 @@ public class ProdutoBean {
             throw e;
         }catch(Exception e){
             throw new NullPointerException(e.getMessage());
+        }
+    }
+
+    public List<Produto> all(){
+        try{
+            return (List<Produto>) em.createNamedQuery("getAllProdutos").getResultList();
+        }catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_Produtos", e);
         }
     }
 }

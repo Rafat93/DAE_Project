@@ -2,6 +2,8 @@ package ejbs;
 
 import entities.Administrador;
 import entities.Atleta;
+import entities.Produto;
+import entities.TipoProduto;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +32,12 @@ public class ConfigBean {
     @EJB
     private ModalidadeBean modalidadeBean;
 
+    @EJB
+    private ProdutoBean produtoBean;
+
+    @EJB
+    private TipoProdutoBean tipoProdutoBean;
+
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     public ConfigBean() {
@@ -54,6 +62,12 @@ public class ConfigBean {
 
             System.out.println("CREATING ADMINS");
             administradorBean.create("a1","a1","a1@admin.com");
+
+            System.out.println("CREATING TIPOPRODUTO");
+            tipoProdutoBean.create("Sapatilha");
+
+            System.out.println("CREATING PRODUTOS");
+            produtoBean.create("AD20",tipoProdutoBean.findTipoProduto("Sapatilha"),"Adidas Finesse",50,5);
 
             System.out.println("*********FINISH POPULATING");
         }catch(Exception e){
