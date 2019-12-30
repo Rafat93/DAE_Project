@@ -1,28 +1,36 @@
 package dtos;
 
-import entities.Modalidade;
-
 import java.io.Serializable;
 
 public class GraduacaoDTO implements Serializable {
 
-    private String name;
+    private String code;
+    private String nome;
     private String siglaModalidade;
 
-    public GraduacaoDTO(String name, String siglaModalidade) {
-        this.name = name;
+    public GraduacaoDTO(String code, String nome, String siglaModalidade) {
+        this.code = code;
+        this.nome = nome;
         this.siglaModalidade = siglaModalidade;
     }
 
     public GraduacaoDTO() {
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSiglaModalidade() {

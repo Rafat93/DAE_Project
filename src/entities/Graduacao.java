@@ -4,11 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "GRADUACOES")
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllGraduacoes",
+                query = "SELECT e FROM Graduacao e ORDER BY e.code" // JPQL
+        )
+})
 public class Graduacao {
 
     @Id
-    @GeneratedValue
-    private int id;
+    private String code;
 
     @NotNull
     private String nome;
@@ -20,12 +26,12 @@ public class Graduacao {
     public Graduacao() {
     }
 
-    public int getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getNome() {

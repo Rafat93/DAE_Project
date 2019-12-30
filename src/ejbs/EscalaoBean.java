@@ -1,6 +1,5 @@
 package ejbs;
 
-import entities.Compra;
 import entities.Escalao;
 import entities.Modalidade;
 import exceptions.MyEntityAlreadyExistsException;

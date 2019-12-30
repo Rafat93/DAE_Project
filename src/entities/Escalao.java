@@ -12,7 +12,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllEscaloes",
-                query = "SELECT e FROM Escalao e ORDER BY e.id" // JPQL
+                query = "SELECT e FROM Escalao e ORDER BY e.code" // JPQL
         )
 })
 public class Escalao {

@@ -47,8 +47,8 @@ public class TreinoController {
                     treinoDTO.getCode(),
                     treinoDTO.getEmailTreinador(),
                     treinoDTO.getSiglaModalidade(),
-                    treinoDTO.getIdGraduacao(),
-                    treinoDTO.getIdEscalao(),
+                    treinoDTO.getCodeGraduacao(),
+                    treinoDTO.getCodeEscalao(),
                     treinoDTO.getHoraInicio(),
                     treinoDTO.getHoraFim(),
                     treinoDTO.getDiaSemana()
@@ -69,8 +69,8 @@ public class TreinoController {
                     code,
                     treinoDTO.getEmailTreinador(),
                     treinoDTO.getSiglaModalidade(),
-                    treinoDTO.getIdGraduacao(),
-                    treinoDTO.getIdEscalao(),
+                    treinoDTO.getCodeGraduacao(),
+                    treinoDTO.getCodeEscalao(),
                     treinoDTO.getHoraInicio(),
                     treinoDTO.getHoraFim(),
                     treinoDTO.getDiaSemana()
@@ -142,8 +142,8 @@ public class TreinoController {
                 treino.getCode(),
                 treino.getTreinador().getNome(),
                 treino.getModalidade().getSigla(),
-                treino.getGraduacao().getId(),
-                treino.getEscalao().getId(),
+                treino.getGraduacao().getCode(),
+                treino.getEscalao().getCode(),
                 treino.getHoraInicio(),
                 treino.getHoraFim(),
                 treino.getDiaSemana()

@@ -233,8 +233,8 @@ public class ModalidadeController {
                 treino.getCode(),
                 treino.getTreinador().getNome(),
                 treino.getModalidade().getSigla(),
-                treino.getGraduacao().getId(),
-                treino.getEscalao().getId(),
+                treino.getGraduacao().getCode(),
+                treino.getEscalao().getCode(),
                 treino.getHoraInicio(),
                 treino.getHoraFim(),
                 treino.getDiaSemana()
@@ -278,10 +278,11 @@ public class ModalidadeController {
 
     EscalaoDTO escalaoToDTO (Escalao escalao){
         return new EscalaoDTO(
-          escalao.getNome(),
-          escalao.getIdadeMin(),
-          escalao.getIdadeMax(),
-          escalao.getModalidade().getSigla()
+                escalao.getCode(),
+            escalao.getNome(),
+            escalao.getIdadeMin(),
+            escalao.getIdadeMax(),
+            escalao.getModalidade().getSigla()
         );
     }
 
@@ -290,7 +291,7 @@ public class ModalidadeController {
     }
 
     GraduacaoDTO graduacaoToDTO (Graduacao graduacao){
-        return new GraduacaoDTO(graduacao.getNome(),graduacao.getModalidade().getSigla());
+        return new GraduacaoDTO(graduacao.getCode(),graduacao.getNome(),graduacao.getModalidade().getSigla());
     }
 
     List <GraduacaoDTO> graduacaoToDTOs (List <Graduacao> graduacoes){

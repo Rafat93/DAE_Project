@@ -10,18 +10,18 @@ public class TreinoDTO implements Serializable {
     private String code;
     private String emailTreinador;
     private String siglaModalidade;
-    private int idGraduacao;
-    private int idEscalao;
+    private String codeGraduacao;
+    private String codeEscalao;
     private Time horaInicio;
     private Time horaFim;
     private DiasSemana diaSemana;
 
-    public TreinoDTO(String code, String nomeTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+    public TreinoDTO(String code, String nomeTreinador, String siglaModalidade, String codeGraduacao, String codeEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
         this.code = code;
         this.emailTreinador = nomeTreinador;
         this.siglaModalidade = siglaModalidade;
-        this.idGraduacao = idGraduacao;
-        this.idEscalao = idEscalao;
+        this.codeGraduacao = codeGraduacao;
+        this.codeEscalao = codeEscalao;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
         this.diaSemana = diaSemana;
@@ -48,20 +48,20 @@ public class TreinoDTO implements Serializable {
         this.siglaModalidade = siglaModalidade;
     }
 
-    public int getIdGraduacao() {
-        return idGraduacao;
+    public String getCodeGraduacao() {
+        return codeGraduacao;
     }
 
-    public void setIdGraduacao(int idGraduacao) {
-        this.idGraduacao = idGraduacao;
+    public void setCodeGraduacao(String codeGraduacao) {
+        this.codeGraduacao = codeGraduacao;
     }
 
-    public int getIdEscalao() {
-        return idEscalao;
+    public String getCodeEscalao() {
+        return codeEscalao;
     }
 
-    public void setIdEscalao(int idEscalao) {
-        this.idEscalao = idEscalao;
+    public void setCodeEscalao(String codeEscalao) {
+        this.codeEscalao = codeEscalao;
     }
 
     public Time getHoraInicio() {

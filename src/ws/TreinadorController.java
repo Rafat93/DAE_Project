@@ -211,8 +211,8 @@ public class TreinadorController {
                 treino.getCode(),
                 treino.getTreinador().getNome(),
                 treino.getModalidade().getSigla(),
-                treino.getGraduacao().getId(),
-                treino.getEscalao().getId(),
+                treino.getGraduacao().getCode(),
+                treino.getEscalao().getCode(),
                 treino.getHoraInicio(),
                 treino.getHoraFim(),
                 treino.getDiaSemana()

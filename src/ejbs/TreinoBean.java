@@ -22,7 +22,7 @@ public class TreinoBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Treino create (String code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana){
+    public Treino create (String code, String emailTreinador, String siglaModalidade, String codeGraduacao, String codeEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana){
         try {
             if(em.find(Treino.class, code) != null){
                 throw new MyEntityAlreadyExistsException("Treino com o codigo: " + code + " já existe");
@@ -35,13 +35,13 @@ public class TreinoBean {
             if(modalidade == null) {
                 throw new MyEntityNotFoundException("Modalidade com a sigla: " + siglaModalidade + " não existe.");
             }
-            Graduacao graduacao = em.find(Graduacao.class,idGraduacao);
+            Graduacao graduacao = em.find(Graduacao.class,codeGraduacao);
             if(graduacao == null){
-                throw new MyEntityNotFoundException("Graduação com o id: " + idGraduacao + " não existe.");
+                throw new MyEntityNotFoundException("Graduação com o id: " + codeGraduacao + " não existe.");
             }
-            Escalao escalao = em.find(Escalao.class,idEscalao);
+            Escalao escalao = em.find(Escalao.class,codeEscalao);
             if(escalao == null){
-                throw new MyEntityNotFoundException("Escalão com o id: " + idEscalao + " não existe.");
+                throw new MyEntityNotFoundException("Escalão com o id: " + codeEscalao + " não existe.");
             }
             Treino treino = new Treino(code,treinador,modalidade,graduacao,escalao,horaInicio,horaFim,diaSemana);
             em.persist(treino);
@@ -51,7 +51,7 @@ public class TreinoBean {
         }
     }
 
-    public Treino update (String code, String emailTreinador, String siglaModalidade, int idGraduacao, int idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) throws MyEntityNotFoundException {
+    public Treino update (String code, String emailTreinador, String siglaModalidade, String idGraduacao, String idEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) throws MyEntityNotFoundException {
         try {
             Treino treino = em.find(Treino.class,code);
             if(treino == null){
