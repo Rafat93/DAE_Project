@@ -3,6 +3,7 @@ package ws;
 import dtos.*;
 import ejbs.ModalidadeBean;
 import entities.*;
+import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 
 import javax.annotation.security.RolesAllowed;
@@ -33,12 +34,12 @@ public class ModalidadeController {
     @POST
     @Path("/")
     @RolesAllowed({"Administrador"})
-    public Response createNewModalidade (ModalidadeDTO modalidadeDTO){
-        Modalidade modalidade = modalidadeBean.create(
-          modalidadeDTO.getSigla(),
-          modalidadeDTO.getNome(),
-          modalidadeDTO.getEpocaDesportiva()
-        );
+    public Response createNewModalidade (ModalidadeDTO modalidadeDTO) throws MyEntityAlreadyExistsException {
+         modalidadeBean.create(
+                 modalidadeDTO.getSigla(),
+                 modalidadeDTO.getNome(),
+                 modalidadeDTO.getEpocaDesportiva());
+         Modalidade modalidade = modalidadeBean.findModalidade(modalidadeDTO.getSigla());
         return Response.status(Response.Status.CREATED)
                 .entity(toDTONoLists(modalidade))
                 .build();

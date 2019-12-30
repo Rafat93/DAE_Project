@@ -1,5 +1,6 @@
 package dtos;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
@@ -17,17 +18,26 @@ public class SocioDTO implements Serializable {
 
     private List<ModalidadeDTO> modalidades;
 
+    private long numIdentificacaoCivil;
+
+    private long numContibuinte;
+
+    private String morada;
+
     public SocioDTO() {
         modalidades = new LinkedList<>();
     }
 
-    public SocioDTO(long numeroSocio, String nome, String email, String password, GregorianCalendar dataNascimento) {
+    public SocioDTO(long numeroSocio, String nome, String email, String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
         this();
         this.numeroSocio = numeroSocio;
         this.nome = nome;
         this.email = email;
         this.password = password;
         this.dataNascimento = dataNascimento;
+        this.numIdentificacaoCivil=numIdentificacaoCivil;
+        this.numContibuinte=numContibuinte;
+        this.morada=morada;
     }
 
     public long getNumeroSocio() {
@@ -76,5 +86,29 @@ public class SocioDTO implements Serializable {
 
     public void setModalidades(List<ModalidadeDTO> modalidades) {
         this.modalidades = modalidades;
+    }
+
+    public long getNumIdentificacaoCivil() {
+        return numIdentificacaoCivil;
+    }
+
+    public void setNumIdentificacaoCivil(long numIdentificacaoCivil) {
+        this.numIdentificacaoCivil = numIdentificacaoCivil;
+    }
+
+    public long getNumContibuinte() {
+        return numContibuinte;
+    }
+
+    public void setNumContibuinte(long numContibuinte) {
+        this.numContibuinte = numContibuinte;
+    }
+
+    public String getMorada() {
+        return morada;
+    }
+
+    public void setMorada(String morada) {
+        this.morada = morada;
     }
 }

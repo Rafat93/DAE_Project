@@ -61,12 +61,9 @@ public class SocioBean {
     public Socio update(long numeroSocio, String nome, String email, String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada) throws MyConstraintViolationException, MyEntityAlreadyExistsException, MyIllegalArgumentException, MyEntityNotFoundException {
         try {
             Socio socio = em.find(Socio.class, email);
-
             if (socio == null) {
                 throw new MyEntityNotFoundException("Socio não encontrado");
             }
-
-            //O que faz?
             em.lock(socio, LockModeType.OPTIMISTIC);
 
             socio.setNumeroSocio(numeroSocio);

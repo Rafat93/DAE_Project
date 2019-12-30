@@ -34,7 +34,7 @@ public class SocioController {
 
     @GET
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public List<SocioDTO> all() {
         return toDTOsNoModalidades(socioBean.all());
     }
@@ -49,7 +49,10 @@ public class SocioController {
                 socioDTO.getPassword(),
                 socioDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
                 socioDTO.getDataNascimento().get(Calendar.MONTH),
-                socioDTO.getDataNascimento().get(Calendar.YEAR));
+                socioDTO.getDataNascimento().get(Calendar.YEAR),
+                socioDTO.getNumIdentificacaoCivil(),
+                socioDTO.getNumContibuinte(),
+                socioDTO.getMorada());
         return Response.status(Response.Status.CREATED).entity(socioToDTO(socio)).build();
     }
 
@@ -62,7 +65,10 @@ public class SocioController {
                 socioDTO.getPassword(),
                 socioDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
                 socioDTO.getDataNascimento().get(Calendar.MONTH),
-                socioDTO.getDataNascimento().get(Calendar.YEAR));
+                socioDTO.getDataNascimento().get(Calendar.YEAR),
+                socioDTO.getNumIdentificacaoCivil(),
+                socioDTO.getNumContibuinte(),
+                socioDTO.getMorada());
         Socio socio = socioBean.findSocio(email);
         return Response.status(Response.Status.OK)
                 .entity(socioToDTO(socio))
@@ -71,7 +77,7 @@ public class SocioController {
 
     @DELETE
     @Path("{email}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response removeSocio(@PathParam("email") String email)
             throws MyEntityNotFoundException {
         socioBean.delete(email);
@@ -113,7 +119,7 @@ public class SocioController {
 
     @PUT
     @Path("{email}/modalidade/subscribe/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response subscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         socioBean.subscribeModalidade(email, sigla);
         return getSocioModalidadesSubscritas(email);
@@ -121,7 +127,7 @@ public class SocioController {
 
     @PUT
     @Path("{email}/modalidade/unsubscribe/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         socioBean.unsubscribeModalidade(email, sigla);
         return getSocioModalidadesSubscritas(email);
@@ -136,7 +142,10 @@ public class SocioController {
                 socio.getNome(),
                 socio.getEmail(),
                 socio.getPassword(),
-                socio.getDataNascimento()
+                socio.getDataNascimento(),
+                socio.getNumIdentificacaoCivil(),
+                socio.getNumContibuinte(),
+                socio.getMorada()
         );
 
         List <ModalidadeDTO> modalidadesDTO = modalidadeToDTOs(socio.getModalidades());
@@ -151,7 +160,10 @@ public class SocioController {
                 socio.getNome(),
                 socio.getEmail(),
                 socio.getPassword(),
-                socio.getDataNascimento()
+                socio.getDataNascimento(),
+                socio.getNumIdentificacaoCivil(),
+                socio.getNumContibuinte(),
+                socio.getMorada()
         );
     }
 

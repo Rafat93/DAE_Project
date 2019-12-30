@@ -1,6 +1,7 @@
 package ejbs;
 
 import entities.Modalidade;
+import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 
 import javax.ejb.EJBException;
@@ -16,14 +17,20 @@ public class ModalidadeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Modalidade create (String sigla, String nome, String epocaDesportiva){
+    public Modalidade create (String sigla, String nome, String epocaDesportiva) throws MyEntityAlreadyExistsException {
         try {
-            Modalidade modalidade = new Modalidade(sigla,nome,epocaDesportiva);
+            Modalidade modalidade = em.find(Modalidade.class,sigla);
+            if (modalidade != null){
+                throw new MyEntityAlreadyExistsException("Modalidade com a sigla "+sigla+"já existe");
+            }
+            modalidade = new Modalidade(sigla,nome,epocaDesportiva);
             System.out.println("PASSOU 0");
             em.persist(modalidade);
             return modalidade;
-        }catch (Exception e){
-            throw new NullPointerException(e.getMessage());
+        } catch (MyEntityAlreadyExistsException e) {
+            throw e;
+        }catch(Exception e){
+            throw new EJBException(e.getMessage());
         }
     }
 
