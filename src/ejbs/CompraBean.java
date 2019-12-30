@@ -22,6 +22,9 @@ public class CompraBean {
     @EJB
     private PagamentoBean pagamentoBean;
 
+    @EJB
+    private ProdutoBean produtoBean;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -91,10 +94,55 @@ public class CompraBean {
                     throw new MyEntityNotFoundException("Produto com o codigo: " + code + " não existe.");
                 }
                 produtos.add(produto);
+                produtoBean.decrementStock(code,1);
             }
             return produtos;
         }catch (MyEntityNotFoundException e) {
                 throw e;
+        }catch (Exception e) {
+            throw new EJBException(e.getMessage());
+        }
+    }
+
+    public void addProduto(String codeProduto, String codeCompra) throws MyEntityNotFoundException {
+        try{
+            Produto produto = em.find(Produto.class,codeProduto);
+            if(produto == null){
+                throw new MyEntityNotFoundException("Produto com o codigo "+codeProduto+" não existe");
+            }
+            Compra compra = em.find(Compra.class,codeCompra);
+            if(compra == null){
+                throw new MyEntityNotFoundException("Compra com o codigo "+codeCompra+" não existe");
+            }
+            if (produto.getStock() > 0) {
+                compra.addProduto(produto);
+                compra.setValorTotal(compra.getValorTotal() + produto.getPrecoEmEuros());
+                produtoBean.decrementStock(produto.getCode(),1);
+            }else{
+                throw new NullPointerException("Não tem stock");
+            }
+        }catch (MyEntityNotFoundException e) {
+            throw e;
+        }catch (Exception e) {
+            throw new EJBException(e.getMessage());
+        }
+    }
+
+    public void removeProduto(String codeProduto, String codeCompra) throws MyEntityNotFoundException {
+        try{
+            Produto produto = em.find(Produto.class,codeProduto);
+            if(produto == null){
+                throw new MyEntityNotFoundException("Produto com o codigo "+codeProduto+" não existe");
+            }
+            Compra compra = em.find(Compra.class,codeCompra);
+            if(compra == null){
+                throw new MyEntityNotFoundException("Compra com o codigo "+codeCompra+" não existe");
+            }
+            compra.removeProduto(produto);
+            compra.setValorTotal(compra.getValorTotal() - produto.getPrecoEmEuros());
+            produtoBean.incrementStock(produto.getCode(),1);
+        }catch (MyEntityNotFoundException e) {
+            throw e;
         }catch (Exception e) {
             throw new EJBException(e.getMessage());
         }

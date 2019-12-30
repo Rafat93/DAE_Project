@@ -1,5 +1,6 @@
 package dtos;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
@@ -35,7 +36,7 @@ public class SocioDTO implements Serializable {
         this.password = password;
         this.dataNascimento = dataNascimento;
         this.numIdentificacaoCivil=numIdentificacaoCivil;
-        this.numContribuinte =numContribuinte;
+        this.numContribuinte=numContribuinte;
         this.morada=morada;
     }
 

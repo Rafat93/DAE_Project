@@ -4,14 +4,15 @@ import dtos.ModalidadeDTO;
 import dtos.ProdutoDTO;
 import ejbs.ProdutoBean;
 import entities.Produto;
+import exceptions.MyEntityAlreadyExistsException;
+import exceptions.MyEntityNotFoundException;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,24 @@ public class ProdutoController {
     public List<ProdutoDTO> all() {
         return toDTOs(produtoBean.all());
     }
+
+    @GET
+    @Path("/{code}")
+    public Response getProdutoDetails (@PathParam("code") String code) {
+        Produto produto = produtoBean.findProduto(code);
+        return Response.status(Response.Status.OK)
+                .entity(toDTO(produto))
+                .build();
+    }
+
+    @DELETE
+    @Path("{code}")
+    @RolesAllowed({"Administrador"})
+    public Response removeProduto (@PathParam("code") String code) {
+        produtoBean.delete(code);
+        return Response.status(Response.Status.OK).build();
+    }
+
 
 
     ProdutoDTO toDTO(Produto produto){
