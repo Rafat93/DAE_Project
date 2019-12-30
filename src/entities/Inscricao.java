@@ -12,11 +12,11 @@ import java.util.GregorianCalendar;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllInscricoes",
-                query = "SELECT i FROM Inscricao i ORDER BY i.nome" // JPQL
+                query = "SELECT i FROM Inscricao i ORDER BY i.code" // JPQL
         ),
         @NamedQuery(
                 name = "getInscricoesNotConfirmed",
-                query = "SELECT i FROM Inscricao i WHERE i.confirmed LIKE 'FALSE' ORDER BY i.nome " // JPQL
+                query = "SELECT i FROM Inscricao i WHERE i.confirmed LIKE 'FALSE' ORDER BY i.code " // JPQL
         )
 })
 public class Inscricao {
