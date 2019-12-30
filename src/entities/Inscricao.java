@@ -34,7 +34,7 @@ public class Inscricao {
     private long numIdentificacaoCivil;
 
     @NotNull
-    private long numContibuinte;
+    private long numContribuinte;
 
     @NotNull
     private String morada;
@@ -54,7 +54,7 @@ public class Inscricao {
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.numIdentificacaoCivil = numIdentificacaoCivil;
-        this.numContibuinte = numContibuinte;
+        this.numContribuinte = numContibuinte;
         this.morada = morada;
         this.confirmed = false;
     }
@@ -91,12 +91,12 @@ public class Inscricao {
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
-    public long getNumContibuinte() {
-        return numContibuinte;
+    public long getNumContribuinte() {
+        return numContribuinte;
     }
 
-    public void setNumContibuinte(long numContibuinte) {
-        this.numContibuinte = numContibuinte;
+    public void setNumContribuinte(long numContibuinte) {
+        this.numContribuinte = numContibuinte;
     }
 
     public String getMorada() {

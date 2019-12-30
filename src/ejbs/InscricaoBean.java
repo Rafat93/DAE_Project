@@ -49,9 +49,9 @@ public class InscricaoBean {
                 throw new MyEntityNotFoundException("Inscricao com o codigo "+code+" não existe");
             }
             //cria socio
-            socioBean.create(socioBean.all().size()+1,inscricao.getNome(),Long.toString(inscricao.getNumContibuinte()),
+            socioBean.create(socioBean.all().size()+1,inscricao.getNome(),Long.toString(inscricao.getNumContribuinte()),
                     inscricao.getEmail(),inscricao.getDataNascimento().get(Calendar.DAY_OF_MONTH),inscricao.getDataNascimento().get(Calendar.MONTH),inscricao.getDataNascimento().get(Calendar.YEAR),
-                    inscricao.getNumIdentificacaoCivil(),inscricao.getNumContibuinte(),inscricao.getMorada());
+                    inscricao.getNumIdentificacaoCivil(),inscricao.getNumContribuinte(),inscricao.getMorada());
             //envia email a informar mail e password
             emailBean.send(inscricao.getEmail(),"","");
 

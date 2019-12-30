@@ -93,7 +93,7 @@ public class InscricaoController {
           inscricao.getNome(),
           inscricao.getDataNascimento(),
           inscricao.getNumIdentificacaoCivil(),
-          inscricao.getNumContibuinte(),
+          inscricao.getNumContribuinte(),
           inscricao.getMorada(),
           inscricao.getEmail()
         );
