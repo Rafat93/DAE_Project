@@ -20,13 +20,13 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano){
+    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada){
         try{
             Atleta atleta = em.find(Atleta.class,email);
             if(atleta != null){
                 throw new MyEntityAlreadyExistsException("Atleta com o email: " + email + " já existe");
             }
-            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia));
+            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContibuinte,morada);
             em.persist(atleta);
             em.flush();
             return atleta;
@@ -35,14 +35,13 @@ public class AtletaBean {
         }
     }
 
-    public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano) throws MyEntityNotFoundException {
+    public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada) throws MyEntityNotFoundException {
         try {
             Atleta atleta = em.find(Atleta.class, email);
 
             if (atleta == null) {
                 throw new MyEntityNotFoundException("Atleta não encontrado!");
             }
-
             em.lock(atleta, LockModeType.OPTIMISTIC);
 
             atleta.setNumeroSocio(numeroSocio);
@@ -50,9 +49,11 @@ public class AtletaBean {
             atleta.setNome(nome);
             atleta.setEmail(email);
             atleta.setDataNascimento(new GregorianCalendar(dia,mes,ano));
+            atleta.setMorada(morada);
+            atleta.setNumContibuinte(numContibuinte);
+            atleta.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
             em.merge(atleta);
-
             return atleta;
         }catch(MyEntityNotFoundException e){
             throw e;

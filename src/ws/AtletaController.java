@@ -57,7 +57,10 @@ public class AtletaController {
                 atletaDTO.getPassword(),
                 atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
                 atletaDTO.getDataNascimento().get(Calendar.MONTH),
-                atletaDTO.getDataNascimento().get(Calendar.YEAR));
+                atletaDTO.getDataNascimento().get(Calendar.YEAR),
+                atletaDTO.getNumIdentificacaoCivil(),
+                atletaDTO.getNumContibuinte(),
+                atletaDTO.getMorada());
         return Response.status(Response.Status.CREATED).entity(atletaToDTO(atleta)).build();
     }
 
@@ -77,7 +80,10 @@ public class AtletaController {
                     atletaDTO.getPassword(),
                     atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
                     atletaDTO.getDataNascimento().get(Calendar.MONTH),
-                    atletaDTO.getDataNascimento().get(Calendar.YEAR));
+                    atletaDTO.getDataNascimento().get(Calendar.YEAR),
+                    atletaDTO.getNumIdentificacaoCivil(),
+                    atletaDTO.getNumContibuinte(),
+                    atletaDTO.getMorada());
             Atleta atleta = atletaBean.findAtleta(email);
             return Response.status(Response.Status.OK)
                     .entity(atletaToDTO(atleta))
@@ -167,7 +173,10 @@ public class AtletaController {
                 atleta.getNome(),
                 atleta.getEmail(),
                 atleta.getPassword(),
-                atleta.getDataNascimento()
+                atleta.getDataNascimento(),
+                atleta.getNumIdentificacaoCivil(),
+                atleta.getNumContibuinte(),
+                atleta.getMorada()
         );
 
         List < ModalidadeDTO> modalidadesDTO = modalidadeToDTOs(atleta.getModalidades());
@@ -182,7 +191,10 @@ public class AtletaController {
                 atleta.getNome(),
                 atleta.getEmail(),
                 atleta.getPassword(),
-                atleta.getDataNascimento()
+                atleta.getDataNascimento(),
+                atleta.getNumIdentificacaoCivil(),
+                atleta.getNumContibuinte(),
+                atleta.getMorada()
         );
     }
 
