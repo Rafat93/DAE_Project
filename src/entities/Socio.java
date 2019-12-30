@@ -11,7 +11,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllSocios",
-                query = "SELECT s FROM Socio s ORDER BY s.nome" // JPQL
+                query = "SELECT s FROM Socio s ORDER BY s.numeroSocio" // JPQL
         )
 })
 public class Socio extends User implements Serializable {
@@ -27,7 +27,7 @@ public class Socio extends User implements Serializable {
     private long numIdentificacaoCivil;
 
     @NotNull
-    private long numContibuinte;
+    private long numContribuinte;
 
     @NotNull
     private String morada;
@@ -41,12 +41,12 @@ public class Socio extends User implements Serializable {
         this.modalidades = new LinkedHashSet<>();
     }
 
-    public Socio(long numeroSocio, String nome, String password, String email, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
+    public Socio(long numeroSocio, String nome, String password, String email, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContribuinte, String morada) {
         super(nome, password, email);
         this.numeroSocio = numeroSocio;
         this.dataNascimento = dataNascimento;
         this.morada = morada;
-        this.numContibuinte = numContibuinte;
+        this.numContribuinte = numContribuinte;
         this.numIdentificacaoCivil = numIdentificacaoCivil;
         this.modalidades = new LinkedHashSet<>();
     }
@@ -95,12 +95,12 @@ public class Socio extends User implements Serializable {
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
-    public long getNumContibuinte() {
-        return numContibuinte;
+    public long getNumContribuinte() {
+        return numContribuinte;
     }
 
-    public void setNumContibuinte(long numContibuinte) {
-        this.numContibuinte = numContibuinte;
+    public void setNumContribuinte(long numContibuinte) {
+        this.numContribuinte = numContibuinte;
     }
 
     public String getMorada() {

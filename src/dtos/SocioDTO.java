@@ -1,6 +1,5 @@
 package dtos;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.*;
 
@@ -20,7 +19,7 @@ public class SocioDTO implements Serializable {
 
     private long numIdentificacaoCivil;
 
-    private long numContibuinte;
+    private long numContribuinte;
 
     private String morada;
 
@@ -28,7 +27,7 @@ public class SocioDTO implements Serializable {
         modalidades = new LinkedList<>();
     }
 
-    public SocioDTO(long numeroSocio, String nome, String email, String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
+    public SocioDTO(long numeroSocio, String nome, String email, String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContribuinte, String morada) {
         this();
         this.numeroSocio = numeroSocio;
         this.nome = nome;
@@ -36,7 +35,7 @@ public class SocioDTO implements Serializable {
         this.password = password;
         this.dataNascimento = dataNascimento;
         this.numIdentificacaoCivil=numIdentificacaoCivil;
-        this.numContibuinte=numContibuinte;
+        this.numContribuinte =numContribuinte;
         this.morada=morada;
     }
 
@@ -96,12 +95,12 @@ public class SocioDTO implements Serializable {
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
-    public long getNumContibuinte() {
-        return numContibuinte;
+    public long getNumContribuinte() {
+        return numContribuinte;
     }
 
-    public void setNumContibuinte(long numContibuinte) {
-        this.numContibuinte = numContibuinte;
+    public void setNumContribuinte(long numContribuinte) {
+        this.numContribuinte = numContribuinte;
     }
 
     public String getMorada() {

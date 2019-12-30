@@ -51,7 +51,7 @@ public class SocioController {
                 socioDTO.getDataNascimento().get(Calendar.MONTH),
                 socioDTO.getDataNascimento().get(Calendar.YEAR),
                 socioDTO.getNumIdentificacaoCivil(),
-                socioDTO.getNumContibuinte(),
+                socioDTO.getNumContribuinte(),
                 socioDTO.getMorada());
         return Response.status(Response.Status.CREATED).entity(socioToDTO(socio)).build();
     }
@@ -67,7 +67,7 @@ public class SocioController {
                 socioDTO.getDataNascimento().get(Calendar.MONTH),
                 socioDTO.getDataNascimento().get(Calendar.YEAR),
                 socioDTO.getNumIdentificacaoCivil(),
-                socioDTO.getNumContibuinte(),
+                socioDTO.getNumContribuinte(),
                 socioDTO.getMorada());
         Socio socio = socioBean.findSocio(email);
         return Response.status(Response.Status.OK)
@@ -144,7 +144,7 @@ public class SocioController {
                 socio.getPassword(),
                 socio.getDataNascimento(),
                 socio.getNumIdentificacaoCivil(),
-                socio.getNumContibuinte(),
+                socio.getNumContribuinte(),
                 socio.getMorada()
         );
 
@@ -162,7 +162,7 @@ public class SocioController {
                 socio.getPassword(),
                 socio.getDataNascimento(),
                 socio.getNumIdentificacaoCivil(),
-                socio.getNumContibuinte(),
+                socio.getNumContribuinte(),
                 socio.getMorada()
         );
     }
