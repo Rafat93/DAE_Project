@@ -34,6 +34,22 @@ public class ProdutoController {
         return toDTOs(produtoBean.all());
     }
 
+    @POST
+    @Path("/")
+    @RolesAllowed({"Administrador"})
+    public Response createNewProduto(ProdutoDTO produtoDTO) throws MyEntityAlreadyExistsException {
+        Produto produto = produtoBean.create(
+                produtoDTO.getCode(),
+                produtoDTO.getTipo(),
+                produtoDTO.getDescricao(),
+                produtoDTO.getPreco(),
+                produtoDTO.getStock()
+        );
+        return Response.status(Response.Status.CREATED).
+                entity(toDTO(produto)).
+                build();
+    }
+
     @GET
     @Path("/{code}")
     public Response getProdutoDetails (@PathParam("code") String code) {
