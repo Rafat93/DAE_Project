@@ -1,5 +1,6 @@
 package ejbs;
 
+import dtos.EmailDTO;
 import entities.Inscricao;
 import entities.Socio;
 import exceptions.MyEntityAlreadyExistsException;
@@ -53,8 +54,11 @@ public class InscricaoBean {
                     inscricao.getEmail(),inscricao.getDataNascimento().get(Calendar.DAY_OF_MONTH),inscricao.getDataNascimento().get(Calendar.MONTH),inscricao.getDataNascimento().get(Calendar.YEAR),
                     inscricao.getNumIdentificacaoCivil(),inscricao.getNumContribuinte(),inscricao.getMorada());
             //envia email a informar mail e password
-            emailBean.send(inscricao.getEmail(),"","");
-
+            EmailDTO emailDTO = new EmailDTO("Inscrição Confirmada",
+                    "A sua incrição foi aceite.\n" +
+                                "Para aceder à sua conta utilize o seu email, "+ inscricao.getEmail()+", e o seu número de contribuinte como password.\n" +
+                                "Deve alterar a sua password assim que fizer o login pela primeira vez para sua segurança.");
+            emailBean.send(inscricao.getEmail(),emailDTO.getSubject(),emailDTO.getMessage());
             //confirma inscrição
             inscricao.setConfirmed(true);
             em.merge(inscricao);
