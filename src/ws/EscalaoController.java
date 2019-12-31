@@ -1,19 +1,19 @@
 package ws;
 
 import dtos.EscalaoDTO;
+import dtos.ModalidadeDTO;
 import dtos.ProdutoDTO;
 import ejbs.EscalaoBean;
+import entities.Atleta;
 import entities.Escalao;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +48,14 @@ public class EscalaoController {
         return Response.status(Response.Status.CREATED).
                 entity(toDTO(escalao)).
                 build();
+    }
+
+    @PUT
+    @Path("{code}/modalidade/enroll/{sigla}")
+    @RolesAllowed({"Administrator"})
+    public Response enrollEscalaoInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        escalaoBean.enrollEscalaoInModalidade(code, sigla);
+        return  Response.status(Response.Status.OK).build();
     }
 
     List<EscalaoDTO> toDTOs(List<Escalao> escaloes) {

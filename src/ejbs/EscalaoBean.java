@@ -4,6 +4,7 @@ import entities.Escalao;
 import entities.Modalidade;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -45,6 +46,27 @@ public class EscalaoBean {
             throw e;
         }catch (Exception e) {
             throw new EJBException(e.getMessage());
+        }
+    }
+
+    public void enrollEscalaoInModalidade( String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Escalao escalao = em.find(Escalao.class, code);
+            if(escalao == null){
+                throw new MyEntityNotFoundException("Escalão com o codigo "+code+" não existe");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
+            }
+            if(modalidade.getEscaloes().contains(escalao)){
+                throw new MyIllegalArgumentException("Escalão is already enrolled in modalidade with code " + sigla);
+            }
+            modalidade.addEscalao(escalao);
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw  e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_ENROLLING_ESCALAO_IN_MODALIDADE ---->" + e.getMessage());
         }
     }
 }

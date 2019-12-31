@@ -26,6 +26,12 @@ public class Graduacao {
     public Graduacao() {
     }
 
+    public Graduacao(String code, String nome, Modalidade modalidade){
+        this.code = code;
+        this.nome = nome;
+        this.modalidade = modalidade;
+    }
+
     public String getCode() {
         return code;
     }
