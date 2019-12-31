@@ -87,4 +87,6 @@ public class ModalidadeBean {
             throw new EJBException("ERROR_DELETING_MODALIDADE",e);
         }
     }
+
+    //TODO: funções para remover elementos das listas
 }

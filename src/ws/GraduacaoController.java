@@ -5,6 +5,7 @@ import ejbs.GraduacaoBean;
 import entities.Graduacao;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
+import exceptions.MyIllegalArgumentException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -45,6 +46,14 @@ public class GraduacaoController {
         return Response.status(Response.Status.CREATED).
                 entity(toDTO(graduacao)).
                 build();
+    }
+
+    @PUT
+    @Path("{code}/modalidade/enroll/{sigla}")
+    @RolesAllowed({"Administrator"})
+    public Response enrollEscalaoInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        graduacaoBean.enrollGraduacaoInModalidade(code, sigla);
+        return  Response.status(Response.Status.OK).build();
     }
 
     GraduacaoDTO toDTO(Graduacao graduacao) {

@@ -141,7 +141,7 @@ public class Modalidade {
         atletas.remove(atleta);
     }
 
-    public void addGraducao (Graduacao graduacao){
+    public void addGraduacao (Graduacao graduacao){
         if(!graduacoes.contains(graduacao)) {
             graduacoes.add(graduacao);
         }
