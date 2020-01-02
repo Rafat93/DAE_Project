@@ -36,14 +36,14 @@ public class TreinadorController {
 
     @GET
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public List<TreinadorDTO> all() {
         return toDTOsNoModalidades(treinadorBean.all());
     }
 
     @POST
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response createNewTreinador (TreinadorDTO treinadorDTO){
         Treinador treinador = treinadorBean.create(
                 treinadorDTO.getNome(),
@@ -80,7 +80,7 @@ public class TreinadorController {
 
     @DELETE
     @Path("{email}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response removeTreinador(@PathParam("email") String email)
             throws MyEntityNotFoundException {
         treinadorBean.delete(email);
