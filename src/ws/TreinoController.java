@@ -1,9 +1,11 @@
 package ws;
 
 import dtos.ModalidadeDTO;
+import dtos.PresencaDTO;
 import dtos.TreinoDTO;
 import ejbs.TreinoBean;
 import entities.Modalidade;
+import entities.Presenca;
 import entities.Treino;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
@@ -17,6 +19,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Path("/treinos") // relative url web path of this controller
@@ -137,6 +140,21 @@ public class TreinoController {
                 .build();
     }
 
+    @GET
+    @Path("{code}/presencas")
+    public Response getListPresenca (@PathParam("code") String code) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        Treino treino = treinoBean.findTreino(code);
+        if(treino != null){
+            Set<Presenca> presencas = treinoBean.getListPresencas(code);
+            return Response.status(Response.Status.OK)
+                    .entity(presencaToDTOs(presencas))
+                    .build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Treino com o codigo "+code+" não encontrado")
+                .build();
+    }
+
     TreinoDTO toDTO (Treino treino){
         return new TreinoDTO(
                 treino.getCode(),
@@ -158,5 +176,18 @@ public class TreinoController {
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
                 modalidade.getEpocaDesportiva());
+    }
+
+    PresencaDTO presencaToDTO(Presenca presenca){
+        return new PresencaDTO(
+                presenca.getCode(),
+                presenca.getTreino().getCode(),
+                presenca.getDataTreino(),
+                presenca.getTreinador().getEmail()
+        );
+    }
+
+    List <PresencaDTO> presencaToDTOs(Set<Presenca> presencas){
+        return presencas.stream().map(this::presencaToDTO).collect(Collectors.toList());
     }
 }

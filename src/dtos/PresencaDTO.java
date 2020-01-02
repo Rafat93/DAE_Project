@@ -3,17 +3,14 @@ package dtos;
 import entities.Atleta;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class PresencaDTO implements Serializable {
 
     private String code;
     private String codeTreino;
     private GregorianCalendar dataTreino;
-    private List <String> atletasPresentes;
+    private Collection<String> atletasPresentes;
     private String emailTreinador;
 
 
@@ -52,7 +49,7 @@ public class PresencaDTO implements Serializable {
         this.dataTreino = dataTreino;
     }
 
-    public List<String> getAtletasPresentes() {
+    public Collection <String> getAtletasPresentes() {
         return atletasPresentes;
     }
 

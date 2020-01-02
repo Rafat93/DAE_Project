@@ -12,13 +12,13 @@ public class InscricaoAtleta extends Inscricao{
     private Set<Modalidade> modalidades;
 
     @ManyToMany
-    private List<Treino> treinos;
+    private Set<Treino> treinos;
 
 
     public InscricaoAtleta() {
     }
 
-    public InscricaoAtleta(String code, String nome, String email, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContibuinte, String morada, Set<Modalidade> modalidades, List<Treino> treinos) {
+    public InscricaoAtleta(String code, String nome, String email, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContibuinte, String morada, Set<Modalidade> modalidades, Set<Treino> treinos) {
         super(code, nome, email, dataNascimento, numIdentificacaoCivil, numContibuinte, morada);
         this.modalidades = modalidades;
         this.treinos = treinos;
@@ -32,11 +32,11 @@ public class InscricaoAtleta extends Inscricao{
         this.modalidades = modalidades;
     }
 
-    public List<Treino> getTreinos() {
+    public Set<Treino> getTreinos() {
         return treinos;
     }
 
-    public void setTreinos(List<Treino> treinos) {
+    public void setTreinos(Set<Treino> treinos) {
         this.treinos = treinos;
     }
 
