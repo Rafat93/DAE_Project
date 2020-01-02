@@ -22,7 +22,7 @@ public class Treino {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "TREINADOR_EMAIL")
+    @JoinColumn(name = "TREINOS_TREINADOR")
     private Treinador treinador;
 
     @ManyToOne
@@ -44,7 +44,7 @@ public class Treino {
     @NotNull
     private DiasSemana diaSemana;
 
-    @OneToMany(mappedBy="PRESENCA", cascade= CascadeType.ALL)
+    @OneToMany(mappedBy="treino", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set <Presenca> presencas;
 
     public Treino() {

@@ -49,8 +49,8 @@ public class PresencaDTO implements Serializable {
         this.dataTreino = dataTreino;
     }
 
-    public Collection <String> getAtletasPresentes() {
-        return atletasPresentes;
+    public List <String> getAtletasPresentes() {
+        return (List<String>) atletasPresentes;
     }
 
     public void setAtletasPresentes(List <String> atletasPresentes) {

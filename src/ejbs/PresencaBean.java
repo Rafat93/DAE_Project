@@ -46,7 +46,7 @@ public class PresencaBean {
         }
     }
 
-    public Presenca update (String code, String codeTreino, int dia, int mes, int ano,List<String> emailsAtletas, String emailTreinador) throws MyEntityNotFoundException {
+    public Presenca update (String code, String codeTreino, int dia, int mes, int ano,List <String> emailsAtletas, String emailTreinador) throws MyEntityNotFoundException {
         try{
             Presenca presenca = em.find(Presenca.class,code);
             if(presenca == null){

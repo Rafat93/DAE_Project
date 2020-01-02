@@ -18,9 +18,9 @@ import javax.mail.MessagingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.security.Principal;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Path("/atletas") // relative url web path of this controller
@@ -49,15 +49,16 @@ public class AtletaController {
     @POST
     @Path("/")
     @RolesAllowed({"Administrador"})
-    public Response createNewAtleta (AtletaDTO atletaDTO) {
+    public Response createNewAtleta (AtletaDTO atletaDTO) throws ParseException {
+        GregorianCalendar dataNascimento = format(atletaDTO.getDataNascimento());
         Atleta atleta = atletaBean.create(
                 atletaDTO.getNumeroSocio(),
                 atletaDTO.getNome(),
                 atletaDTO.getEmail(),
                 atletaDTO.getPassword(),
-                atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                atletaDTO.getDataNascimento().get(Calendar.MONTH),
-                atletaDTO.getDataNascimento().get(Calendar.YEAR),
+                dataNascimento.get(Calendar.DAY_OF_MONTH),
+                dataNascimento.get(Calendar.MONTH),
+                dataNascimento.get(Calendar.YEAR),
                 atletaDTO.getNumIdentificacaoCivil(),
                 atletaDTO.getNumContibuinte(),
                 atletaDTO.getMorada());
@@ -67,20 +68,20 @@ public class AtletaController {
     @PUT
     @Path("{email}")
     public Response updateAtleta(@PathParam("email") String email, AtletaDTO atletaDTO)
-            throws MyEntityNotFoundException {
+            throws MyEntityNotFoundException, ParseException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println(email + " --- " + principal.getName());
 
         if(securityContext.isUserInRole("Administrador") ||
                 securityContext.isUserInRole("Atleta") && principal.getName().equals(atletaDTO.getNome())) {
-
+            GregorianCalendar dataNascimento = format(atletaDTO.getDataNascimento());
             atletaBean.update(atletaDTO.getNumeroSocio(),
                     atletaDTO.getNome(),
                     email,
                     atletaDTO.getPassword(),
-                    atletaDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                    atletaDTO.getDataNascimento().get(Calendar.MONTH),
-                    atletaDTO.getDataNascimento().get(Calendar.YEAR),
+                    dataNascimento.get(Calendar.DAY_OF_MONTH),
+                    dataNascimento.get(Calendar.MONTH),
+                    dataNascimento.get(Calendar.YEAR),
                     atletaDTO.getNumIdentificacaoCivil(),
                     atletaDTO.getNumContibuinte(),
                     atletaDTO.getMorada());
@@ -212,6 +213,14 @@ public class AtletaController {
 
     List<ModalidadeDTO> modalidadeToDTOs(Collection<Modalidade> modalidades){
         return modalidades.stream().map(this::atletaToDTO).collect(Collectors.toList());
+    }
+
+    public static GregorianCalendar format(String format) throws ParseException {
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = df.parse(format);
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(date);
+        return cal;
     }
 
 }

@@ -1,9 +1,9 @@
 package dtos;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class AtletaDTO implements Serializable {
     private long numeroSocio;
@@ -14,7 +14,7 @@ public class AtletaDTO implements Serializable {
 
     private String password;
 
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
 
     private Collection<ModalidadeDTO> modalidades;
 
@@ -34,7 +34,7 @@ public class AtletaDTO implements Serializable {
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = format(dataNascimento);
         this.morada = morada;
         this.numContibuinte = numContibuinte;
         this.numIdentificacaoCivil = numIdentificacaoCivil;
@@ -64,11 +64,11 @@ public class AtletaDTO implements Serializable {
         this.email = email;
     }
 
-    public GregorianCalendar getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -111,4 +111,12 @@ public class AtletaDTO implements Serializable {
     public void setMorada(String morada) {
         this.morada = morada;
     }
+
+    public static String format(GregorianCalendar calendar) {
+        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
+        fmt.setCalendar(calendar);
+
+        return fmt.format(calendar.getTime());
+    }
+
 }

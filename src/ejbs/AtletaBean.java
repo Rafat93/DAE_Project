@@ -26,6 +26,7 @@ public class AtletaBean {
             if(atleta != null){
                 throw new MyEntityAlreadyExistsException("Atleta com o email: " + email + " já existe");
             }
+            mes=mes-1;
             atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContibuinte,morada);
             em.persist(atleta);
             em.flush();
@@ -48,10 +49,14 @@ public class AtletaBean {
             atleta.setPassword(password);
             atleta.setNome(nome);
             atleta.setEmail(email);
-            atleta.setDataNascimento(new GregorianCalendar(dia,mes,ano));
             atleta.setMorada(morada);
             atleta.setNumContribuinte(numContibuinte);
             atleta.setNumIdentificacaoCivil(numIdentificacaoCivil);
+
+            GregorianCalendar newDataNascimento = new GregorianCalendar(ano,mes,dia);
+            if(!atleta.getDataNascimento().equals(newDataNascimento)){
+                atleta.setDataNascimento(new GregorianCalendar(ano,mes-1,dia));
+            }
 
             em.merge(atleta);
             return atleta;
