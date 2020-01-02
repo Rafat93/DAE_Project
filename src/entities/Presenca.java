@@ -20,6 +20,7 @@ public class Presenca {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "PRESENCA_CODE",referencedColumnName = "CODE",nullable = false)
     private Treino treino;
 
     @NotNull

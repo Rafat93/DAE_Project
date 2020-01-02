@@ -69,4 +69,20 @@ public class EscalaoBean {
             throw new EJBException("ERROR_ENROLLING_ESCALAO_IN_MODALIDADE ---->" + e.getMessage());
         }
     }
+
+    public void delete (String code){
+        try{
+            em.remove(findEscalao(code));
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_ESCALAO");
+        }
+    }
+
+    public Escalao findEscalao (String code) {
+        try{
+            return em.find(Escalao.class,code);
+        }catch (Exception e){
+            throw new EJBException("ERROR_FINDING_ESCALAO", e);
+        }
+    }
 }

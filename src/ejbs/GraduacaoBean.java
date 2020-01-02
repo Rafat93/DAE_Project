@@ -66,4 +66,20 @@ public class GraduacaoBean {
             throw new EJBException("ERROR_ENROLLING_ESCALAO_IN_MODALIDADE ---->" + e.getMessage());
         }
     }
+
+    public void delete (String code){
+        try{
+            em.remove(findGraduacao(code));
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_GRADUACAO");
+        }
+    }
+
+    public Graduacao findGraduacao (String code) {
+        try{
+            return em.find(Graduacao.class,code);
+        }catch (Exception e){
+            throw new EJBException("ERROR_FINDING_GRADUACAO", e);
+        }
+    }
 }

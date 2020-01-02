@@ -5,6 +5,8 @@ import enums.DiasSemana;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NamedQueries({
@@ -42,7 +44,11 @@ public class Treino {
     @NotNull
     private DiasSemana diaSemana;
 
+    @OneToMany(mappedBy="PRESENCA", cascade= CascadeType.ALL)
+    private Set <Presenca> presencas;
+
     public Treino() {
+        this.presencas = new HashSet<>();
     }
 
     public Treino(String code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,Time horaInicio, Time horaFim, DiasSemana diaSemana) {
@@ -54,6 +60,7 @@ public class Treino {
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
         this.diaSemana = diaSemana;
+        this.presencas = new HashSet<>();
     }
 
     public Time getHoraInicio() {
@@ -118,5 +125,19 @@ public class Treino {
 
     public void setEscalao(Escalao escalao) {
         this.escalao = escalao;
+    }
+
+    public Set<Presenca> getPresencas() {
+        return presencas;
+    }
+
+    public void addPresenca (Presenca presenca){
+        if(!presencas.contains(presenca)){
+            presencas.add(presenca);
+        }
+    }
+
+    public void removePresenca (Presenca presenca){
+        presencas.remove(presenca);
     }
 }

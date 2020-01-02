@@ -58,6 +58,21 @@ public class EscalaoController {
         return  Response.status(Response.Status.OK).build();
     }
 
+    @DELETE
+    @Path("{code}")
+    @RolesAllowed({"Administrador"})
+    public Response removeEscalao (@PathParam("code") String code){
+        escalaoBean.delete(code);
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @GET
+    @Path("/{code}")
+    public Response getEscalaoDetails (@PathParam("code") String code) {
+        Escalao escalao = escalaoBean.findEscalao(code);
+        return  Response.status(Response.Status.OK).entity(toDTO(escalao)).build();
+    }
+
     List<EscalaoDTO> toDTOs(List<Escalao> escaloes) {
         return escaloes.stream().map(this::toDTO).collect(Collectors.toList());
     }

@@ -4,6 +4,8 @@ import enums.DiasSemana;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Collection;
+import java.util.HashSet;
 
 public class TreinoDTO implements Serializable {
 
@@ -15,6 +17,7 @@ public class TreinoDTO implements Serializable {
     private Time horaInicio;
     private Time horaFim;
     private DiasSemana diaSemana;
+    private Collection<PresencaDTO> presencas;
 
     public TreinoDTO(String code, String nomeTreinador, String siglaModalidade, String codeGraduacao, String codeEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
         this.code = code;
@@ -25,9 +28,11 @@ public class TreinoDTO implements Serializable {
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
         this.diaSemana = diaSemana;
+        this.presencas = new HashSet<>();
     }
 
     public TreinoDTO() {
+        this.presencas = new HashSet<>();
     }
 
 
@@ -94,5 +99,13 @@ public class TreinoDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Collection<PresencaDTO> getPresencas() {
+        return presencas;
+    }
+
+    public void setPresencas(Collection<PresencaDTO> presencas) {
+        this.presencas = presencas;
     }
 }

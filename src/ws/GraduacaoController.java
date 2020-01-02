@@ -2,6 +2,7 @@ package ws;
 
 import dtos.GraduacaoDTO;
 import ejbs.GraduacaoBean;
+import entities.Escalao;
 import entities.Graduacao;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
@@ -55,6 +56,23 @@ public class GraduacaoController {
         graduacaoBean.enrollGraduacaoInModalidade(code, sigla);
         return  Response.status(Response.Status.OK).build();
     }
+
+    @DELETE
+    @Path("{code}")
+    @RolesAllowed({"Administrador"})
+    public Response removeGraduacao (@PathParam("code") String code){
+        graduacaoBean.delete(code);
+        return Response.status(Response.Status.OK).build();
+    }
+
+    @GET
+    @Path("/{code}")
+    public Response getEscalaoDetails (@PathParam("code") String code) {
+        Graduacao graduacao = graduacaoBean.findGraduacao(code);
+        return  Response.status(Response.Status.OK).entity(toDTO(graduacao)).build();
+    }
+
+
 
     GraduacaoDTO toDTO(Graduacao graduacao) {
         return new GraduacaoDTO(

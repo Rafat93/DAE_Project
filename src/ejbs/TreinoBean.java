@@ -2,6 +2,7 @@ package ejbs;
 
 
 
+import dtos.PresencaDTO;
 import entities.*;
 import enums.DiasSemana;
 import exceptions.MyEntityAlreadyExistsException;
@@ -15,6 +16,7 @@ import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.sql.Time;
 import java.util.List;
+import java.util.Set;
 
 @Stateless(name = "TreinoEJB")
 public class TreinoBean {
@@ -162,6 +164,23 @@ public class TreinoBean {
             }
             modalidade.removeTreino(treino);
         } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_TREINO_FROM_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
+    public Set <Presenca> getListPresencas(String code) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Treino treino = (Treino) em.find(Treino.class, code);
+            if (treino == null) {
+                throw new MyEntityNotFoundException("Treino com o código " + code + " não existe.");
+            }
+            if(treino.getPresencas().isEmpty()){
+                throw new MyIllegalArgumentException("Treino com o código "+code+" não tem presenças.");
+            }
+            return treino.getPresencas();
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_UNROLLING_TREINO_FROM_MODALIDADE ---->" + e.getMessage());
