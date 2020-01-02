@@ -176,9 +176,6 @@ public class TreinoBean {
             if (treino == null) {
                 throw new MyEntityNotFoundException("Treino com o código " + code + " não existe.");
             }
-            if(treino.getPresencas().isEmpty()){
-                throw new MyIllegalArgumentException("Treino com o código "+code+" não tem presenças.");
-            }
             return treino.getPresencas();
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
