@@ -31,6 +31,7 @@ public class EscalaoController {
     @GET
     @Path("/")
     public List<EscalaoDTO> all() {
+        System.out.println("CONTROLLER - Buscar ESCALOES");
         return toDTOs(escalaoBean.all());
     }
 

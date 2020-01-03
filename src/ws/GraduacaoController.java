@@ -31,6 +31,7 @@ public class GraduacaoController {
 
     @GET
     @Path("/")
+    @RolesAllowed({"Administrador"})
     public List<GraduacaoDTO> all(){
         return toDTOs(graduacaoBean.all());
     }
@@ -53,15 +54,15 @@ public class GraduacaoController {
     @PUT
     @Path("{code}/modalidade/enroll/{sigla}")
     @RolesAllowed({"Administrator"})
-    public Response enrollEscalaoInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Response enrollGraduacaoInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         graduacaoBean.enrollGraduacaoInModalidade(code, sigla);
         return  Response.status(Response.Status.OK).build();
     }
 
     @PUT
-    @Path("{code}/modalidade/enroll/{sigla}")
+    @Path("{code}/modalidade/unroll/{sigla}")
     @RolesAllowed({"Administrator"})
-    public Response unrollEscalaoFromModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public Response unrollGraduacaoFromModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         graduacaoBean.unrollGraduacaoFromModalidade(code, sigla);
         return  Response.status(Response.Status.OK).build();
     }

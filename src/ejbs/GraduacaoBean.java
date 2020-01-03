@@ -20,7 +20,6 @@ public class GraduacaoBean {
 
     public List<Graduacao> all(){
         try{
-            System.out.println("Buscar todas as graduações");
             return (List<Graduacao>) em.createNamedQuery("getAllGraduacoes").getResultList();
         }catch (Exception e) {
             throw new EJBException("ERROR_RETRIEVING_GRADUACOES", e);
