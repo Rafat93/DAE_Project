@@ -57,6 +57,14 @@ public class GraduacaoController {
         return  Response.status(Response.Status.OK).build();
     }
 
+    @PUT
+    @Path("{code}/modalidade/enroll/{sigla}")
+    @RolesAllowed({"Administrator"})
+    public Response unrollEscalaoFromModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        graduacaoBean.unrollGraduacaoFromModalidade(code, sigla);
+        return  Response.status(Response.Status.OK).build();
+    }
+
     @DELETE
     @Path("{code}")
     @RolesAllowed({"Administrador"})
