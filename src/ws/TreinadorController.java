@@ -169,6 +169,16 @@ public class TreinadorController {
         return getTreinadorTreinos(email);
     }
 
+    @GET
+    @Path("{email}/modalidades_livres")
+    @RolesAllowed({"Administrador"})
+    public Response getModalidadesLivres(@PathParam("email")String email) throws MyEntityNotFoundException {
+        List <Modalidade> modalidades = treinadorBean.getModalidadesSemTreinador(email);
+        return  Response.status(Response.Status.OK)
+                .entity(modalidadeToDTOs(modalidades))
+                .build();
+    }
+
     TreinadorDTO toDTO(Treinador treinador){
         TreinadorDTO treinadorDTO = new TreinadorDTO(
                 treinador.getNumeroCedula(),

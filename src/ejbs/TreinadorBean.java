@@ -9,16 +9,21 @@ import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 
 @Stateless(name = "TreinadorEJB")
 public class TreinadorBean {
+
+    @EJB
+    private ModalidadeBean modalidadeBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -156,7 +161,7 @@ public class TreinadorBean {
 
     public void unrollTreinadorFromTreino(String email, int code) throws MyEntityNotFoundException, MyIllegalArgumentException {
         try {
-            Treinador treinador = (Treinador) em.find(Treinador.class, email);
+            Treinador treinador = em.find(Treinador.class, email);
             if (treinador == null) {
                 throw new MyEntityNotFoundException("Treinador com email " + email + " não existe.");
             }
@@ -171,6 +176,28 @@ public class TreinadorBean {
             treino.setTreinador(null);
 
         } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_TREINADOR_FROM_TREINO ---->" + e.getMessage());
+        }
+    }
+
+    public List <Modalidade> getModalidadesSemTreinador (String email) throws MyEntityNotFoundException {
+        try {
+            Treinador treinador = em.find(Treinador.class, email);
+            if (treinador == null) {
+                throw new MyEntityNotFoundException("Treinador com email " + email + " não existe.");
+            }
+            List <Modalidade> modalidades = modalidadeBean.all();
+            List <Modalidade> modalidadesDoTreinador = treinador.getModalidades();
+            List <Modalidade> modalidadesSemTreinador = new LinkedList<>();
+            for(Modalidade modalidade : modalidades){
+                if(!modalidadesDoTreinador.contains(modalidade)){
+                    modalidadesSemTreinador.add(modalidade);
+                }
+            }
+            return modalidadesSemTreinador;
+        } catch (MyEntityNotFoundException e) {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_UNROLLING_TREINADOR_FROM_TREINO ---->" + e.getMessage());
