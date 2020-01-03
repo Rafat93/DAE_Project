@@ -84,6 +84,7 @@ public class TreinadorBean {
             if (treinador == null) {
                 throw new MyEntityNotFoundException("Treinador com o email: " + email + " já existe");
             }
+            removeFromModalidades(email);
             em.remove(findTreinador(email));
         }catch (MyEntityNotFoundException e) {
             throw e;
@@ -201,6 +202,23 @@ public class TreinadorBean {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_UNROLLING_TREINADOR_FROM_TREINO ---->" + e.getMessage());
+        }
+    }
+
+    public void removeFromModalidades (String email) throws MyEntityNotFoundException {
+        try {
+            Treinador treinador = em.find(Treinador.class,email);
+            if (treinador == null) {
+                throw new MyEntityNotFoundException("Treinador com o email: " + email + " já existe");
+            }
+            List <Modalidade> modalidades = treinador.getModalidades();
+            for(Modalidade modalidade:modalidades){
+                modalidade.removeTreinador(treinador);
+            }
+        }catch (MyEntityNotFoundException e) {
+            throw e;
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_TREINADOR",e);
         }
     }
 }
