@@ -61,6 +61,29 @@ public class ProdutoController {
                 .build();
     }
 
+    @PUT
+    @Path("{code}")
+    @RolesAllowed({"Administrador"})
+    public Response update(@PathParam("code") String code, ProdutoDTO produtoDTO) throws MyEntityNotFoundException {
+        TipoProduto tipoProduto = tipoProdutoBean.findTipoProduto(produtoDTO.getTipo());
+        if(tipoProduto != null) {
+            produtoBean.update(
+                    produtoDTO.getCode(),
+                    tipoProduto,
+                    produtoDTO.getDescricao(),
+                    produtoDTO.getPreco(),
+                    produtoDTO.getStock()
+            );
+            Produto produto = produtoBean.findProduto(code);
+            return Response.status(Response.Status.OK).
+                    entity(toDTO(produto)).
+                    build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Tipo Produto com o nome  "+produtoDTO.getTipo()+ " não existe")
+                .build();
+    }
+
     @GET
     @Path("/{code}")
     public Response getProdutoDetails (@PathParam("code") String code) {

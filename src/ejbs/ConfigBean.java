@@ -61,6 +61,7 @@ public class ConfigBean {
 
             atletaBean.enrollAtletaInModalidade("jose.silva@ipleiria.com", "Atl");
             atletaBean.enrollAtletaInModalidade("maggs@ipleiria.com", "Nat");
+
             System.out.println("CREATING TREINADORES");
             treinadorBean.create("Rui Norte","123","rui@mail.com",25365);
             treinadorBean.create("Ana Margarida Silva","123","margarida-silva@mail.com",22343);
