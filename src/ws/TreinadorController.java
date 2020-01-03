@@ -137,7 +137,7 @@ public class TreinadorController {
 
     @PUT
     @Path("{email}/modalidade/enroll/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response enrollTreinadorInModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinadorBean.enrollTreinadorInModalidade(email, sigla);
         return getTreinadorModalidades(email);
@@ -145,7 +145,7 @@ public class TreinadorController {
 
     @PUT
     @Path("{email}/modalidade/unroll/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response unrollTreinadorFromModalidade(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinadorBean.unrollTreinadorFromModalidade(email, sigla);
         return getTreinadorModalidades(email);
@@ -153,7 +153,7 @@ public class TreinadorController {
 
     @PUT
     @Path("{email}/treino/enroll/{code}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response enrollTreinadorInTreino(@PathParam("email") String email, @PathParam("code") int code)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinadorBean.enrollTreinadorInTreino(email, code);
         return getTreinadorTreinos(email);
@@ -161,7 +161,7 @@ public class TreinadorController {
 
     @PUT
     @Path("{email}/modalidade/unroll/{code}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response unrollTreinadorInTreino(@PathParam("email") String email, @PathParam("code") int code)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinadorBean.unrollTreinadorFromTreino(email, code);
         return getTreinadorTreinos(email);

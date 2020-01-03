@@ -1,5 +1,6 @@
 package dtos;
 
+import ejbs.TipoProdutoBean;
 import entities.TipoProduto;
 
 import javax.persistence.Id;
@@ -8,7 +9,7 @@ import java.io.Serializable;
 public class ProdutoDTO implements Serializable {
 
     private String code;
-    private TipoProduto tipo;
+    private String tipo;
     private String descricao;
     private double preco;
     private int stock;
@@ -16,7 +17,7 @@ public class ProdutoDTO implements Serializable {
     public ProdutoDTO() {
     }
 
-    public ProdutoDTO(String code,TipoProduto tipo, String descricao, double preco,int stock) {
+    public ProdutoDTO(String code, String tipo, String descricao, double preco,int stock) {
         this.code = code;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -24,12 +25,11 @@ public class ProdutoDTO implements Serializable {
         this.stock = stock;
     }
 
-
-    public TipoProduto getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoProduto tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

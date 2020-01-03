@@ -3,7 +3,9 @@ package ws;
 import dtos.ModalidadeDTO;
 import dtos.ProdutoDTO;
 import ejbs.ProdutoBean;
+import ejbs.TipoProdutoBean;
 import entities.Produto;
+import entities.TipoProduto;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 
@@ -25,6 +27,9 @@ public class ProdutoController {
     @EJB
     private ProdutoBean produtoBean;
 
+    @EJB
+    private TipoProdutoBean tipoProdutoBean;
+
     @Context
     private SecurityContext securityContext;
 
@@ -38,16 +43,22 @@ public class ProdutoController {
     @Path("/")
     @RolesAllowed({"Administrador"})
     public Response createNewProduto(ProdutoDTO produtoDTO) throws MyEntityAlreadyExistsException {
-        Produto produto = produtoBean.create(
-                produtoDTO.getCode(),
-                produtoDTO.getTipo(),
-                produtoDTO.getDescricao(),
-                produtoDTO.getPreco(),
-                produtoDTO.getStock()
-        );
-        return Response.status(Response.Status.CREATED).
-                entity(toDTO(produto)).
-                build();
+        TipoProduto tipoProduto = tipoProdutoBean.findTipoProduto(produtoDTO.getTipo());
+        if(tipoProduto != null) {
+            Produto produto = produtoBean.create(
+                    produtoDTO.getCode(),
+                    tipoProduto,
+                    produtoDTO.getDescricao(),
+                    produtoDTO.getPreco(),
+                    produtoDTO.getStock()
+            );
+            return Response.status(Response.Status.CREATED).
+                    entity(toDTO(produto)).
+                    build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Tipo Produto com o nome  "+produtoDTO.getTipo()+ " não existe")
+                .build();
     }
 
     @GET
@@ -72,7 +83,7 @@ public class ProdutoController {
     ProdutoDTO toDTO(Produto produto){
         return new ProdutoDTO(
                 produto.getCode(),
-                produto.getTipo(),
+                produto.getTipo().getNome(),
                 produto.getDescricao(),
                 produto.getPrecoEmEuros(),
                 produto.getStock()
