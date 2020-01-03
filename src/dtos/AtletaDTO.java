@@ -1,9 +1,8 @@
 package dtos;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
+import static utils.Utilitarios.*;
 
 public class AtletaDTO implements Serializable {
     private long numeroSocio;
@@ -112,11 +111,5 @@ public class AtletaDTO implements Serializable {
         this.morada = morada;
     }
 
-    public static String format(GregorianCalendar calendar) {
-        SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
-        fmt.setCalendar(calendar);
-
-        return fmt.format(calendar.getTime());
-    }
 
 }

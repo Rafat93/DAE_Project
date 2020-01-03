@@ -2,11 +2,13 @@ package dtos;
 
 import java.util.GregorianCalendar;
 
+import static utils.Utilitarios.format;
+
 public class InscricaoDTO {
 
     private String code;
     private String nome;
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
     private long numIdentificacaoCivil;
     private long numContribuinte;
     private String morada;
@@ -19,7 +21,7 @@ public class InscricaoDTO {
     public InscricaoDTO(String code, String nome, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContribuinte, String morada, String email) {
         this.code = code;
         this.nome = nome;
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = format(dataNascimento);
         this.numIdentificacaoCivil = numIdentificacaoCivil;
         this.numContribuinte = numContribuinte;
         this.morada = morada;
@@ -43,11 +45,11 @@ public class InscricaoDTO {
         this.nome = nome;
     }
 
-    public GregorianCalendar getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -89,5 +91,9 @@ public class InscricaoDTO {
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
     }
 }

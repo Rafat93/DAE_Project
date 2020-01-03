@@ -16,10 +16,11 @@ import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.security.Principal;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.text.ParseException;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static utils.Utilitarios.format;
 
 @Path("/socios") // relative url web path of this controller
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
@@ -41,15 +42,16 @@ public class SocioController {
 
     @POST
     @Path("/")
-    public Response createNewSocio (SocioDTO socioDTO) throws MyEntityAlreadyExistsException, MyConstraintViolationException, MyIllegalArgumentException {
+    public Response createNewSocio (SocioDTO socioDTO) throws MyEntityAlreadyExistsException, MyConstraintViolationException, MyIllegalArgumentException, ParseException {
+        GregorianCalendar dataNascimento = format(socioDTO.getDataNascimento());
         Socio socio = socioBean.create(
                 socioDTO.getNumeroSocio(),
                 socioDTO.getNome(),
                 socioDTO.getEmail(),
                 socioDTO.getPassword(),
-                socioDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                socioDTO.getDataNascimento().get(Calendar.MONTH),
-                socioDTO.getDataNascimento().get(Calendar.YEAR),
+                dataNascimento.get(Calendar.DAY_OF_MONTH),
+                dataNascimento.get(Calendar.MONTH),
+                dataNascimento.get(Calendar.YEAR),
                 socioDTO.getNumIdentificacaoCivil(),
                 socioDTO.getNumContribuinte(),
                 socioDTO.getMorada());
@@ -58,14 +60,15 @@ public class SocioController {
 
     @PUT
     @Path("{email}")
-    public Response updateSocio (@PathParam("email") String email,SocioDTO socioDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException, MyEntityAlreadyExistsException {
+    public Response updateSocio (@PathParam("email") String email,SocioDTO socioDTO) throws MyEntityNotFoundException, MyConstraintViolationException, MyIllegalArgumentException, MyEntityAlreadyExistsException, ParseException {
+        GregorianCalendar dataNascimento = format(socioDTO.getDataNascimento());
         socioBean.update(socioDTO.getNumeroSocio(),
                 socioDTO.getNome(),
                 socioDTO.getEmail(),
                 socioDTO.getPassword(),
-                socioDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                socioDTO.getDataNascimento().get(Calendar.MONTH),
-                socioDTO.getDataNascimento().get(Calendar.YEAR),
+                dataNascimento.get(Calendar.DAY_OF_MONTH),
+                dataNascimento.get(Calendar.MONTH),
+                dataNascimento.get(Calendar.YEAR),
                 socioDTO.getNumIdentificacaoCivil(),
                 socioDTO.getNumContribuinte(),
                 socioDTO.getMorada());

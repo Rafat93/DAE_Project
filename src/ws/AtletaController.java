@@ -19,9 +19,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.security.Principal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static utils.Utilitarios.format;
 
 @Path("/atletas") // relative url web path of this controller
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
@@ -214,13 +215,4 @@ public class AtletaController {
     List<ModalidadeDTO> modalidadeToDTOs(Collection<Modalidade> modalidades){
         return modalidades.stream().map(this::atletaToDTO).collect(Collectors.toList());
     }
-
-    public static GregorianCalendar format(String format) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-        Date date = df.parse(format);
-        GregorianCalendar cal = new GregorianCalendar();
-        cal.setTime(date);
-        return cal;
-    }
-
 }

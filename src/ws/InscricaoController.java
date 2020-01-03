@@ -13,9 +13,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static utils.Utilitarios.format;
 
 @Path("/inscricoes") // relative url web path of this controller
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
@@ -43,14 +47,15 @@ public class InscricaoController {
     @POST
     @Path("/")
     @RolesAllowed({"Administrador"})
-    public Response createNewInscricao (InscricaoDTO inscricaoDTO) throws MyEntityAlreadyExistsException{
+    public Response createNewInscricao (InscricaoDTO inscricaoDTO) throws MyEntityAlreadyExistsException, ParseException {
+        GregorianCalendar dataNascimento = format(inscricaoDTO.getDataNascimento());
         inscricaoBean.create(
                 inscricaoDTO.getCode(),
                 inscricaoDTO.getNome(),
                 inscricaoDTO.getEmail(),
-                inscricaoDTO.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                inscricaoDTO.getDataNascimento().get(Calendar.MONTH),
-                inscricaoDTO.getDataNascimento().get(Calendar.YEAR),
+                dataNascimento.get(Calendar.DAY_OF_MONTH),
+                dataNascimento.get(Calendar.MONTH),
+                dataNascimento.get(Calendar.YEAR),
                 inscricaoDTO.getNumIdentificacaoCivil(),
                 inscricaoDTO.getNumContribuinte(),
                 inscricaoDTO.getMorada()
@@ -88,7 +93,7 @@ public class InscricaoController {
     }
 
     InscricaoDTO toDTO(Inscricao inscricao){
-        InscricaoDTO inscricaoDTO = new InscricaoDTO(
+        return new InscricaoDTO(
           inscricao.getCode(),
           inscricao.getNome(),
           inscricao.getDataNascimento(),
@@ -97,7 +102,6 @@ public class InscricaoController {
           inscricao.getMorada(),
           inscricao.getEmail()
         );
-        return inscricaoDTO;
     }
 
     List <InscricaoDTO> toDTOs (List <Inscricao> inscricoes){

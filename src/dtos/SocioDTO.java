@@ -1,8 +1,11 @@
 package dtos;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.*;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import static utils.Utilitarios.format;
 
 public class SocioDTO implements Serializable {
 
@@ -14,7 +17,7 @@ public class SocioDTO implements Serializable {
 
     private String password;
 
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
 
     private List<ModalidadeDTO> modalidades;
 
@@ -34,7 +37,7 @@ public class SocioDTO implements Serializable {
         this.nome = nome;
         this.email = email;
         this.password = password;
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = format(dataNascimento);
         this.numIdentificacaoCivil=numIdentificacaoCivil;
         this.numContribuinte=numContribuinte;
         this.morada=morada;
@@ -72,11 +75,11 @@ public class SocioDTO implements Serializable {
         this.password = password;
     }
 
-    public GregorianCalendar getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -111,4 +114,6 @@ public class SocioDTO implements Serializable {
     public void setMorada(String morada) {
         this.morada = morada;
     }
+
+
 }

@@ -53,6 +53,7 @@ public class AtletaBean {
             atleta.setNumContribuinte(numContibuinte);
             atleta.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
+
             GregorianCalendar newDataNascimento = new GregorianCalendar(ano,mes,dia);
             if(!atleta.getDataNascimento().equals(newDataNascimento)){
                 atleta.setDataNascimento(new GregorianCalendar(ano,mes-1,dia));

@@ -2,7 +2,6 @@ package ws;
 
 import dtos.*;
 import ejbs.ModalidadeBean;
-import ejbs.TreinadorBean;
 import entities.*;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;

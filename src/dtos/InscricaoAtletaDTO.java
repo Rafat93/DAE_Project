@@ -4,11 +4,13 @@ import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import static utils.Utilitarios.format;
+
 public class InscricaoAtletaDTO {
 
     private String code;
     private String nome;
-    private GregorianCalendar dataNascimento;
+    private String dataNascimento;
     private long numIdentificacaoCivil;
     private long numContribuinte;
     private String morada;
@@ -26,7 +28,7 @@ public class InscricaoAtletaDTO {
         this();
         this.code = code;
         this.nome = nome;
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = format(dataNascimento);
         this.numIdentificacaoCivil = numIdentificacaoCivil;
         this.numContribuinte = numContribuinte;
         this.morada = morada;
@@ -50,11 +52,11 @@ public class InscricaoAtletaDTO {
         this.nome = nome;
     }
 
-    public GregorianCalendar getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(GregorianCalendar dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
