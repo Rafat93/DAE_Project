@@ -9,6 +9,7 @@ import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless(name = "TipoProdutoEJB")
 public class TipoProdutoBean {
@@ -36,6 +37,14 @@ public class TipoProdutoBean {
             return em.find(TipoProduto.class,nome);
         }catch (Exception e){
             throw new EJBException("ERROR_FINDING_TIPO_PRODUTO", e);
+        }
+    }
+
+    public List<TipoProduto> all() {
+        try {
+            return (List<TipoProduto>) em.createNamedQuery("getAllTipoProdutos").getResultList();
+        }catch (Exception e) {
+            throw new EJBException("ERROR_RETRIEVING_TIPO_PRODUTOS", e);
         }
     }
 }

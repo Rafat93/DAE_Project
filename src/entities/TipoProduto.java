@@ -1,12 +1,16 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "getAllTipoProdutos",
+                query = "SELECT t FROM TipoProduto t ORDER BY t.nome" // JPQL
+        )
+})
 public class TipoProduto  {
 
     @Id

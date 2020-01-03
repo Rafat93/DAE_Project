@@ -288,10 +288,10 @@ public class ModalidadeController {
     EscalaoDTO escalaoToDTO (Escalao escalao){
         return new EscalaoDTO(
                 escalao.getCode(),
-            escalao.getNome(),
-            escalao.getIdadeMin(),
-            escalao.getIdadeMax(),
-            escalao.getModalidade().getSigla()
+                escalao.getNome(),
+                escalao.getIdadeMin(),
+                escalao.getIdadeMax(),
+                escalao.getModalidade().getSigla()
         );
     }
 
@@ -300,7 +300,10 @@ public class ModalidadeController {
     }
 
     GraduacaoDTO graduacaoToDTO (Graduacao graduacao){
-        return new GraduacaoDTO(graduacao.getCode(),graduacao.getNome(),graduacao.getModalidade().getSigla());
+        return new GraduacaoDTO(
+                graduacao.getCode(),
+                graduacao.getNome(),
+                graduacao.getModalidade().getSigla());
     }
 
     List <GraduacaoDTO> graduacaoToDTOs (List <Graduacao> graduacoes){
