@@ -63,6 +63,10 @@ public class ConfigBean {
             atletaBean.enrollAtletaInModalidade("maggs@ipleiria.com", "Nat");
             System.out.println("CREATING TREINADORES");
             treinadorBean.create("Rui Norte","123","rui@mail.com",25365);
+            treinadorBean.create("Ana Margarida Silva","123","margarida-silva@mail.com",22343);
+            treinadorBean.create("Manuel Oliveira","123","oliveira-manuel@mail.com",25555);
+            treinadorBean.create("João Filipe Moleira","123","jfmoleira@mail.com",25765);
+            treinadorBean.create("Filipa Margarida Mendes","123","m.filipa.m@mail.com",25305);
 
             System.out.println("CREATING SOCIOS");
             socioBean.create(4,"Carlos Silva","123","carlos.silva@mail.com",12,3,2000,15896327,123456789,"Testing");

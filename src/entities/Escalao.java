@@ -20,16 +20,16 @@ public class Escalao {
     @Id
     private String code;
 
-    @NotNull
+    //@NotNull
     private String nome;
 
-    @NotNull
+   // @NotNull
     private int idadeMin;
 
-    @NotNull
+    //@NotNull
     private int idadeMax;
 
-    @NotNull
+    //@NotNull
     @ManyToOne(cascade = CascadeType.REMOVE)
     private Modalidade modalidade;
 
