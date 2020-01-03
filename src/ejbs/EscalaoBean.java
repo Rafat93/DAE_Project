@@ -70,6 +70,27 @@ public class EscalaoBean {
         }
     }
 
+    public void unrollEscalaoFromModalidade( String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try{
+            Escalao escalao = em.find(Escalao.class, code);
+            if(escalao == null){
+                throw new MyEntityNotFoundException("Escalão com o codigo "+code+" não existe");
+            }
+            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
+            }
+            if(!modalidade.getEscaloes().contains(escalao)){
+                throw new MyIllegalArgumentException("Escalão is already unrolled from modalidade with code " + sigla);
+            }
+            modalidade.removeEscalao(escalao);
+        }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw  e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_ESCALAO_FROM_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
     public void delete (String code){
         try{
             em.remove(findEscalao(code));
