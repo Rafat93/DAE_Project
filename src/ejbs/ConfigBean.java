@@ -41,6 +41,12 @@ public class ConfigBean {
     @EJB
     private InscricaoBean inscricaoBean;
 
+    @EJB
+    private EscalaoBean escalaoBean;
+
+    @EJB
+    private  GraduacaoBean graduacaoBean;
+
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     public ConfigBean() {
@@ -54,6 +60,13 @@ public class ConfigBean {
             modalidadeBean.create("Atl","Atletismo","2019/2020");
             modalidadeBean.create("Nat", "Natação", "2019/2020");
 
+            System.out.println("CREATING ESCALOES");
+            escalaoBean.create("Inf","Infantil",10,12,"Atl");
+            System.out.println("CREATING GRADUAÇOES");
+            graduacaoBean.create("Inf1","Infantil 1","Atl");
+            System.out.println("ENROLLING ESCALOES AND GRADUAÇOES");
+            escalaoBean.enrollEscalaoInModalidade("Inf","Atl");
+            graduacaoBean.enrollGraduacaoInModalidade("Inf1","Atl");
             System.out.println("CREATING ATLETAS");
             atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001,15891457,456456789,"Testing");
             atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002,11566327,987456789,"Testing");

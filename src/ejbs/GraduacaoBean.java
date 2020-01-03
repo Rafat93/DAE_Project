@@ -77,8 +77,8 @@ public class GraduacaoBean {
             if (modalidade == null) {
                 throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
             }
-            if (modalidade.getGraduacoes().contains(graduacao)) {
-                throw new MyIllegalArgumentException("Escalão is already enrolled in modalidade with code " + sigla);
+            if (!modalidade.getGraduacoes().contains(graduacao)) {
+                throw new MyIllegalArgumentException("Graduação is already unrolled in modalidade with code " + sigla);
             }
             modalidade.removeGraduacao(graduacao);
             delete(code);

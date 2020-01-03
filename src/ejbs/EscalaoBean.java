@@ -76,7 +76,7 @@ public class EscalaoBean {
             if(escalao == null){
                 throw new MyEntityNotFoundException("Escalão com o codigo "+code+" não existe");
             }
-            Modalidade modalidade = (Modalidade) em.find(Modalidade.class,sigla);
+            Modalidade modalidade = em.find(Modalidade.class,sigla);
             if (modalidade == null) {
                 throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
             }
