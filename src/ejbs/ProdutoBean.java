@@ -49,7 +49,6 @@ public class ProdutoBean {
             if(produto == null){
                 throw new MyEntityNotFoundException("Produto com o codigo "+code+" não  existe");
             }
-            em.lock(produto, LockModeType.OPTIMISTIC);
             produto.setDescricao(descricao);
             produto.setTipo(tipo);
             if(preco <= 0){
@@ -60,8 +59,6 @@ public class ProdutoBean {
                 throw new NumberFormatException("Stock tem de ser maior que 0");
             }
             produto.setStock(stock);
-
-            em.merge(produto);
             return produto;
         }catch(MyEntityNotFoundException e){
             throw e;

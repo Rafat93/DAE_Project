@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
         @NamedQuery(
                 name = "getAllGraduacoes",
-                query = "SELECT e FROM Graduacao e ORDER BY e.code" // JPQL
+                query = "SELECT g FROM Graduacao g ORDER BY g.code" // JPQL
         )
 })
 public class Graduacao {

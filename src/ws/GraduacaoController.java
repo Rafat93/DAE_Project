@@ -44,6 +44,7 @@ public class GraduacaoController {
                 graduacaoDTO.getNome(),
                 graduacaoDTO.getSiglaModalidade()
         );
+        System.out.println("Criou Graduação");
         return Response.status(Response.Status.CREATED).
                 entity(toDTO(graduacao)).
                 build();
