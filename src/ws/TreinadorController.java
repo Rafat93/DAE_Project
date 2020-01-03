@@ -160,7 +160,7 @@ public class TreinadorController {
     }
 
     @PUT
-    @Path("{email}/modalidade/unroll/{code}")
+    @Path("{email}/treino/unroll/{code}")
     @RolesAllowed({"Administrador"})
     public Response unrollTreinadorInTreino(@PathParam("email") String email, @PathParam("code") int code)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinadorBean.unrollTreinadorFromTreino(email, code);
