@@ -70,7 +70,7 @@ public class EscalaoBean {
         }
     }
 
-    public void unrollEscalaoFromModalidade( String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+    public void unrollEscalaoFromModalidade(String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
         try{
             Escalao escalao = em.find(Escalao.class, code);
             if(escalao == null){
@@ -84,6 +84,7 @@ public class EscalaoBean {
                 throw new MyIllegalArgumentException("Escalão is already unrolled from modalidade with code " + sigla);
             }
             modalidade.removeEscalao(escalao);
+            delete(code);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw  e;
         } catch (Exception e) {

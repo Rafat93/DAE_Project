@@ -67,6 +67,28 @@ public class GraduacaoBean {
         }
     }
 
+    public void unrollGraduacaoFromModalidade( String code, String sigla) throws MyEntityNotFoundException, MyIllegalArgumentException {
+        try {
+            Graduacao graduacao = em.find(Graduacao.class, code);
+            if (graduacao == null) {
+                throw new MyEntityNotFoundException("Graduação com o codigo " + code + " não existe");
+            }
+            Modalidade modalidade = em.find(Modalidade.class, sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade with code " + sigla + " not found.");
+            }
+            if (modalidade.getGraduacoes().contains(graduacao)) {
+                throw new MyIllegalArgumentException("Escalão is already enrolled in modalidade with code " + sigla);
+            }
+            modalidade.removeGraduacao(graduacao);
+            delete(code);
+        } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_ENROLLING_ESCALAO_IN_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
     public void delete (String code){
         try{
             em.remove(findGraduacao(code));
