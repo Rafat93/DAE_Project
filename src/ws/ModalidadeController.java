@@ -2,6 +2,7 @@ package ws;
 
 import dtos.*;
 import ejbs.ModalidadeBean;
+import ejbs.TreinadorBean;
 import entities.*;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
@@ -179,6 +180,15 @@ public class ModalidadeController {
                 .build();
     }
 
+    @GET
+    @Path("{sigla}/treinadores_livres")
+    @RolesAllowed({"Administrador"})
+    public Response getTreinadoresLivres(@PathParam("sigla")String sigla) throws MyEntityNotFoundException {
+        List <Treinador> treinadores = modalidadeBean.getTreinadoresSemModalidade(sigla);
+        return  Response.status(Response.Status.OK)
+                .entity(treinadoresToDTOs(treinadores))
+                .build();
+    }
 
     ModalidadeDTO toDTO (Modalidade modalidade){
         ModalidadeDTO modalidadeDTO = new ModalidadeDTO(

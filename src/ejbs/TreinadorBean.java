@@ -52,14 +52,11 @@ public class TreinadorBean {
             if(treinador == null){
                 throw new MyEntityNotFoundException("Treinador não encontrado!");
             }
-            em.lock(treinador, LockModeType.OPTIMISTIC);
-
             treinador.setNumeroCedula(numeroCedula);
             treinador.setNome(nome);
             treinador.setEmail(email);
             treinador.setPassword(password);
 
-            em.merge(treinador);
             return  treinador;
         }catch(MyEntityNotFoundException e){
             throw e;

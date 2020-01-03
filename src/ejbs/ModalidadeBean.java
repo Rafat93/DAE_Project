@@ -1,19 +1,25 @@
 package ejbs;
 
 import entities.Modalidade;
+import entities.Treinador;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
+import java.util.LinkedList;
 import java.util.List;
 
 @Stateless(name = "ModalidadeEJB")
 public class ModalidadeBean {
+
+    @EJB
+    private TreinadorBean treinadorBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -81,6 +87,28 @@ public class ModalidadeBean {
                 throw new MyEntityNotFoundException("Modalidade com a sigla: " + sigla + " não existe");
             }
             em.remove(findModalidade(sigla));
+        }catch (MyEntityNotFoundException e) {
+            throw e;
+        }catch (Exception e){
+            throw new EJBException("ERROR_DELETING_MODALIDADE",e);
+        }
+    }
+
+    public List <Treinador> getTreinadoresSemModalidade(String sigla) throws MyEntityNotFoundException {
+        try {
+            Modalidade modalidade = em.find(Modalidade.class, sigla);
+            if (modalidade == null) {
+                throw new MyEntityNotFoundException("Modalidade com a sigla: " + sigla + " não existe");
+            }
+            List<Treinador> treinadores = treinadorBean.all();
+            List<Treinador> treinadoresDaModalidade = modalidade.getTreinadores();
+            List<Treinador> treinadoresSemModalidade = new LinkedList<>();
+            for (Treinador treinador : treinadores) {
+                if(!treinadoresDaModalidade.contains(treinador)){
+                    treinadoresSemModalidade.add(treinador);
+                }
+            }
+            return treinadoresSemModalidade;
         }catch (MyEntityNotFoundException e) {
             throw e;
         }catch (Exception e){
