@@ -101,6 +101,7 @@ public class TreinadorBean {
                 throw new MyIllegalArgumentException("Treinador is already enrolled in modalidade with code " + sigla);
             }
             modalidade.addTreinador(treinador);
+            treinador.addModalidade(modalidade);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
@@ -122,6 +123,7 @@ public class TreinadorBean {
                 throw new MyIllegalArgumentException("Treinador não existe na Modalidade com a sigla " + sigla);
             }
             modalidade.removeTreinador(treinador);
+            treinador.removeModalidade(modalidade);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
