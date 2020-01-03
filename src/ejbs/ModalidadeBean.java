@@ -48,13 +48,13 @@ public class ModalidadeBean {
                 throw new MyEntityNotFoundException("Modalidade não encontrada!");
             }
 
-            em.lock(modalidade, LockModeType.OPTIMISTIC);
+
 
             modalidade.setSigla(sigla);
             modalidade.setNome(nome);
             modalidade.setEpocaDesportiva(epocaDesportiva);
 
-            em.merge(modalidade);
+
 
             return modalidade;
         }catch(MyEntityNotFoundException e){
