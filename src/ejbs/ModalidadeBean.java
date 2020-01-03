@@ -1,7 +1,6 @@
 package ejbs;
 
-import entities.Modalidade;
-import entities.Treinador;
+import entities.*;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
@@ -20,6 +19,15 @@ public class ModalidadeBean {
 
     @EJB
     private TreinadorBean treinadorBean;
+
+    @EJB
+    private EscalaoBean escalaoBean;
+
+    @EJB
+    private GraduacaoBean graduacaoBean;
+
+    @EJB
+    private TreinoBean treinoBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -86,11 +94,38 @@ public class ModalidadeBean {
             if(modalidade == null){
                 throw new MyEntityNotFoundException("Modalidade com a sigla: " + sigla + " não existe");
             }
+            //eliminar os escalões associados
+            deleteEscaloes(modalidade);
+            //eliminar as graduações associadas
+            deleteGraduacoes(modalidade);
+            //eliminar treinos associados
+            deleteTreinos(modalidade);
             em.remove(findModalidade(sigla));
         }catch (MyEntityNotFoundException e) {
             throw e;
         }catch (Exception e){
             throw new EJBException("ERROR_DELETING_MODALIDADE",e);
+        }
+    }
+
+    private void deleteTreinos(Modalidade modalidade) {
+        List <Treino> treinos = modalidade.getTreinos();
+        for(Treino treino : treinos){
+            treinoBean.delete(treino.getCode());
+        }
+    }
+
+    private void deleteGraduacoes(Modalidade modalidade) {
+        List <Graduacao> graduacoes = modalidade.getGraduacoes();
+        for (Graduacao graduacao :graduacoes) {
+            graduacaoBean.delete(graduacao.getCode());
+        }
+    }
+
+    private void deleteEscaloes(Modalidade modalidade) {
+        List <Escalao> escaloes = modalidade.getEscaloes();
+        for (Escalao escalao :escaloes) {
+            escalaoBean.delete(escalao.getCode());
         }
     }
 
