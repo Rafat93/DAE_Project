@@ -90,6 +90,9 @@ public class AtletaBean {
             if (atleta == null) {
                 throw new MyEntityNotFoundException("Atleta com o email: " + email + " não existe");
             }
+            for(Modalidade modalidade:atleta.getModalidades()){
+                unrollAtletaFromModalidade(email,modalidade.getSigla());
+            }
             em.remove(findAtleta(email));
         }catch (MyEntityNotFoundException e) {
             throw e;
@@ -112,6 +115,7 @@ public class AtletaBean {
                 throw new MyIllegalArgumentException("Atleta is already enrolled in modalidade with code " + sigla);
             }
             modalidade.addAtleta(atleta);
+            atleta.addModalidade(modalidade);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {

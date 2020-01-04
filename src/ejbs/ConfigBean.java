@@ -79,9 +79,9 @@ public class ConfigBean {
             graduacaoBean.enrollGraduacaoInModalidade("Inf1","Atl");
 
             System.out.println("CREATING ATLETAS");
-            atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001,15891457,456456789,"Testing");
-            atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002,11566327,987456789,"Testing");
-            atletaBean.create(3,"Margarida Maria", "maggs@ipleiria.com","123", 15, 3, 1987,11563427,983456789,"Rua da Paz");
+            Atleta atleta1 = atletaBean.create(1,"Jose Silva", "jose.silva@ipleiria.com","123", 18,2,2001,15891457,456456789,"Testing");
+            Atleta atleta2 = atletaBean.create(2,"Sofia Antonia", "sofia.antonia@ipleiria.com","123", 15, 3, 2002,11566327,987456789,"Testing");
+            Atleta atleta3 = atletaBean.create(3,"Margarida Maria", "maggs@ipleiria.com","123", 15, 3, 1987,11563427,983456789,"Rua da Paz");
 
             atletaBean.enrollAtletaInModalidade("jose.silva@ipleiria.com", "Atl");
             atletaBean.enrollAtletaInModalidade("maggs@ipleiria.com", "Nat");
