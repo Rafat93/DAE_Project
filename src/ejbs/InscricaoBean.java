@@ -2,6 +2,7 @@ package ejbs;
 
 import dtos.EmailDTO;
 import entities.Inscricao;
+import entities.InscricaoAtletaModalidade;
 import entities.Socio;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
@@ -20,6 +21,9 @@ public class InscricaoBean {
 
     @EJB
     private SocioBean socioBean;
+
+    @EJB
+    private InscricaoAtletaModalidadeBean inscricaoAtletaModalidadeBean;
 
     @EJB
     private EmailBean emailBean;
@@ -45,6 +49,10 @@ public class InscricaoBean {
 
     public void confirmInscricao(String code) throws MyEntityNotFoundException {
         try{
+            if(em.find(InscricaoAtletaModalidade.class,code) !=null){
+                inscricaoAtletaModalidadeBean.confirmInscricao(code);
+                return;
+            }
             Inscricao inscricao = em.find(Inscricao.class,code);
             if(inscricao == null){
                 throw new MyEntityNotFoundException("Inscricao com o codigo "+code+" não existe");
