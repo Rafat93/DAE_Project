@@ -140,6 +140,7 @@ public class TreinoBean {
                 throw new MyIllegalArgumentException("Treino já está adicionado à Modalidade com a sigla " + sigla + "!");
             }
             modalidade.addTreino(treino);
+            treino.getTreinador().addTreinoLecionado(treino);
         } catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
             throw e;
         } catch (Exception e) {
