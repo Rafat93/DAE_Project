@@ -23,20 +23,17 @@ public class InscricaoAtletaModalidadeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create (String code, String nome, String email, int dia, int mes, int ano, long numIdentificacaoCivil, long numContibuinte, String morada, List<String> siglaModalidades, List <String> codeTreinos) throws MyEntityAlreadyExistsException {
+    public void create (String code, String siglaModalidade, List <String> codeTreinos) throws MyEntityAlreadyExistsException {
         try{
-            InscricaoAtleta inscricao = em.find(InscricaoAtleta.class,code);
+            InscricaoAtletaModalidade inscricao = em.find(InscricaoAtletaModalidade.class,code);
             if (inscricao != null){
                 throw new MyEntityAlreadyExistsException("Inscrição com o codigo "+code+"já existe");
             }
-            if(siglaModalidades.size() == 0){
-                throw new MyIllegalArgumentException("Inscrição de atletas tem de ter modalidades associadas");
-            }
+            Modalidade modalidade = em.find(Modalidade.class,siglaModalidade);
             if(codeTreinos.size() == 0){
                 throw new MyIllegalArgumentException("Inscrição de atletas tem de ter treinos associados");
             }
-            GregorianCalendar dataNascimento = new GregorianCalendar(ano,mes,dia);
-            inscricao = new InscricaoAtleta(code,nome,email,dataNascimento,numIdentificacaoCivil,numContibuinte,morada,geraModalidades(siglaModalidades),geraTreinos(codeTreinos));
+            inscricao = new InscricaoAtletaModalidade(code,modalidade,geraTreinos(codeTreinos));
             em.persist(inscricao);
         }catch (MyEntityAlreadyExistsException e) {
             throw e;

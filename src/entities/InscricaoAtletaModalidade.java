@@ -7,8 +7,7 @@ import java.util.*;
 public class InscricaoAtletaModalidade{
 
     @Id
-    @GeneratedValue
-    private long id;
+    private String code;
 
     @ManyToOne
     private Modalidade modalidade;
@@ -20,13 +19,18 @@ public class InscricaoAtletaModalidade{
     public InscricaoAtletaModalidade() {
     }
 
-    public InscricaoAtletaModalidade(Modalidade modalidade, Set<Treino> treinos) {
+    public InscricaoAtletaModalidade(String code,Modalidade modalidade, Set<Treino> treinos) {
+        this.code = code;
         this.modalidade = modalidade;
         this.treinos = treinos;
     }
 
-    public long getId() {
-        return id;
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Modalidade getModalidade() {
