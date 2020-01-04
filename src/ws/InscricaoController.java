@@ -48,6 +48,7 @@ public class InscricaoController {
     @Path("/")
     @RolesAllowed({"Administrador"})
     public Response createNewInscricao (InscricaoDTO inscricaoDTO) throws MyEntityAlreadyExistsException, ParseException {
+        System.out.println(inscricaoDTO.getDataNascimento());
         GregorianCalendar dataNascimento = format(inscricaoDTO.getDataNascimento());
         inscricaoBean.create(
                 inscricaoDTO.getCode(),

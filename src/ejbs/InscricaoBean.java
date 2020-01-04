@@ -33,6 +33,7 @@ public class InscricaoBean {
 
     public void create (String code, String nome, String email, int dia, int mes, int ano, long numIdentificacaoCivil, long numContibuinte, String morada) throws MyEntityAlreadyExistsException {
         try{
+            System.out.println(dia+"/"+mes+"/"+ano);
             Inscricao inscricao = em.find(Inscricao.class,code);
             if (inscricao != null){
                 throw new MyEntityAlreadyExistsException("Inscrição com o codigo "+code+"já existe");

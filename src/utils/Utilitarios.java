@@ -12,7 +12,7 @@ public final class Utilitarios {
     }
 
     public static GregorianCalendar format(String format) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = df.parse(format);
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);

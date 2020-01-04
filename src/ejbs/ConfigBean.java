@@ -1,16 +1,12 @@
 package ejbs;
 
-import entities.Administrador;
 import entities.Atleta;
-import entities.Produto;
-import entities.TipoProduto;
 import enums.DiasSemana;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.logging.Level;
@@ -68,7 +64,8 @@ public class ConfigBean {
             LocalDateTime timePoint = LocalDateTime.now();
             System.out.println("#### Populating DB...");
             System.out.println("CREATING CLUBE");
-            clubeBean.create(505240896,"LSC","Leiria Sport Clube","geral@leiriasportclube.pt","","Estádio municipalde Leiria",992356789);
+            clubeBean.create(505240896,"LSC","Leiria Sport Clube","geral@leiriasportclube.pt","","Estádio Municipal de Leiria",992356789);
+
             System.out.println("CREATING MODALIDADES");
             modalidadeBean.create("Atl","Atletismo","2019/2020",10.00);
             modalidadeBean.create("Nat", "Natação", "2019/2020",10.00);
@@ -113,6 +110,7 @@ public class ConfigBean {
 
             System.out.println("CREATING TIPOPRODUTO");
             tipoProdutoBean.create("Sapatilha");
+            tipoProdutoBean.create("Inscrição");
 
             System.out.println("CREATING PRODUTOS");
             produtoBean.create("AD20",tipoProdutoBean.findTipoProduto("Sapatilha"),"Adidas Finesse",50,5);
