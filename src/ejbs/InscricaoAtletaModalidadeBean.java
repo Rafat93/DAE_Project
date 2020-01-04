@@ -34,7 +34,7 @@ public class InscricaoAtletaModalidadeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public void create (String code, String email, String siglaModalidade, List <String> codeTreinos) throws MyEntityAlreadyExistsException {
+    public void create (String code, String email, String siglaModalidade) throws MyEntityAlreadyExistsException {
         try{
             InscricaoAtletaModalidade inscricao = em.find(InscricaoAtletaModalidade.class,code);
             if (inscricao != null){
@@ -48,11 +48,6 @@ public class InscricaoAtletaModalidadeBean {
             if (socio == null) {
                 throw new MyEntityNotFoundException("Socio não encontrado");
             }
-            if(codeTreinos.size() == 0){
-                for(Treino treino:modalidade.getTreinos())
-                    codeTreinos.add(treino.getCode());
-                //throw new MyIllegalArgumentException("Inscrição de atletas tem de ter treinos associados");
-            }
             inscricao = new InscricaoAtletaModalidade(
                     code,
                     socio.getNome(),
@@ -61,8 +56,7 @@ public class InscricaoAtletaModalidadeBean {
                     socio.getNumIdentificacaoCivil(),
                     socio.getNumContribuinte(),
                     socio.getMorada(),
-                    modalidade,
-                    geraTreinos(codeTreinos));
+                    modalidade);
 
             em.persist(inscricao);
         }catch (MyEntityAlreadyExistsException e) {

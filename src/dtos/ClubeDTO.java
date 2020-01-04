@@ -16,6 +16,7 @@ public class ClubeDTO {
 
     public ClubeDTO(long nif,String sigla, String nome, String email, String descricao, String morada, long telefone) {
         this.nif = nif;
+        this.sigla = sigla;
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;

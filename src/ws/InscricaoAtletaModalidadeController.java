@@ -40,8 +40,7 @@ public class InscricaoAtletaModalidadeController {
         inscricaoAtletaModalidadeBean.create(
                 inscricaoDTO.getCode(),
                 inscricaoDTO.getEmail(),
-                inscricaoDTO.getSiglaModalidade(),
-                inscricaoDTO.getTreinos()
+                inscricaoDTO.getSiglaModalidade()
         );
         InscricaoAtletaModalidade inscricao = inscricaoAtletaModalidadeBean.findInscricao(inscricaoDTO.getCode());
         return Response.status(Response.Status.CREATED).entity(toDTO(inscricao)).build();

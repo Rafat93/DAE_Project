@@ -20,10 +20,10 @@ public class InscricaoAtletaModalidade extends Inscricao{
     public InscricaoAtletaModalidade() {
     }
 
-    public InscricaoAtletaModalidade(String code, String nome,String email, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada,Modalidade modalidade, Set<Treino> treinos) {
+    public InscricaoAtletaModalidade(String code, String nome,String email, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada,Modalidade modalidade) {
         super(code,nome,email,dataNascimento,numIdentificacaoCivil,numContibuinte,morada);
         this.modalidade = modalidade;
-        this.treinos = treinos;
+        this.treinos = new HashSet<>();
     }
 
     public Modalidade getModalidade() {
