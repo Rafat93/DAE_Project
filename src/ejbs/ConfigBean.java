@@ -54,6 +54,9 @@ public class ConfigBean {
     @EJB
     private TreinoBean treinoBean;
 
+    @EJB
+    private ClubeBean clubeBean;
+
     private static final Logger logger = Logger.getLogger("ejbs.ConfigBean");
 
     public ConfigBean() {
@@ -64,6 +67,8 @@ public class ConfigBean {
         try {
             LocalDateTime timePoint = LocalDateTime.now();
             System.out.println("#### Populating DB...");
+            System.out.println("CREATING CLUBE");
+            clubeBean.create(505240896,"LSC","Leiria Sport Clube","geral@leiriasportclube.pt","","Estádio municipalde Leiria",992356789);
             System.out.println("CREATING MODALIDADES");
             modalidadeBean.create("Atl","Atletismo","2019/2020",10.00);
             modalidadeBean.create("Nat", "Natação", "2019/2020",10.00);

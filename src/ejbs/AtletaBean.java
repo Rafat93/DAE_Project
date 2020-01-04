@@ -20,7 +20,7 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada){
+    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada) throws MyEntityAlreadyExistsException {
         try{
             Atleta atleta = em.find(Atleta.class,email);
             if(atleta != null){
@@ -29,16 +29,16 @@ public class AtletaBean {
             mes=mes-1;
             atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContribuinte,morada);
             em.persist(atleta);
-            em.flush();
             return atleta;
+        }catch(MyEntityAlreadyExistsException e){
+            throw e;
         }catch(Exception e){
-            throw new NullPointerException(e.getMessage());
+            throw new EJBException("ERROR CREATING ATLETA", e);
         }
     }
 
     public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada) throws MyEntityNotFoundException {
         try {
-            System.out.println(numeroSocio+","+nome+","+email+","+password+","+dia+","+mes+","+ano+","+numIdentificacaoCivil+","+numContribuinte+","+morada);
             Atleta atleta = em.find(Atleta.class, email);
 
             if (atleta == null) {
