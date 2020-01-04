@@ -15,9 +15,8 @@ import java.util.Set;
 })
 public class Atleta extends Socio implements Serializable {
 
-    @OneToMany
-    private Set<Inscricao> inscricoes;
-
+    @ManyToMany(mappedBy = "atletas")
+    private Set<Modalidade> modalidades;
 
     public Atleta() {
         super();
@@ -25,26 +24,26 @@ public class Atleta extends Socio implements Serializable {
 
     public Atleta(long numeroSocio, String nome, String email,String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContribuinte, String morada) {
         super(numeroSocio,nome,password,email,dataNascimento,numIdentificacaoCivil,numContribuinte,morada);
-        this.inscricoes = new LinkedHashSet<>();
+        this.modalidades = new LinkedHashSet<>();
     }
 
-    public Set<Inscricao> getInscricoes() {
-        return inscricoes;
+    public Set<Modalidade> getModalidades() {
+        return modalidades;
     }
 
-    public void setInscricoes(Set<Inscricao> inscricoes) {
-        this.inscricoes = inscricoes;
+    public void setModalidades(Set<Modalidade> modalidades) {
+        this.modalidades = modalidades;
     }
 
-    public void addInscricao (Inscricao inscricao){
-        if (!inscricoes.contains(inscricao)){
-            inscricoes.add(inscricao);
+    public void addModalidade (Modalidade modalidade){
+        if (!modalidades.contains(modalidade)){
+            modalidades.add(modalidade);
         }
     }
 
-    public void removeInscricao(Inscricao inscricao){
-        if (inscricoes.contains(inscricao)){
-            inscricoes.remove(inscricao);
+    public void removeModalidade(Modalidade modalidade){
+        if (modalidades.contains(modalidade)){
+            modalidades.remove(modalidade);
         }
     }
 }

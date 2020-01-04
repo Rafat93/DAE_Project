@@ -102,57 +102,6 @@ public class SocioController {
         return Response.status(Response.Status.FORBIDDEN).build();
     }
 
-    @GET
-    @Path("{email}/modalidades_subscritas")
-    public Response getSocioModalidadesSubscritas(@PathParam("email") String email){
-        Socio socio = socioBean.findSocio(email);
-        if (socio != null){
-            GenericEntity<List<ModalidadeDTO>> entity
-                    = new GenericEntity<List<ModalidadeDTO>>(modalidadeToDTOs(socio.getModalidades())){
-
-            };
-            return  Response.status(Response.Status.OK)
-                    .entity(entity)
-                    .build();
-        }
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity("Atleta with email "+email+ " not found")
-                .build();
-    }
-
-    @GET
-    @Path("{email}/modalidades_nao_subscritas")
-    public Response getSocioModalidadesNaoSubscritas(@PathParam("email") String email) throws MyEntityNotFoundException {
-        Socio socio = socioBean.findSocio(email);
-        if (socio != null){
-            GenericEntity<List<ModalidadeDTO>> entity
-                    = new GenericEntity<List<ModalidadeDTO>>(modalidadeToDTOs(socioBean.getModalidadesNaoSubscritas(email))){
-
-            };
-            return  Response.status(Response.Status.OK)
-                    .entity(entity)
-                    .build();
-        }
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity("Socio with email "+email+ " not found")
-                .build();
-    }
-
-    @PUT
-    @Path("{email}/modalidade/subscribe/{sigla}")
-    @RolesAllowed({"Administrador"})
-    public Response subscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
-        socioBean.subscribeModalidade(email, sigla);
-        return getSocioModalidadesSubscritas(email);
-    }
-
-    @PUT
-    @Path("{email}/modalidade/unsubscribe/{sigla}")
-    @RolesAllowed({"Administrador"})
-    public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
-        socioBean.unsubscribeModalidade(email, sigla);
-        return getSocioModalidadesSubscritas(email);
-    }
 
     // Converts an entity Atleta to a DTO Atleta class
     SocioDTO socioToDTO(Socio socio){
@@ -166,9 +115,6 @@ public class SocioController {
                 socio.getNumContribuinte(),
                 socio.getMorada()
         );
-
-        List <ModalidadeDTO> modalidadesDTO = modalidadeToDTOs(socio.getModalidades());
-        socioDTO.setModalidades(modalidadesDTO);
 
         return socioDTO;
     }
@@ -191,14 +137,4 @@ public class SocioController {
 
     }
 
-    ModalidadeDTO socioToDTO(Modalidade modalidade){
-        return new ModalidadeDTO(modalidade.getSigla(),
-                modalidade.getNome(),
-                modalidade.getEpocaDesportiva(),
-                modalidade.getQuotaAnual());
-    }
-
-    List<ModalidadeDTO> modalidadeToDTOs(Collection<Modalidade> modalidades){
-        return modalidades.stream().map(this::socioToDTO).collect(Collectors.toList());
-    }
 }

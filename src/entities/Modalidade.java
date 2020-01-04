@@ -32,14 +32,11 @@ public class Modalidade {
     @OneToMany(mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Escalao> escaloes;
 
-    @OneToMany
-    private List<Atleta> atletas;
-
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "MODALIDADES_SOCIOS",
+    @JoinTable(name = "MODALIDADES_ATLETAS",
             joinColumns =  @JoinColumn(name = "MODALIDADE_SIGLA", referencedColumnName = "SIGLA"),
-            inverseJoinColumns = @JoinColumn(name = "SOCIO_EMAIL", referencedColumnName = "EMAIL"))
-    private List<Socio> socios;
+            inverseJoinColumns = @JoinColumn(name = "ATLETA_EMAIL", referencedColumnName = "EMAIL"))
+    private List<Atleta> atletas;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "MODALIDADES_TREINADORES",
@@ -56,7 +53,6 @@ public class Modalidade {
 
     public Modalidade() {
         this.treinos = new LinkedList<>();
-        this.socios = new LinkedList<>();
         this.atletas = new LinkedList<>();
         this.treinadores = new LinkedList<>();
         this.escaloes = new LinkedList<>();
@@ -69,7 +65,6 @@ public class Modalidade {
         this.epocaDesportiva = epocaDesportiva;
         this.quotaAnual = quotaAnual;
         this.treinos = new LinkedList<>();
-        this.socios = new LinkedList<>();
         this.atletas = new LinkedList<>();
         this.treinadores = new LinkedList<>();
         this.escaloes = new LinkedList<>();
@@ -83,7 +78,7 @@ public class Modalidade {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sigla, nome, treinos, escaloes, atletas, socios,graduacoes);
+        return Objects.hash(sigla, nome, treinos, escaloes, atletas,graduacoes);
     }
 
     public String getSigla() {
@@ -114,39 +109,16 @@ public class Modalidade {
         return treinos;
     }
 
-
     public List<Escalao> getEscaloes() {
         return escaloes;
     }
-
 
     public List<Atleta> getAtletas() {
         return atletas;
     }
 
-
-    public List<Socio> getSocios() {
-        return socios;
-    }
-
     public List<Treinador> getTreinadores() {
         return treinadores;
-    }
-
-    public void addSocio (Socio socio){
-        if (!socios.contains(socio)){
-            socios.add(socio);
-        }
-    }
-
-    public void removeSocio (Socio socio){
-        socios.remove(socio);
-    }
-
-    public void addAtleta (Atleta atleta){
-        if (!atletas.contains(atleta)){
-            atletas.add(atleta);
-        }
     }
 
     public void removeAtleta (Atleta atleta){
@@ -189,6 +161,12 @@ public class Modalidade {
 
     public void removeTreinador (Treinador treinador){
         treinadores.remove(treinador);
+    }
+
+    public void addAtleta(Atleta atleta){
+        if (!atletas.contains(atleta)){
+            atletas.add(atleta);
+        }
     }
 
     public String getEpocaDesportiva() {
