@@ -40,10 +40,11 @@ public class AdministradorController {
     @Path("/")
     @RolesAllowed({"Administrador"})
     public Response createNewAdministrador (AdministradorDTO administradorDTO) throws MyEntityAlreadyExistsException {
+       // System.out.println("ADMINCONTROLLER: "+administradorDTO.getEmail()+"/"+administradorDTO.getNome()+"/"+administradorDTO.getPassword());
         Administrador administrador = administradorBean.create(
                 administradorDTO.getNome(),
-                administradorDTO.getEmail(),
-                administradorDTO.getPassword());
+                administradorDTO.getPassword(),
+                administradorDTO.getEmail());
         return  Response.status(Response.Status.CREATED).entity(toDTO(administrador)).build();
     }
 
