@@ -2,21 +2,28 @@ package ejbs;
 
 import entities.Modalidade;
 import entities.Socio;
+import entities.Treinador;
 import exceptions.MyConstraintViolationException;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Stateless(name = "SocioEJB")
 public class SocioBean {
+
+    @EJB
+    private ModalidadeBean modalidadeBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -125,6 +132,28 @@ public class SocioBean {
             socio.removeModalidade(modalidade);
             modalidade.removeSocio(socio);
         }catch (MyEntityNotFoundException | MyIllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_SOCIO_UNSUBSCRIBING_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
+    public List <Modalidade> getModalidadesNaoSubscritas (String email) throws MyEntityNotFoundException {
+        try{
+            Socio socio = (Socio) em.find(Socio.class, email);
+            if(socio == null){
+                throw new MyEntityNotFoundException("Socio with email " + email + " not found.");
+            }
+            List <Modalidade> modalidades = modalidadeBean.all();
+            Set<Modalidade> modalidadesSubscritas = socio.getModalidades();
+            List<Modalidade> modalidadesNaoSubscritas = new LinkedList<>();
+            for(Modalidade modalidade: modalidades){
+                if(!modalidadesSubscritas.contains(modalidade)){
+                    modalidadesNaoSubscritas.add(modalidade);
+                }
+            }
+            return modalidadesNaoSubscritas;
+        }catch (MyEntityNotFoundException e) {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_SOCIO_UNSUBSCRIBING_MODALIDADE ---->" + e.getMessage());

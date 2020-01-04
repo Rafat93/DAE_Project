@@ -136,6 +136,24 @@ public class SocioController {
         return getSocioModalidadesSubscritas(email);
     }
 
+    @GET
+    @Path("{email}/modalidades_nao_subscritas")
+    public Response getSocioModalidadesNaoSubscritas(@PathParam("email") String email) throws MyEntityNotFoundException {
+        Socio socio = socioBean.findSocio(email);
+        if (socio != null){
+            GenericEntity<List<ModalidadeDTO>> entity
+                    = new GenericEntity<List<ModalidadeDTO>>(modalidadeToDTOs(socioBean.getModalidadesNaoSubscritas(email))){
+
+            };
+            return  Response.status(Response.Status.OK)
+                    .entity(entity)
+                    .build();
+        }
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                .entity("Socio with email "+email+ " not found")
+                .build();
+    }
+
 
 
     // Converts an entity Atleta to a DTO Atleta class
