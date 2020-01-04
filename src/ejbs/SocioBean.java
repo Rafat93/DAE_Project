@@ -86,9 +86,18 @@ public class SocioBean {
         }
     }
 
-    public void delete(String email){
+    public void delete(String email) throws MyEntityNotFoundException {
         try {
+            Socio socio = em.find(Socio.class, email);
+            if (socio == null) {
+                throw new MyEntityNotFoundException("Socio não encontrado");
+            }
+            for(Modalidade modalidade:socio.getModalidades()){
+                unsubscribeModalidade(email,modalidade.getSigla());
+            }
             em.remove(findSocio(email));
+        }catch (MyEntityNotFoundException e) {
+            throw e;
         }catch (Exception e){
             throw new EJBException("ERROR_DELETING_SOCIO",e);
         }
