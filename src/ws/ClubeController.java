@@ -31,6 +31,7 @@ public class ClubeController {
     public Response update(@PathParam("nif") long nif,ClubeDTO clubeDTO) throws MyEntityNotFoundException {
         clubeBean.update(
                 nif,
+                clubeDTO.getSigla(),
                 clubeDTO.getNome(),
                 clubeDTO.getEmail(),
                 clubeDTO.getDescricao(),
