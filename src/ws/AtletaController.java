@@ -50,7 +50,7 @@ public class AtletaController {
     @POST
     @Path("/")
     @RolesAllowed({"Administrador"})
-    public Response createNewAtleta (AtletaDTO atletaDTO) throws ParseException {
+    public Response createNewAtleta (AtletaDTO atletaDTO) throws ParseException, MyEntityAlreadyExistsException {
         GregorianCalendar dataNascimento = format(atletaDTO.getDataNascimento());
         Atleta atleta = atletaBean.create(
                 atletaDTO.getNumeroSocio(),
