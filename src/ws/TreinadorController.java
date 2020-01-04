@@ -92,7 +92,7 @@ public class TreinadorController {
         System.out.println(email + " --- " + principal.getName());
         Treinador treinador = treinadorBean.findTreinador(email);
         if(securityContext.isUserInRole("Administrador") ||
-                securityContext.isUserInRole("Treinador") && principal.getName().equals(treinador.getNome())) {
+                securityContext.isUserInRole("Treinador") && principal.getName().equals(email)) {
             return Response.status(Response.Status.OK)
                     .entity(toDTO(treinador))
                     .build();

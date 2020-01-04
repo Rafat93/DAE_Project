@@ -94,7 +94,7 @@ public class SocioController {
         System.out.println(email + " --- " + principal.getName());
         Socio socio = socioBean.findSocio(email);
         if(securityContext.isUserInRole("Administrador") ||
-        securityContext.isUserInRole("Socio") && principal.getName().equals(socio.getNome())) {
+        securityContext.isUserInRole("Socio") && principal.getName().equals(email)) {
             return Response.status(Response.Status.OK)
                     .entity(socioToDTO(socio))
                     .build();

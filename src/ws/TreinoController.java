@@ -40,7 +40,7 @@ public class TreinoController {
 
     @POST
     @Path("/")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response createNewTreino(TreinoDTO treinoDTO){
         Principal principal = securityContext.getUserPrincipal();
         System.out.println("Treino: " + treinoDTO.getCode() + " --- " + principal.getName());

@@ -111,7 +111,7 @@ public class AtletaController {
 
         Atleta atleta = atletaBean.findAtleta(email);
         if(securityContext.isUserInRole("Administrador") ||
-                securityContext.isUserInRole("Atleta") && principal.getName().equals(atleta.getNome())) {
+                securityContext.isUserInRole("Atleta") && principal.getName().equals(email)) {
 
             return Response.status(Response.Status.OK)
                     .entity(atletaToDTO(atleta))
