@@ -184,6 +184,7 @@ public class ModalidadeController {
         );
         List <AtletaDTO> atletasDTO = atletaToDTOs(modalidade.getAtletas());
         List <EscalaoDTO> escaloesDTO = escalaoToDTOs(modalidade.getEscaloes());
+        List <GraduacaoDTO> graduacoesDTO = graduacaoToDTOs(modalidade.getGraduacoes());
         List <TreinoDTO> treinosDTO = treinoToDTOs(modalidade.getTreinos());
         List <TreinadorDTO> treinadoresDTO = treinadoresToDTOs(modalidade.getTreinadores());
 
@@ -191,6 +192,7 @@ public class ModalidadeController {
         modalidadeDTO.setEscaloes(escaloesDTO);
         modalidadeDTO.setTreinos(treinosDTO);
         modalidadeDTO.setTreinadores(treinadoresDTO);
+        modalidadeDTO.setGraduacoes(graduacoesDTO);
         return modalidadeDTO;
     }
 

@@ -2,8 +2,10 @@ package entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @NamedQueries({
@@ -19,12 +21,11 @@ public class Carrinho {
     @NotNull
     private String email;
 
-    @NotNull
-    @ManyToMany
-    private List<Produto> produtos;
+    /*@NotNull
+    private Map <Produto,Integer> produtosQuatidade;*/
 
     public Carrinho() {
-        this.produtos = new LinkedList<>();
+        //this.produtos = new LinkedList<>();
     };
 
     public Carrinho(String code, String email) {
@@ -49,13 +50,13 @@ public class Carrinho {
         this.email = email;
     }
 
-    public List<Produto> getProdutos() {
+    /*public List<Produto> getProdutos() {
         return produtos;
     }
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
-    }
+    }*/
 
     public void addProduto(Produto produto){
 
