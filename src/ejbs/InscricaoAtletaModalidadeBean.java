@@ -49,7 +49,9 @@ public class InscricaoAtletaModalidadeBean {
                 throw new MyEntityNotFoundException("Socio não encontrado");
             }
             if(codeTreinos.size() == 0){
-                throw new MyIllegalArgumentException("Inscrição de atletas tem de ter treinos associados");
+                for(Treino treino:modalidade.getTreinos())
+                    codeTreinos.add(treino.getCode());
+                //throw new MyIllegalArgumentException("Inscrição de atletas tem de ter treinos associados");
             }
             inscricao = new InscricaoAtletaModalidade(
                     code,

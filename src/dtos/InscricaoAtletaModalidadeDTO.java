@@ -21,6 +21,7 @@ public class InscricaoAtletaModalidadeDTO {
         this.code = code;
         this.email=email;
         this.siglaModalidade = siglaModalidade;
+
     }
 
     public String getCode() {
