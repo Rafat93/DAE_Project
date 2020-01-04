@@ -20,14 +20,14 @@ public class AtletaBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada){
+    public Atleta create(long numeroSocio, String nome, String email, String password, int dia, int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada){
         try{
             Atleta atleta = em.find(Atleta.class,email);
             if(atleta != null){
                 throw new MyEntityAlreadyExistsException("Atleta com o email: " + email + " já existe");
             }
             mes=mes-1;
-            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContibuinte,morada);
+            atleta = new Atleta(numeroSocio,nome,email,password, new GregorianCalendar(ano,mes,dia),numIdentificacaoCivil,numContribuinte,morada);
             em.persist(atleta);
             em.flush();
             return atleta;
@@ -36,7 +36,7 @@ public class AtletaBean {
         }
     }
 
-    public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContibuinte, String morada) throws MyEntityNotFoundException {
+    public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada) throws MyEntityNotFoundException {
         try {
             Atleta atleta = em.find(Atleta.class, email);
 
@@ -50,7 +50,7 @@ public class AtletaBean {
             atleta.setNome(nome);
             atleta.setEmail(email);
             atleta.setMorada(morada);
-            atleta.setNumContribuinte(numContibuinte);
+            atleta.setNumContribuinte(numContribuinte);
             atleta.setNumIdentificacaoCivil(numIdentificacaoCivil);
 
 
