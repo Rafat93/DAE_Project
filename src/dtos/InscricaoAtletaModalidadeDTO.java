@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import static utils.Utilitarios.format;
 
-public class InscricaoAtletaDTO {
+public class InscricaoAtletaModalidadeDTO {
 
     private String code;
     private String nome;
@@ -19,12 +19,12 @@ public class InscricaoAtletaDTO {
     private Collection <ModalidadeDTO> modalidades;
     private Collection <TreinoDTO> treinos;
 
-    public InscricaoAtletaDTO() {
+    public InscricaoAtletaModalidadeDTO() {
         treinos = new LinkedList<>();
         modalidades = new LinkedList<>();
     }
 
-    public InscricaoAtletaDTO (String code, String nome, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContribuinte, String morada, String email) {
+    public InscricaoAtletaModalidadeDTO(String code, String nome, GregorianCalendar dataNascimento, long numIdentificacaoCivil, long numContribuinte, String morada, String email) {
         this();
         this.code = code;
         this.nome = nome;

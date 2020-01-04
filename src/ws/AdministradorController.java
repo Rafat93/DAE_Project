@@ -12,11 +12,15 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Path("/administradores") // relative url web path of this controller
+@Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”
+@Consumes({MediaType.APPLICATION_JSON}) // injects header “Accept: application/json”
 public class AdministradorController {
 
     @EJB
