@@ -4,6 +4,7 @@ import enums.DiasSemana;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -14,14 +15,14 @@ public class TreinoDTO implements Serializable {
     private String siglaModalidade;
     private String codeGraduacao;
     private String codeEscalao;
-    private Time horaInicio;
-    private Time horaFim;
+    private LocalTime horaInicio;
+    private LocalTime horaFim;
     private DiasSemana diaSemana;
     private Collection<PresencaDTO> presencas;
 
-    public TreinoDTO(String code, String nomeTreinador, String siglaModalidade, String codeGraduacao, String codeEscalao, Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+    public TreinoDTO(String code, String emailTreinador, String siglaModalidade, String codeGraduacao, String codeEscalao, LocalTime horaInicio, LocalTime horaFim, DiasSemana diaSemana) {
         this.code = code;
-        this.emailTreinador = nomeTreinador;
+        this.emailTreinador = emailTreinador;
         this.siglaModalidade = siglaModalidade;
         this.codeGraduacao = codeGraduacao;
         this.codeEscalao = codeEscalao;
@@ -69,19 +70,19 @@ public class TreinoDTO implements Serializable {
         this.codeEscalao = codeEscalao;
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFim() {
+    public LocalTime getHoraFim() {
         return horaFim;
     }
 
-    public void setHoraFim(Time horaFim) {
+    public void setHoraFim(LocalTime horaFim) {
         this.horaFim = horaFim;
     }
 

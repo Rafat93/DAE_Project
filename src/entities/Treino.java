@@ -5,6 +5,7 @@ import enums.DiasSemana;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,10 +37,10 @@ public class Treino {
     private Escalao escalao;
 
     @NotNull
-    private Time horaInicio;
+    private LocalTime horaInicio;
 
     @NotNull
-    private Time horaFim;
+    private LocalTime horaFim;
 
     @NotNull
     private DiasSemana diaSemana;
@@ -51,7 +52,7 @@ public class Treino {
         this.presencas = new HashSet<>();
     }
 
-    public Treino(String code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,Time horaInicio, Time horaFim, DiasSemana diaSemana) {
+    public Treino(String code, Treinador treinador, Modalidade modalidade, Graduacao graduacao, Escalao escalao,LocalTime horaInicio, LocalTime horaFim, DiasSemana diaSemana) {
         this.code = code;
         this.treinador = treinador;
         this.modalidade = modalidade;
@@ -63,19 +64,19 @@ public class Treino {
         this.presencas = new HashSet<>();
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFim() {
+    public LocalTime getHoraFim() {
         return horaFim;
     }
 
-    public void setHoraFim(Time horaFim) {
+    public void setHoraFim(LocalTime horaFim) {
         this.horaFim = horaFim;
     }
 
