@@ -204,7 +204,8 @@ public class AtletaController {
     ModalidadeDTO atletaToDTO(Modalidade modalidade){
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getEpocaDesportiva());
+                modalidade.getEpocaDesportiva(),
+                modalidade.getQuotaAnual());
     }
 
     // converts an entire list of Atletas entities without the list of Modalidades into a list of DTOs

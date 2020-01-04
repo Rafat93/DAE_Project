@@ -120,22 +120,6 @@ public class SocioController {
                 .build();
     }
 
-    @PUT
-    @Path("{email}/modalidade/subscribe/{sigla}")
-    @RolesAllowed({"Administrador"})
-    public Response subscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
-        socioBean.subscribeModalidade(email, sigla);
-        return getSocioModalidadesSubscritas(email);
-    }
-
-    @PUT
-    @Path("{email}/modalidade/unsubscribe/{sigla}")
-    @RolesAllowed({"Administrador"})
-    public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
-        socioBean.unsubscribeModalidade(email, sigla);
-        return getSocioModalidadesSubscritas(email);
-    }
-
     @GET
     @Path("{email}/modalidades_nao_subscritas")
     public Response getSocioModalidadesNaoSubscritas(@PathParam("email") String email) throws MyEntityNotFoundException {
@@ -154,7 +138,21 @@ public class SocioController {
                 .build();
     }
 
+    @PUT
+    @Path("{email}/modalidade/subscribe/{sigla}")
+    @RolesAllowed({"Administrador"})
+    public Response subscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        socioBean.subscribeModalidade(email, sigla);
+        return getSocioModalidadesSubscritas(email);
+    }
 
+    @PUT
+    @Path("{email}/modalidade/unsubscribe/{sigla}")
+    @RolesAllowed({"Administrador"})
+    public Response unsubscribeAtletaInModalidae(@PathParam("email") String email, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
+        socioBean.unsubscribeModalidade(email, sigla);
+        return getSocioModalidadesSubscritas(email);
+    }
 
     // Converts an entity Atleta to a DTO Atleta class
     SocioDTO socioToDTO(Socio socio){
@@ -196,7 +194,8 @@ public class SocioController {
     ModalidadeDTO socioToDTO(Modalidade modalidade){
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getEpocaDesportiva());
+                modalidade.getEpocaDesportiva(),
+                modalidade.getQuotaAnual());
     }
 
     List<ModalidadeDTO> modalidadeToDTOs(Collection<Modalidade> modalidades){

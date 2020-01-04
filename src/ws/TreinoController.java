@@ -175,7 +175,8 @@ public class TreinoController {
     ModalidadeDTO treinoToDTO(Modalidade modalidade){
         return new ModalidadeDTO(modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getEpocaDesportiva());
+                modalidade.getEpocaDesportiva(),
+                modalidade.getQuotaAnual());
     }
 
     PresencaDTO presencaToDTO(Presenca presenca){

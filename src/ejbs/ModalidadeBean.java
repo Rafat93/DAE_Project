@@ -32,14 +32,14 @@ public class ModalidadeBean {
     @PersistenceContext
     private EntityManager em;
 
-    public Modalidade create (String sigla, String nome, String epocaDesportiva) throws MyEntityAlreadyExistsException {
+    public Modalidade create (String sigla, String nome, String epocaDesportiva,double quotaAnual) throws MyEntityAlreadyExistsException {
         try {
             Modalidade modalidade = em.find(Modalidade.class,sigla);
             if (modalidade != null){
                 throw new MyEntityAlreadyExistsException("Modalidade com a sigla "+sigla+"já existe");
             }
             System.out.println("ModalidadeBean: Epoca Desportiva"+epocaDesportiva);
-            modalidade = new Modalidade(sigla,nome,epocaDesportiva);
+            modalidade = new Modalidade(sigla,nome,epocaDesportiva,quotaAnual);
             em.persist(modalidade);
             return modalidade;
         } catch (MyEntityAlreadyExistsException e) {
@@ -49,20 +49,17 @@ public class ModalidadeBean {
         }
     }
 
-    public Modalidade update (String sigla, String nome, String epocaDesportiva) throws MyEntityNotFoundException {
+    public Modalidade update (String sigla, String nome, String epocaDesportiva, double quotaAnual) throws MyEntityNotFoundException {
         try {
             Modalidade modalidade = em.find(Modalidade.class, sigla);
             if(modalidade ==null){
                 throw new MyEntityNotFoundException("Modalidade não encontrada!");
             }
 
-
-
             modalidade.setSigla(sigla);
             modalidade.setNome(nome);
             modalidade.setEpocaDesportiva(epocaDesportiva);
-
-
+            modalidade.setQuotaAnual(quotaAnual);
 
             return modalidade;
         }catch(MyEntityNotFoundException e){

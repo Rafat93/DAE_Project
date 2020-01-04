@@ -14,10 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Stateless(name = "SocioEJB")
 public class SocioBean {
@@ -147,7 +144,7 @@ public class SocioBean {
         }
     }
 
-    public List <Modalidade> getModalidadesNaoSubscritas (String email) throws MyEntityNotFoundException {
+    public Set <Modalidade> getModalidadesNaoSubscritas (String email) throws MyEntityNotFoundException {
         try{
             Socio socio = (Socio) em.find(Socio.class, email);
             if(socio == null){
@@ -155,7 +152,7 @@ public class SocioBean {
             }
             List <Modalidade> modalidades = modalidadeBean.all();
             Set<Modalidade> modalidadesSubscritas = socio.getModalidades();
-            List<Modalidade> modalidadesNaoSubscritas = new LinkedList<>();
+            Set<Modalidade> modalidadesNaoSubscritas = new HashSet<>();
             for(Modalidade modalidade: modalidades){
                 if(!modalidadesSubscritas.contains(modalidade)){
                     modalidadesNaoSubscritas.add(modalidade);

@@ -65,8 +65,8 @@ public class ConfigBean {
             LocalDateTime timePoint = LocalDateTime.now();
             System.out.println("#### Populating DB...");
             System.out.println("CREATING MODALIDADES");
-            modalidadeBean.create("Atl","Atletismo","2019/2020");
-            modalidadeBean.create("Nat", "Natação", "2019/2020");
+            modalidadeBean.create("Atl","Atletismo","2019/2020",10);
+            modalidadeBean.create("Nat", "Natação", "2019/2020",10);
 
             System.out.println("CREATING ESCALOES");
             escalaoBean.create("Inf","Infantil",10,12,"Atl");

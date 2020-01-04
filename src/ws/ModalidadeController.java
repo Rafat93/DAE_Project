@@ -38,7 +38,8 @@ public class ModalidadeController {
          modalidadeBean.create(
                  modalidadeDTO.getSigla(),
                  modalidadeDTO.getNome(),
-                 modalidadeDTO.getEpocaDesportiva());
+                 modalidadeDTO.getEpocaDesportiva(),
+                 modalidadeDTO.getQuotaAnual());
          Modalidade modalidade = modalidadeBean.findModalidade(modalidadeDTO.getSigla());
         return Response.status(Response.Status.CREATED)
                 .entity(toDTONoLists(modalidade))
@@ -52,7 +53,8 @@ public class ModalidadeController {
         modalidadeBean.update(
                 modalidadeDTO.getSigla(),
                 modalidadeDTO.getNome(),
-                modalidadeDTO.getEpocaDesportiva());
+                modalidadeDTO.getEpocaDesportiva(),
+                modalidadeDTO.getQuotaAnual());
         Modalidade modalidade = modalidadeBean.findModalidade(sigla);
         return  Response.status(Response.Status.OK)
                 .entity(toDTONoLists(modalidade))
@@ -193,7 +195,8 @@ public class ModalidadeController {
         ModalidadeDTO modalidadeDTO = new ModalidadeDTO(
                 modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getEpocaDesportiva()
+                modalidade.getEpocaDesportiva(),
+                modalidade.getQuotaAnual()
         );
         List <AtletaDTO> atletasDTO = atletaToDTOs(modalidade.getAtletas());
         List <EscalaoDTO> escaloesDTO = escalaoToDTOs(modalidade.getEscaloes());
@@ -213,7 +216,8 @@ public class ModalidadeController {
         return new ModalidadeDTO(
                 modalidade.getSigla(),
                 modalidade.getNome(),
-                modalidade.getEpocaDesportiva()
+                modalidade.getEpocaDesportiva(),
+                modalidade.getQuotaAnual()
         );
     }
 

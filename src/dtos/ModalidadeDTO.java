@@ -13,6 +13,7 @@ public class ModalidadeDTO implements Serializable {
     private String sigla;
     private String nome;
     private String epocaDesportiva;
+    private double quotaAnual;
     private Collection<TreinoDTO> treinos;
     private Collection<EscalaoDTO> escaloes;
     private Collection<AtletaDTO> atletas;
@@ -20,11 +21,12 @@ public class ModalidadeDTO implements Serializable {
     private Collection<TreinadorDTO> treinadores;
     private Collection<GraduacaoDTO> graduacoes;
 
-    public ModalidadeDTO(String sigla, String nome, String epocaDesportiva) {
+    public ModalidadeDTO(String sigla, String nome, String epocaDesportiva,double quotaAnual) {
         this();
         this.sigla = sigla;
         this.nome = nome;
         this.epocaDesportiva = epocaDesportiva;
+        this.quotaAnual = quotaAnual;
     }
 
     public ModalidadeDTO() {
@@ -107,5 +109,13 @@ public class ModalidadeDTO implements Serializable {
 
     public void setGraduacoes(Collection<GraduacaoDTO> graduacoes) {
         this.graduacoes = graduacoes;
+    }
+
+    public double getQuotaAnual() {
+        return quotaAnual;
+    }
+
+    public void setQuotaAnual(double quotaAnual) {
+        this.quotaAnual = quotaAnual;
     }
 }

@@ -50,6 +50,9 @@ public class Modalidade {
     @OneToMany(mappedBy = "modalidade",cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Graduacao> graduacoes;
 
+    @NotNull
+    private double quotaAnual;
+
 
     public Modalidade() {
         this.treinos = new LinkedList<>();
@@ -60,10 +63,11 @@ public class Modalidade {
         this.graduacoes = new LinkedList<>();
     }
 
-    public Modalidade (String sigla, String nome, String epocaDesportiva){
+    public Modalidade (String sigla, String nome, String epocaDesportiva,double quotaAnual){
         this.sigla = sigla;
         this.nome = nome;
         this.epocaDesportiva = epocaDesportiva;
+        this.quotaAnual = quotaAnual;
         this.treinos = new LinkedList<>();
         this.socios = new LinkedList<>();
         this.atletas = new LinkedList<>();
@@ -96,6 +100,14 @@ public class Modalidade {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public double getQuotaAnual() {
+        return quotaAnual;
+    }
+
+    public void setQuotaAnual(double quotaAnual) {
+        this.quotaAnual = quotaAnual;
     }
 
     public List<Treino> getTreinos() {
