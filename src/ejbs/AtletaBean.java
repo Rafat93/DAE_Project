@@ -2,20 +2,26 @@ package ejbs;
 
 import entities.Atleta;
 import entities.Modalidade;
+import entities.Treinador;
 import exceptions.MyEntityAlreadyExistsException;
 import exceptions.MyEntityNotFoundException;
 import exceptions.MyIllegalArgumentException;
 
+import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Stateless(name = "AtletaEJB")
 public class AtletaBean {
+
+    @EJB
+    private ModalidadeBean modalidadeBean;
 
     @PersistenceContext
     private EntityManager em;
@@ -138,6 +144,28 @@ public class AtletaBean {
             throw e;
         } catch (Exception e) {
             throw new EJBException("ERROR_UNROLLING_ATLETA_FROM_MODALIDADE ---->" + e.getMessage());
+        }
+    }
+
+    public List <Modalidade> getModalidadesSemAtleta (String email) throws MyEntityNotFoundException {
+        try {
+            Atleta atleta = em.find(Atleta.class, email);
+            if (atleta == null) {
+                throw new MyEntityNotFoundException("Atleta com email " + email + " não existe.");
+            }
+            List <Modalidade> modalidades = modalidadeBean.all();
+            Set<Modalidade> modalidadesDoAtleta = atleta.getModalidades();
+            List <Modalidade> modalidadesSemAtleta = new LinkedList<>();
+            for(Modalidade modalidade : modalidades){
+                if(!modalidadesDoAtleta.contains(modalidade)){
+                    modalidadesSemAtleta.add(modalidade);
+                }
+            }
+            return modalidadesSemAtleta;
+        } catch (MyEntityNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new EJBException("ERROR_UNROLLING_TREINADOR_FROM_TREINO ---->" + e.getMessage());
         }
     }
 }

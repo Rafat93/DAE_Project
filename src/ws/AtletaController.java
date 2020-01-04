@@ -167,6 +167,15 @@ public class AtletaController {
                 build();
     }
 
+    @GET
+    @Path("{email}/modalidades_livres")
+    public Response getModalidadesLivres(@PathParam("email")String email) throws MyEntityNotFoundException {
+        List <Modalidade> modalidades = atletaBean.getModalidadesSemAtleta(email);
+        return  Response.status(Response.Status.OK)
+                .entity(modalidadeToDTOs(modalidades))
+                .build();
+    }
+
 
     // Converts an entity Atleta to a DTO Atleta class
     AtletaDTO atletaToDTO(Atleta atleta){

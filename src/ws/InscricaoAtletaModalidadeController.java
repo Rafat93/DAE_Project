@@ -21,7 +21,6 @@ import javax.ws.rs.core.SecurityContext;
 import java.text.ParseException;
 import java.util.*;
 
-import static utils.Utilitarios.format;
 
 @Path("/inscricoes/atleta") // relative url web path of this controller
 @Produces({MediaType.APPLICATION_JSON}) // injects header “Content-Type: application/json”

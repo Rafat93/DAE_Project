@@ -84,22 +84,28 @@ public class InscricaoAtletaModalidadeBean {
             if(inscricao == null){
                 throw new MyEntityNotFoundException("Inscricao com o codigo "+code+" não existe");
             }
-            Socio socio = em.find(Socio.class,inscricao.getEmail());
-            long numeroSocio = socio.getNumeroSocio();
-            String password = socio.getPassword();
-            socioBean.delete(socio.getEmail());
-            //cria atleta
-            atletaBean.create(
-                    numeroSocio,
-                    inscricao.getNome(),
-                    inscricao.getEmail(),
-                    password,
-                    inscricao.getDataNascimento().get(Calendar.DAY_OF_MONTH),
-                    inscricao.getDataNascimento().get(Calendar.MONTH),
-                    inscricao.getDataNascimento().get(Calendar.YEAR),
-                    inscricao.getNumIdentificacaoCivil(),
-                    inscricao.getNumContribuinte(),
-                    inscricao.getMorada());
+            Atleta atleta = em.find(Atleta.class,inscricao.getEmail());
+            //atleta já fez uma inscricao modalidade
+            if(atleta != null){
+                atletaBean.enrollAtletaInModalidade(atleta.getEmail(),inscricao.getModalidade().getSigla());
+            }else {
+                Socio socio = em.find(Socio.class, inscricao.getEmail());
+                long numeroSocio = socio.getNumeroSocio();
+                String password = socio.getPassword();
+                socioBean.delete(socio.getEmail());
+                //cria atleta
+                atletaBean.create(
+                        numeroSocio,
+                        inscricao.getNome(),
+                        inscricao.getEmail(),
+                        password,
+                        inscricao.getDataNascimento().get(Calendar.DAY_OF_MONTH),
+                        inscricao.getDataNascimento().get(Calendar.MONTH),
+                        inscricao.getDataNascimento().get(Calendar.YEAR),
+                        inscricao.getNumIdentificacaoCivil(),
+                        inscricao.getNumContribuinte(),
+                        inscricao.getMorada());
+            }
             //envia email a informar que a inscrição como atleta na modalidade foi aceite
             EmailDTO emailDTO = new EmailDTO("Inscrição na Modalidade "+inscricao.getModalidade().getNome()+" Confirmada",
                     "A sua incrição na Modalidade "+inscricao.getModalidade().getNome()+"foi aceite.");
