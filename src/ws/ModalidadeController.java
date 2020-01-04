@@ -96,22 +96,6 @@ public class ModalidadeController {
                 .build();
     }
 
-    @GET
-    @Path("{sigla}/socios")
-    public Response getModalidadeSocios(@PathParam("sigla")String sigla){
-        Modalidade modalidade = modalidadeBean.findModalidade(sigla);
-        if(modalidade != null){
-            GenericEntity<List<SocioDTO>> entity
-                    = new GenericEntity<List<SocioDTO>>(socioToDTOs(modalidade.getSocios())){
-            };
-            return  Response.status(Response.Status.OK)
-                    .entity(entity)
-                    .build();
-        }
-        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                .entity("Modalidade com a "+ sigla + " não existe")
-                .build();
-    }
 
     @GET
     @Path("{sigla}/treinadores")
@@ -200,13 +184,11 @@ public class ModalidadeController {
         );
         List <AtletaDTO> atletasDTO = atletaToDTOs(modalidade.getAtletas());
         List <EscalaoDTO> escaloesDTO = escalaoToDTOs(modalidade.getEscaloes());
-        List <SocioDTO> sociosDTO = socioToDTOs(modalidade.getSocios());
         List <TreinoDTO> treinosDTO = treinoToDTOs(modalidade.getTreinos());
         List <TreinadorDTO> treinadoresDTO = treinadoresToDTOs(modalidade.getTreinadores());
 
         modalidadeDTO.setAtletas(atletasDTO);
         modalidadeDTO.setEscaloes(escaloesDTO);
-        modalidadeDTO.setSocios(sociosDTO);
         modalidadeDTO.setTreinos(treinosDTO);
         modalidadeDTO.setTreinadores(treinadoresDTO);
         return modalidadeDTO;
