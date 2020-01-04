@@ -82,7 +82,7 @@ public class TreinadorBean {
         try {
             Treinador treinador = em.find(Treinador.class,email);
             if (treinador == null) {
-                throw new MyEntityNotFoundException("Treinador com o email: " + email + " já existe");
+                throw new MyEntityNotFoundException("Treinador com o email: " + email + " nao existe");
             }
             removeFromModalidades(email);
             em.remove(findTreinador(email));

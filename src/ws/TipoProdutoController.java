@@ -4,6 +4,7 @@ import dtos.TipoProdutoDTO;
 import ejbs.TipoProdutoBean;
 import entities.TipoProduto;
 import exceptions.MyEntityAlreadyExistsException;
+import exceptions.MyEntityNotFoundException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -39,6 +40,14 @@ public class TipoProdutoController {
     public Response createNewTipoProduto (TipoProdutoDTO tipoProdutoDTO) throws MyEntityAlreadyExistsException {
         TipoProduto tipoProduto = tipoProdutoBean.create(tipoProdutoDTO.getNome());
         return Response.status(Response.Status.OK).entity(toDTO(tipoProduto)).build();
+    }
+
+    @DELETE
+    @Path("/{nome}")
+    @RolesAllowed({"Administrador"})
+    public Response removeTipoProduto(@PathParam("nome") String nome) throws MyEntityNotFoundException {
+        tipoProdutoBean.delete(nome);
+        return Response.status(Response.Status.OK).build();
     }
 
     TipoProdutoDTO toDTO(TipoProduto tipoProduto){
