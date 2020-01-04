@@ -21,8 +21,7 @@ public class ClubeController {
 
     @GET
     @Path("/")
-    @RolesAllowed({"Administrador"})
-    public ClubeDTO clube(long nif){
+    public ClubeDTO clube(){
         return toDTO(clubeBean.clube());
     }
 
