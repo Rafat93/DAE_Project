@@ -23,8 +23,8 @@ public class Atleta extends Socio implements Serializable {
         super();
     }
 
-    public Atleta(long numeroSocio, String nome, String email,String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
-        super(numeroSocio,nome,password,email,dataNascimento,numIdentificacaoCivil,numContibuinte,morada);
+    public Atleta(long numeroSocio, String nome, String email,String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContribuinte, String morada) {
+        super(numeroSocio,nome,password,email,dataNascimento,numIdentificacaoCivil,numContribuinte,morada);
         this.inscricoes = new LinkedHashSet<>();
     }
 
