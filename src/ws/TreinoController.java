@@ -63,7 +63,7 @@ public class TreinoController {
 
     @PUT
     @Path("{code}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response updateTreino(@PathParam("code") String code, TreinoDTO treinoDTO) throws MyEntityNotFoundException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println("Treino: " + treinoDTO.getCode() + " --- " + principal.getName());
@@ -88,7 +88,7 @@ public class TreinoController {
 
     @DELETE
     @Path("{code}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response removeTreino (@PathParam("code") String code){
         treinoBean.delete(code);
         return Response.status(Response.Status.OK).build();
@@ -112,7 +112,7 @@ public class TreinoController {
 
     @PUT
     @Path("{code}/modalidade/enroll/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response enrollAtletaInModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.enrollTreinoInModalidade(code, sigla);
         return getModalidade(code);
@@ -120,7 +120,7 @@ public class TreinoController {
 
     @PUT
     @Path("{code}/modalidade/unroll/{sigla}")
-    @RolesAllowed({"Administrator"})
+    @RolesAllowed({"Administrador"})
     public Response unrollTreinoFromModalidade(@PathParam("code") String code, @PathParam("sigla") String sigla)throws MyEntityNotFoundException, MyIllegalArgumentException {
         treinoBean.unrollTreinoFromModalidade(code, sigla);
         return getModalidade(code);

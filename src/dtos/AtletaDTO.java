@@ -19,7 +19,7 @@ public class AtletaDTO implements Serializable {
 
     private long numIdentificacaoCivil;
 
-    private long numContibuinte;
+    private long numContribuinte;
 
     private String morada;
 
@@ -27,7 +27,7 @@ public class AtletaDTO implements Serializable {
         modalidades = new LinkedList<>();
     }
 
-    public AtletaDTO(long numeroSocio,String nome, String email,String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContibuinte, String morada) {
+    public AtletaDTO(long numeroSocio,String nome, String email,String password, GregorianCalendar dataNascimento,long numIdentificacaoCivil, long numContribuinte, String morada) {
         this();
         this.numeroSocio = numeroSocio;
         this.nome = nome;
@@ -35,7 +35,7 @@ public class AtletaDTO implements Serializable {
         this.password = password;
         this.dataNascimento = format(dataNascimento);
         this.morada = morada;
-        this.numContibuinte = numContibuinte;
+        this.numContribuinte = numContribuinte;
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
@@ -95,12 +95,12 @@ public class AtletaDTO implements Serializable {
         this.numIdentificacaoCivil = numIdentificacaoCivil;
     }
 
-    public long getNumContibuinte() {
-        return numContibuinte;
+    public long getNumContribuinte() {
+        return numContribuinte;
     }
 
-    public void setNumContibuinte(long numContibuinte) {
-        this.numContibuinte = numContibuinte;
+    public void setNumContribuinte(long numContribuinte) {
+        this.numContribuinte = numContribuinte;
     }
 
     public String getMorada() {

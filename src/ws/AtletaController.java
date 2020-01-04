@@ -61,7 +61,7 @@ public class AtletaController {
                 dataNascimento.get(Calendar.MONTH),
                 dataNascimento.get(Calendar.YEAR),
                 atletaDTO.getNumIdentificacaoCivil(),
-                atletaDTO.getNumContibuinte(),
+                atletaDTO.getNumContribuinte(),
                 atletaDTO.getMorada());
         return Response.status(Response.Status.CREATED).entity(atletaToDTO(atleta)).build();
     }
@@ -84,7 +84,7 @@ public class AtletaController {
                     dataNascimento.get(Calendar.MONTH),
                     dataNascimento.get(Calendar.YEAR),
                     atletaDTO.getNumIdentificacaoCivil(),
-                    atletaDTO.getNumContibuinte(),
+                    atletaDTO.getNumContribuinte(),
                     atletaDTO.getMorada());
             Atleta atleta = atletaBean.findAtleta(email);
             return Response.status(Response.Status.OK)
