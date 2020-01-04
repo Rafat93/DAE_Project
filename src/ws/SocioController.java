@@ -47,8 +47,8 @@ public class SocioController {
         Socio socio = socioBean.create(
                 socioDTO.getNumeroSocio(),
                 socioDTO.getNome(),
-                socioDTO.getEmail(),
                 socioDTO.getPassword(),
+                socioDTO.getEmail(),
                 dataNascimento.get(Calendar.DAY_OF_MONTH),
                 dataNascimento.get(Calendar.MONTH),
                 dataNascimento.get(Calendar.YEAR),
