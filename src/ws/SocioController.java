@@ -92,9 +92,9 @@ public class SocioController {
     public Response getSociosDetails(@PathParam("email")String email) throws MyEntityAlreadyExistsException, MyEntityNotFoundException, MyConstraintViolationException {
         Principal principal = securityContext.getUserPrincipal();
         System.out.println(email + " --- " + principal.getName());
-        Socio socio = socioBean.findSocio(email);
         if(securityContext.isUserInRole("Administrador") ||
         securityContext.isUserInRole("Socio") && principal.getName().equals(email)) {
+            Socio socio = socioBean.findSocio(email);
             return Response.status(Response.Status.OK)
                     .entity(socioToDTO(socio))
                     .build();

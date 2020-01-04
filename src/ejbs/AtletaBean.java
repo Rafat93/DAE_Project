@@ -38,13 +38,12 @@ public class AtletaBean {
 
     public Atleta update (long numeroSocio,String nome, String email,String password, int dia,int mes, int ano,long numIdentificacaoCivil, long numContribuinte, String morada) throws MyEntityNotFoundException {
         try {
+            System.out.println(numeroSocio+","+nome+","+email+","+password+","+dia+","+mes+","+ano+","+numIdentificacaoCivil+","+numContribuinte+","+morada);
             Atleta atleta = em.find(Atleta.class, email);
 
             if (atleta == null) {
                 throw new MyEntityNotFoundException("Atleta não encontrado!");
             }
-            em.lock(atleta, LockModeType.OPTIMISTIC);
-
             atleta.setNumeroSocio(numeroSocio);
             atleta.setPassword(password);
             atleta.setNome(nome);
@@ -58,8 +57,6 @@ public class AtletaBean {
             if(!atleta.getDataNascimento().equals(newDataNascimento)){
                 atleta.setDataNascimento(new GregorianCalendar(ano,mes-1,dia));
             }
-
-            em.merge(atleta);
             return atleta;
         }catch(MyEntityNotFoundException e){
             throw e;

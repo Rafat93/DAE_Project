@@ -63,8 +63,6 @@ public class SocioBean {
             if (socio == null) {
                 throw new MyEntityNotFoundException("Socio não encontrado");
             }
-            em.lock(socio, LockModeType.OPTIMISTIC);
-
             socio.setNumeroSocio(numeroSocio);
             socio.setPassword(password);
             socio.setNome(nome);
@@ -73,9 +71,6 @@ public class SocioBean {
             socio.setMorada(morada);
             socio.setNumContribuinte(numContribuinte);
             socio.setNumIdentificacaoCivil(numIdentificacaoCivil);
-
-            em.merge(socio);
-
             return socio;
         }catch(MyEntityNotFoundException e){
             throw e;
